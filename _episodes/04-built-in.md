@@ -115,6 +115,8 @@ round(3.712, 1)
 ~~~
 {: .output}
 
+
+
 ## Use the built-in function `help` to get help for a function.
 
 *   Every built-in function has online documentation.
@@ -135,6 +137,30 @@ round(...)
 ~~~
 {: .output}
 
+## IPython makes using functions easier
+
+*   As we open a parenthesis of a function we can see some useful help
+*   We can type `?` after a function or object to get help about it
+*   For some functions tab completion will show some available named arguements
+
+~~~
+print?
+~~~
+{: .python}
+~~~
+Docstring:
+print(value, ..., sep=' ', end='\n', file=sys.stdout, flush=False)
+
+Prints the values to a stream, or to sys.stdout by default.
+Optional keyword arguments:
+file:  a file-like object (stream); defaults to the current sys.stdout.
+sep:   string inserted between values, default a space.
+end:   string appended after the last value, default a newline.
+flush: whether to forcibly flush the stream.
+Type:      builtin_function_or_method
+~~~
+{: .output}
+
 ## Python reports a syntax error when it can't understand the source of a program.
 
 *   Won't even try to run the program if it can't be parsed.
@@ -145,6 +171,7 @@ name = 'Feng
 ~~~
 {: .python}
 ~~~
+...
 SyntaxError: EOL while scanning string literal
 ~~~
 {: .error}
@@ -155,6 +182,7 @@ age = = 52
 ~~~
 {: .python}
 ~~~
+...
 SyntaxError: invalid syntax
 ~~~
 {: .error}
@@ -162,23 +190,25 @@ SyntaxError: invalid syntax
 *   Look more closely at the error message:
 
 ~~~
-print("hello world"
+# use a multiline expression by pressing ctrl + enter after each line
+age = 52 
+print( age 
+# execute the multiline expression using shift + enter
 ~~~
 {: .python}
 ~~~
-  File "<ipython-input-6-d1cc229bf815>", line 1
-    print ("hello world"
-                        ^
+  print( age # in ipython we must execute this command using shift + enter
+
+  File "<ipython-input-408-c217d1563eb4>", line 2
+    print( age # in ipython we must execute this command using shift + enter
+                                                                            ^
 SyntaxError: unexpected EOF while parsing
 ~~~
 {: .error}
 
-*   The message indicates a problem on first line of the input ("line 1").
+*   The message indicates a problem on first line of the input ("line 2").
     *   In this case the "ipython-input" section of the file name tells us that
-        we are working with input into IPython,
-        the Python interpreter used by the Jupyter Notebook.
-*   The `-6-` part of the filename indicates that
-    the error occurred in cell 6 of our Notebook.
+        we are working with input into IPython.
 *   Next is the problematic line of code,
     indicating the problem with a `^` pointer.
 
@@ -195,13 +225,6 @@ NameError: name 'aege' is not defined
 {: .error}
 
 *   Fix syntax errors by reading the source and runtime errors by tracing execution.
-
-## The Jupyter Notebook has two ways to get help.
-
-*   Place the cursor inside the parenthesis of the function,
-    hold down `shift`,
-    and press `tab`.
-*   Or type a function name with a question mark after it.
 
 ## Every function returns something.
 
