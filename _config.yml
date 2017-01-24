@@ -3,13 +3,13 @@
 #------------------------------------------------------------
 
 # Which carpentry is this ("swc" or "dc")?
-carpentry: "swc"
+carpentry: "dc"
 
 # Overall title for pages.
-title: "Plotting and Programming in Python"
+title: "Open and Reproducible Neuroscience"
 
 # Contact email address.
-email: lessons@software-carpentry.org
+email: john.rodgers-lee@nih.gov
 
 #------------------------------------------------------------
 # Generic settings (should not need to change).
