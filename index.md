@@ -5,19 +5,19 @@ root: .
 ## Re-working of the original material:  
 
 Day 1
-+ Layers of computing (10mins)
+* Layers of computing (10mins)
     * hardware, binary, machine language,shell, ipython, nomachine
 <!-- all python stuff until data is 120mins -->
-+ An introduction to using python and ipython (10mins)
+* An introduction to using python and ipython (10mins)
     * A key aspect of reproducibility is to use code. Python is a great option for this. (5mins)
     * Introduction to ipython : `pwd`, `cd`, `ls` and system commands (5mins)
-+ The basics of python (110mins)    
+* The basics of python (110mins)    
     * First hour of gapminder course. variables,types,builtin functions. (65mins)
     * Lists, list comprehensions and other loops (45mins)
-+ Introduction to the data (20 mins)
+* Introduction to the data (20 mins)
     * Brainbox is a great aggregator of data. Explore this. CLI would be useful...
     * How would we use other people’s tools to achieve our aims.
-+ Beginning to work with the data files
+* Beginning to work with the data files
     * Segue to libraries with pathlib (20mins)
     * Exploring the features of pathlib (~ 50mins)
         * basic path object with associated commands `exists`, `isdir`, `is_file`, `absolute`, `parent` (object not callable)
@@ -28,7 +28,7 @@ Day 1
         * `iterdir`, `glob`, `rglob`
         * `write_text` and `read_text`
         * mention high level methods expecting strings instead of path objects and the `as_uri` or `as_posix` commands
-+ wrap up (10mins)
+* wrap up (10mins)
     * adding a series of commands to a file.
     * briefly discuss how we should start to begin to track this.
     
