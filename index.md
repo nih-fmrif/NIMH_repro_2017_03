@@ -5,8 +5,9 @@ root: .
 ## Re-working of the original material:  
 
 Day 1
-* Layers of computing (10mins)
-    * hardware, binary, machine language,shell, ipython, nomachine
+
+*   Layers of computing (10mins)
+    *   hardware, binary, machine language,shell, ipython, nomachine
 <!-- all python stuff until data is 120mins -->
 * An introduction to using python and ipython (10mins)
     * A key aspect of reproducibility is to use code. Python is a great option for this. (5mins)
