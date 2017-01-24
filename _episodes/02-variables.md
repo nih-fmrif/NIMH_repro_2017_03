@@ -10,7 +10,6 @@ objectives:
 keypoints:
 - "Use variables to store values."
 - "Use `print` to display values."
-- "Variables persist between cells."
 - "Variables must be created before they are used."
 - "Variables can be used in calculations."
 - "Use an index to get a single character from a string."
@@ -80,16 +79,7 @@ NameError: name 'last_name' is not defined
 {: .error}
 
 *   The last line of an error message is usually the most informative.
-*   We will look at error messages in detail [later]({{ page.root }}/05-error-messages/).
-
-> ## Variables Persist Between Cells
-> Variables defined in one cell exist in all other cells once executed,
-> so the relative location of cells in the notebook do not matter
-> (i.e., cells lower down can still affect those above).
-> Remember: Notebook cells are just a way to organize a program:
-> as far as Python is concerned,
-> all of the source code is one long set of instructions.
-{: .callout}
+<!-- *   We will look at error messages in detail [later]({{ page.root }}/05-error-messages/). -->
 
 ## Variables can be used in calculations.
 
@@ -114,8 +104,8 @@ Age in three years: 45
 *   Locations are numbered from 0 rather than 1.
 
 ~~~
-element = 'helium'
-print(element[0])
+a_greeting = 'hello world'
+print(a_greeting[0])
 ~~~
 {: .python}
 ~~~
@@ -131,30 +121,45 @@ h
 *   So the difference between stop and start is the slice's length.
 
 ~~~
-element = 'sodium'
-print(element[0:3])
+a_greeting = 'hello world'
+print(a_greeting[0:5])
 ~~~
 {: .python}
 ~~~
-sod
+hello
 ~~~
 {: .output}
+
+## A slice with a different step
+* We don't have to take every element in the range we specify. We can specify
+the step  by which we take elements from the string.
+
+~~~
+a_greeting = 'hello world'
+print(a_greeting[0:5:2])
+~~~
+{: .python}
+~~~
+hlo
+~~~
+{: .output}
+
 
 ## Use the built-in function `len` to find the length of a string.
 
 ~~~
-print(len('helium'))
+print(len('hello world'))
 ~~~
 {: .python}
 ~~~
-6
+11
 ~~~
 {: .output}
 
 *   Nested functions are evaluated from the inside out,
     just like in mathematics.
 
-FIXME: need to introduce slices
+
 
 ## Python is case-sensitive.
 
