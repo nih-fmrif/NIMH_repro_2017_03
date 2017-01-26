@@ -55,6 +55,41 @@ Show
 *  Mention how none of this is not python, which is the majority of what we will
 teach from now on.
 
+~~~
+pwd
+~~~
+{: .source}
+~~~
+ls
+~~~
+{: .source}
+~~~
+cd Documents
+~~~
+{: .source}
+~~~
+ls
+~~~
+{: .source}
+~~~
+!pwd
+~~~
+{: .source}
+~~~
+!ls
+~~~
+{: .source}
+~~~
+!cd Documents
+~~~
+{: .source}
+~~~
+ls
+~~~
+{: .source}
+
+
+
 ## Convenient commands to remember
 
 *   Use tab completion when possible. The computer is more precise than we are.
