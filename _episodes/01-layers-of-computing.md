@@ -30,8 +30,35 @@ interface using NoMachine"
 - "We will use an IPython console to interact with the Python interpretter"
 - "We can easily interact with the system shell from IPython"
 ---
+## Layers of computing
+Talk about the layers of computing and where the shell and other higher level
+programs fit into this. Mention remote computing.
 
-The course content will go here.
+![image_of_shell](../fig/layers_of_computing.png)
 
-This will include a run through of pwd and ls. If we want to demonstrate the
-processes opene by system calls
+
+##  The file system
+Talk about what a path is etc. using the following figures:
+![image_of_shell](../fig/file_system_1.png)
+![image_of_shell](../fig/file_system_2.png)
+![image_of_shell](../fig/file_system_3.png)
+
+
+## The IPython console
+Show 
+*  Getting the current working directory with `pwd`
+*  navigating the file system with `cd`
+*  Listing directories with `ls`
+*  How these commands are both Ipthon and system commands.
+*  Show how `cd`  behaves differently because each system call is a subprocess
+*  Mention how none of this is not python, which is the majority of what we will
+teach from now on.
+
+## Convenient commands to remember
+
+*   Use tab completion when possible. The computer is more precise than we are.
+*   We can cycle through previous commands using up and down arrows.
+*   We can cycle through previous commands starting with the current text using
+Ctl + n/p
+*   Enter,  Ctl + Enter / Shift + Enter allow us to run commands in different
+ways
