@@ -6,7 +6,8 @@ questions:
 - "How can I store multiple values?"
 objectives:
 - "Explain why programs need collections of values."
-- "Write programs that create flat lists, index them, slice them, and modify them through assignment and method calls."
+- "Write programs that create flat lists, index them, slice them, and modify
+them through assignment and method calls."
 keypoints:
 - "A list stores many values in a single structure."
 - "Use an item's index to fetch it from a list."
@@ -21,21 +22,24 @@ keypoints:
 ---
 ## A list stores many values in a single structure.
 
-*   Doing calculations with a hundred variables called `pressure_001`, `pressure_002`, etc.,
-    would be at least as slow as doing them by hand.
+*   When we wish to work with hundreds of variables defining them all explicitly
+would be at least as slow as doing them by hand. For example if we had many
+regions in the brain that we wished to analyse we might have many numbers. Each
+number would correspond to the volume of a particular ROI like `cingulate`,
+`limbic`, etc.
 *   Use a *list* to store many values together.
-    *   Contained within square brackets `[...]`.
-    *   Values separated by commas `,`.
+    *   Contained within square brackets: `[...]`.
+    *   Values separated by commas: `,`.
 *   Use `len` to find out how many values are in a list.
 
 ~~~
-pressures = [0.273, 0.275, 0.277, 0.275, 0.276]
-print('pressures:', pressures)
-print('length:', len(pressures))
+roi_volumes = [2.73,145.3,12.7,16.2, 27.6]
+print('Volume of ROIs : ', roi_volumes)
+print('length:', len(roi_volumes))
 ~~~
 {: .python}
 ~~~
-pressures: [0.273, 0.275, 0.277, 0.275, 0.276]
+Volume of ROIs: [2.73,145.3,12.7,16.2, 27.6]
 length: 5
 ~~~
 {: .output}
@@ -45,13 +49,13 @@ length: 5
 *   Just like strings.
 
 ~~~
-print('zeroth item of pressures:', pressures[0])
-print('fourth item of pressures:', pressures[4])
+print('The item with index 0 in the list is :', roi_volumes[0])
+print('The item with index 4 in the list is :', roi_volumes[4])
 ~~~
 {: .python}
 ~~~
-zeroth item of pressures: 0.273
-fourth item of pressures: 0.276
+The item with index 0 in the list is : 2.73
+The item with index 4 in the list is : 27.6
 ~~~
 {: .output}
 
@@ -60,12 +64,12 @@ fourth item of pressures: 0.276
 *   Use an index expression on the left of assignment to replace a value.
 
 ~~~
-pressures[0] = 0.265
-print('pressures is now:', pressures)
+roi_volumes[0] = 26.5
+print('Our list is now:', roi_volumes)
 ~~~
 {: .python}
 ~~~
-pressures is now: [0.265, 0.275, 0.277, 0.275, 0.276]
+Our list is now: [26.5,145.3,12.7,16.2, 27.6]
 ~~~
 {: .output}
 
@@ -74,16 +78,15 @@ pressures is now: [0.265, 0.275, 0.277, 0.275, 0.276]
 *   Use `list_name.append` to add items to the end of a list.
 
 ~~~
-primes = [2, 3, 5]
-print('primes is initially:', primes)
-primes.append(7)
-primes.append(9)
-print('primes has become:', primes)
+print('Our list is initially:', roi_volumes )
+roi_volumes.append(14.2)
+roi_volumes.append(140)
+print('Our list has now become:', roi_volumes)
 ~~~
 {: .python}
 ~~~
-primes is initially: [2, 3, 5]
-primes has become: [2, 3, 5, 7, 9]
+Our list is initially: [26.5,145.3,12.7,16.2, 27.6]
+Our list has now become: [26.5,145.3,12.7,16.2, 27.6,14.2,140]
 ~~~
 {: .python}
 
@@ -100,14 +103,14 @@ primes has become: [2, 3, 5, 7, 9]
 *   Not a function or a method, but a statement in the language.
 
 ~~~
-print('primes before removing last item:', primes)
-del primes[4]
-print('primes after removing last item:', primes)
+print('roi_volumes before removing last item:', roi_volumes)
+del roi_volumes[6]
+print('roi_volumes after removing last item:', roi_volumes)
 ~~~
 {: .python}
 ~~~
-primes before removing last item: [2, 3, 5, 7, 9]
-primes after removing last item: [2, 3, 5, 7]
+roi_volumes before removing last item: [26.5,145.3,12.7,16.2, 27.6,14.2,140]
+roi_volumes after removing last item:  [26.5,145.3,12.7,16.2, 27.6,14.2]
 ~~~
 {: .output}
 
@@ -115,8 +118,8 @@ primes after removing last item: [2, 3, 5, 7]
 
 *   Use `[]` on its own to represent a list that doesn't contain any values.
     *   "The zero of lists."
-*   Helpful as a starting point for collecting values
-    (which we will see in the [next episode]({{page.root}}/09-for-loops/)).
+*   Helpful as a starting point for collecting values which we will see when we
+learn about iteration.
 
 ## Lists may contain values of different types.
 
@@ -129,17 +132,17 @@ goals = [1, 'Create lists.', 2, 'Extract items from lists.', 3, 'Modify lists.']
 
 ## Character strings can be indexed like lists.
 
-*   Get single characters from a character string using indexes in square brackets.
+*   As we saw before, indexing into strings is the same as lists.
 
 ~~~
-element = 'carbon'
-print('zeroth character:', element[0])
-print('third character:', element[3])
+label_for_roi = 'cortex_left'
+print('The character indexed by 0:', label_for_roi[0])
+print('The character indexed by 3:', label_for_roi[3])
 ~~~
 {: .python}
 ~~~
-zeroth character: c
-third character: b
+The character indexed by 0: c
+The character indexed by 3: t
 ~~~
 {: .output}
 
@@ -152,7 +155,7 @@ third character: b
     not a collection of values.
 
 ~~~
-element[0] = 'C'
+label_for_roi[0] = 'C'
 ~~~
 {: .python}
 ~~~
@@ -170,7 +173,7 @@ TypeError: 'str' object does not support item assignment
         because the index might be calculated based on data.
 
 ~~~
-print('99th element of element is:', element[99])
+print('The character indexed by 99 is:', label_for_roi[99])
 ~~~
 {: .python}
 ~~~

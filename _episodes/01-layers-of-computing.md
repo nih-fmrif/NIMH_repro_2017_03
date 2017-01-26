@@ -46,6 +46,7 @@ Talk about what a path is etc. using the following figures:
 
 ## The IPython console
 Show 
+
 *  Getting the current working directory with `pwd`
 *  navigating the file system with `cd`
 *  Listing directories with `ls`
