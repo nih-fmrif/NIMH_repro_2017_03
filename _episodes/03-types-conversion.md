@@ -45,8 +45,8 @@ print(type(52))
 {: .output}
 
 ~~~
-fitness = 'average'
-print(type(fitness))
+disease = 'schizophrenia'
+print(type(disease))
 ~~~
 {: .python}
 ~~~
@@ -68,14 +68,14 @@ print(5 - 3)
 {: .output}
 
 ~~~
-print('hello' - 'h')
+print('frontotemporal' - 'fronto')
 ~~~
 {: .python}
 ~~~
 ---------------------------------------------------------------------------
 TypeError                                 Traceback (most recent call last)
 <ipython-input-2-67f5626a1e07> in <module>()
-----> 1 print('hello' - 'h')
+----> 1 print('frontotemporal' - 'fronto')
 
 TypeError: unsupported operand type(s) for -: 'str' and 'str'
 ~~~
@@ -86,12 +86,12 @@ TypeError: unsupported operand type(s) for -: 'str' and 'str'
 *   "Adding" character strings concatenates them.
 
 ~~~
-full_name = 'Ahmed' + ' ' + 'Walsh'
-print(full_name)
+roi_label = 'fronto' + ' ' + 'temporal'
+print(roi_label)
 ~~~
 {: .python}
 ~~~
-Ahmed Walsh
+frontotemporal
 ~~~
 {: .output}
 
@@ -99,12 +99,12 @@ Ahmed Walsh
     *   Since multiplication is just repeated addition.
 
 ~~~
-separator = '=' * 10
-print(separator)
+dna_repeat_sequence = 'CAG' * 10
+print(dna_repeat_sequence)
 ~~~
 {: .python}
 ~~~
-==========
+CAGCAGCAGCAGCAGCAGCAGCAGCAGCAG
 ~~~
 {: .output}
 
@@ -113,7 +113,7 @@ print(separator)
 *   The built-in function `len` counts the number of characters in a string.
 
 ~~~
-print(len(full_name))
+print(len(dna_repeat_sequence))
 ~~~
 {: .python}
 ~~~
@@ -142,7 +142,7 @@ TypeError: object of type 'int' has no len()
 *   Cannot add numbers and strings.
 
 ~~~
-print(1 + 'A')
+print(1 + '2')
 ~~~
 {: .python}
 ~~~
@@ -193,20 +193,20 @@ three squared is 9.0
 *   This does **not** happen in programming languages.
 
 ~~~
-first = 1
-second = 5 * first
-first = 2
-print('first is', first, 'and second is', second)
+brain_volume = 1246
+brain_volume_corrected = brain_volume * 1.2
+brain_volume = 1400
+print('brain_volume is', brain_volume, 'and brain_volume_corrected is', brain_volume_corrected)
 ~~~
 {: .python}
 ~~~
-first is 2 and second is 5
+brain_volume is 1400 and brain_volume_corrected is 1495.2
 ~~~
 {: .output}
 
-*   The computer reads the value of `first` when doing the multiplication,
-    creates a new value, and assigns it to `second`.
-*   After that, `second` does not remember where it came from.
+*   The computer reads the value of `brain_volume` when doing the multiplication,
+    creates a new value, and assigns it to `brain_volume_corrected`.
+*   After that, `brain_volume_corrected` does not remember where it came from.
 
 > ## Fractions
 >
@@ -230,7 +230,7 @@ first is 2 and second is 5
 
 > ## Automatic Type Conversion
 >
-> What type of value is 3..25 + 4?
+> What type of value is 3.25 + 4?
 >
 > > ## Solution
 > >
@@ -256,10 +256,10 @@ first is 2 and second is 5
 >
 > 1. Number of days since the start of the year.
 > 2. Time elapsed since the start of the year.
-> 3. Serial number of a piece of lab equipment.
-> 4. A lab specimen's age.
-> 5. Current population of a city.
-> 6. Average population of a city over time.
+> 3. Brain volume.
+> 4. Number of scan sequences used in a scan session.
+> 5. Disease state.
+> 6. Scan sequence name.
 {: .challenge}
 
 > ## Division Types
@@ -336,17 +336,4 @@ first is 2 and second is 5
 > >
 > > Answer: 1 and 4
 > {: .solution}
-{: .challenge}
-
-> ## Complex Numbers
->
-> Python provides complex numbers,
-> which are written as `1.0+2.0j`.
-> If `val` is an imaginary number,
-> its real and imaginary parts can be accessed using *dot notation*
-> as `val.real` and `val.imag`.
->
-> 1.  Why do you think Python uses `j` instead of `i` for the imaginary part?
-> 2.  What do you expect `1+2j + 3` to produce?
-> 3.  What do you expect '4j' to be?  What about `4 j' (with a space)?
 {: .challenge}
