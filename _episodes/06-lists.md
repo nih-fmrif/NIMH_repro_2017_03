@@ -214,13 +214,13 @@ IndexError: string index out of range
 > Given this:
 >
 > ~~~
-> print('string to list:', list('tin'))
-> print('list to string:', ''.join(['g', 'o', 'l', 'd']))
+> print('string to list:', list('ADHD'))
+> print('list to string:', ''.join(['c', 'n', 's']))
 > ~~~
 > {: .python}
 > ~~~
-> ['t', 'i', 'n']
-> 'gold'
+> ['A', 'D', 'H', 'D']
+> 'cns'
 > ~~~
 > {: .output}
 >
@@ -233,17 +233,18 @@ IndexError: string index out of range
 > What does the following program print?
 >
 > ~~~
-> element = 'helium'
-> print(element[-1])
+> roi_label = 'hippocampus'
+> print(roi_label[-1])
 > ~~~
 > {: .python}
 >
 > 1.  How does Python interpret a negative index?
 > 2.  If a list or string has N elements,
->     what is the most negative index that can safely be used with it,
->     and what location does that index represent?
+> what is the most negative index that can safely be used with it,
+> and what location does that index represent?
 > 3.  If `values` is a list, what does `del values[-1]` do?
-> 4.  How can you display all elements but the last one without changing `values`?
+> 4.  How can you display all elements but the last one without 
+> changing `values`?
 >     (Hint: you will need to combine slicing and negative indexing.)
 {: .challenge}
 
@@ -252,9 +253,9 @@ IndexError: string index out of range
 > What does the following program print?
 >
 > ~~~
-> element = 'fluorine'
-> print(element[::2])
-> print(element[::-1])
+> roi_label = 'hippocampus'
+> print(roi_label[::2])
+> print(roi_label[::-1])
 > ~~~
 > {: .python}
 >
@@ -267,33 +268,22 @@ IndexError: string index out of range
 > What does the following program print?
 >
 > ~~~
-> element = 'lithium'
-> print(element[0:20])
-> print(element[-1:3])
+> roi_label = 'hippocampus'
+> print(roi_label[0:20])
+> print(roi_label[-1:3])
 > ~~~
 > {: .python}
 {: .challenge}
 
 > ## Sort and Sorted
 >
-> What do these two programs print?
-> In simple terms, explain the difference between `sorted(letters)` and `letters.sort()`.
->
 > ~~~
-> # Program A
-> letters = list('gold')
-> result = sorted(letters)
-> print('letters is', letters, 'and result is', result)
+> roi_label_as_list = list(roi_label)
 > ~~~
 > {: .python}
->
-> ~~~
-> # Program B
-> letters = list('gold')
-> result = letters.sort()
-> print('letters is', letters, 'and result is', result)
-> ~~~
-> {: .python}
+> 
+> In simple terms, explain the difference between `sorted(roi_label_as_list)`
+> and `roi_label_as_list.sort()`.
 {: .challenge}
 
 > ## Copying (or Not)
@@ -303,7 +293,7 @@ IndexError: string index out of range
 >
 > ~~~
 > # Program A
-> old = list('gold')
+> old = list('Brain')
 > new = old      # simple assignment
 > new[0] = 'D'
 > print('new is', new, 'and old is', old)
@@ -312,7 +302,7 @@ IndexError: string index out of range
 >
 > ~~~
 > # Program B
-> old = list('gold')
+> old = list('Brain')
 > new = old[:]   # assigning a slice
 > new[0] = 'D'
 > print('new is', new, 'and old is', old)
