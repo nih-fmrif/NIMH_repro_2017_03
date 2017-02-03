@@ -266,11 +266,9 @@ print('The',ewr_422_yY, 'is', flabadab, 'cubic mm')
 > ~~~
 > 
 > > ## Solution
-> > 
-> >
 > >~~~
 > >sequence_type[1:3] is: P_
 > >~~~
 > >{: .output}
-> {: .solution}
->{: .challenge}
+>  {: .solution}
+{: .challenge}
