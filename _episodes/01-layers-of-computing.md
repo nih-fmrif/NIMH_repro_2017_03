@@ -3,19 +3,20 @@ title: "The layers of computing"
 teaching: 20
 exercises: 0
 questions:
-- "What is running under the surface of a modern operating system?"
-- "What is IPython?"
+- "Where, exactly, is my data? Where should it be?"
+- "Where is the computer analyzing my data? Can I make it go faster?"
+- "How do all of these places relate to each other?"
+- "What is the shell and why do I care?"
+- "What is python? What is IPython? What is Juypter?"
+- "What are the tools we'll be using in the course?"
 objectives:
-- "Explain how the shell relates to the keyboard, the screen, the operating
-system, and users’ programs."
-- "Explain when and why command-line interfaces should be used instead of
-graphical interfaces."
-- "Explain the advantages of remote computing."
-- "Explain how to access the NIMH dedicated computing resources in the most
-convenient manner."
-- "Explain basic use of the IPython console."
-- "Explain some of the useful hotkeys available for making use of the command
-line more convenient."
+- "Build a mental model of data storage, computing, and how they relate to one another"
+- "Understand the different ways of interacting with your computer and what the pros and cons are"
+- "Explain when and why command-line interfaces should be used instead of graphical interfaces."
+- "Explain the advantages of remote computing including cloud and high performance computing."
+- "Explain how to access the NIMH dedicated computing resources in the most convenient manner."
+- "Get exposed to IPython and learn it's strengths."
+- "Learn shortcuts and hotkeys to make command line computing fast and efficient"
 keypoints:
 - "A shell is a program whose primary purpose is to read commands and run other
 programs."
@@ -29,7 +30,9 @@ cryptic its commands and operation can be."
 interface using NoMachine"
 - "We will use an IPython console to interact with the Python interpretter"
 - "We can easily interact with the system shell from IPython"
+
 ---
+
 ## Layers of computing
 Talk about the layers of computing and where the shell and other higher level
 programs fit into this. Mention remote computing.
