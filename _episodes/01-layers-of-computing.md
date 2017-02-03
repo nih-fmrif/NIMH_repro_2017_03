@@ -87,6 +87,14 @@ ls
 ls
 ~~~
 {: .source}
+~~~
+!mkdir ~/reproducibility_course
+~~~
+{: .source}
+~~~
+cd reproducibility_course
+~~~
+{: .source}
 
 
 
