@@ -4,13 +4,26 @@ Links :
 
 Course info : [site](https://nih-fmrif.github.io/2017-03-13-nimh) and [github repository](https://github.com/nih-fmrif/2017-03-13-nimh)
 
-Day 1 : [site](https://nih-fmrif.github.io/reproducibility_course_day_1) and [github repository](https://github.com/nih-fmrif/reproducibility_course_day_1)
+NIMH's Data Science and Sharing Team will be conducting a workshop on open and reproducible neuroscience the week of March 13th. Over the course of four mornings (8:30a to 12:30p Mon, Wed, Thur, & Fri) we will provide hands on training on:
 
-Day 2 : [site](https://nih-fmrif.github.io/reproducibility_course_day_2) and [github repository](https://github.com/nih-fmrif/reproducibility_course_day_2)
+- Using Python and Github to produce & share reproducible processing pipelines
+- Structuring and reporting your data using community-recognized standards (COBIDAS, BIDS, EQUATOR)
+- Accessing and contributing to share repositories
+- Using pre-print servers (biorxiv.org)
+- Accessing NIMH dedicated HPC resources
 
-Day 3 : [site](https://nih-fmrif.github.io/reproducibility_course_day_3) and [github repository](https://github.com/nih-fmrif/reproducibility_course_day_3)
+Mar 13, 15, 16, 17th, 8:30 am – 12:30 pm (Note Mar 14th is NIH Pi Day)
 
-Day 4 : [site](https://nih-fmrif.github.io/reproducibility_course_day_4) and [github repository](https://github.com/nih-fmrif/reproducibility_course_day_4) 
+Note that space in the course is limited.  Our priority is to aim to maximize the number of labs represents across the NIH Neuroscience Intramural Research Program. 
+
+Course Organizers:
+Peter Bandettini, SFIM, FMRIF
+Adam Thomas, DSST, FMRIF
+John Lee, DSST, FMRIF
+Rick Reynolds, SSCC
+Paul Taylor, SSCC
+Sara Kimmich, SFIM
+Matthew Brett
 
 
 The course will:
