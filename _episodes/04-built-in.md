@@ -166,7 +166,7 @@ Type:      builtin_function_or_method
 
 ~~~
 # Forgot to close the quotation marks around the string.
-name = 'Feng
+roi_label = 'hippocampus
 ~~~
 {: .python}
 ~~~
@@ -177,7 +177,7 @@ SyntaxError: EOL while scanning string literal
 
 ~~~
 # An extra '=' in the assignment.
-age = = 52
+brain_volume = = 1302
 ~~~
 {: .python}
 ~~~
@@ -190,16 +190,16 @@ SyntaxError: invalid syntax
 
 ~~~
 # use a multiline expression by pressing ctrl + enter after each line
-age = 52 
-print( age 
+brain_volume = 1302
+print( brain_volume 
 # execute the multiline expression using shift + enter
 ~~~
 {: .python}
 ~~~
-  print( age # in ipython we must execute this command using shift + enter
+  print( brain_volume # in ipython we must execute this command using shift + enter
 
   File "<ipython-input-408-c217d1563eb4>", line 2
-    print( age # in ipython we must execute this command using shift + enter
+    print( brain_volume # in ipython we must execute this command using shift + enter
                                                                             ^
 SyntaxError: unexpected EOF while parsing
 ~~~
@@ -214,12 +214,13 @@ SyntaxError: unexpected EOF while parsing
 ## Python reports a runtime error when something goes wrong while a program is executing.
 
 ~~~
-age = 53
-remaining = 100 - aege # mis-spelled 'age'
+brain_volume = 1302
+grey_matter = 700 
+csf_and_white_matter = brain_volume - grey_matters # mis-spelled 'grey_matter'
 ~~~
 {: .python}
 ~~~
-NameError: name 'aege' is not defined
+NameError: name 'grey_matters' is not defined
 ~~~
 {: .error}
 
@@ -232,13 +233,13 @@ NameError: name 'aege' is not defined
     it usually returns the special value `None`.
 
 ~~~
-result = print('example')
-print('result of print is', result)
+result = print('hippocampus')
+print('The output of print is', result)
 ~~~
 {: .python}
 ~~~
-example
-result of print is None
+hippocampus
+The output of print is None
 ~~~
 {: .output}
 
@@ -263,10 +264,10 @@ result of print is None
 >    If it runs, does its result make any sense?
 >
 > ~~~
-> rich = "gold"
-> poor = "tin"
-> print(max(rich, poor))
-> print(max(len(rich), len(poor)))
+> grey_matter = "the good stuff"
+> white_matter = "the wires"
+> print(max(grey_matter, white_matter))
+> print(max(len(grey_matter), len(white_matter)))
 > ~~~
 > {: .python}
 {: .challenge}
@@ -280,11 +281,11 @@ result of print is None
 >
 > If Python starts counting from zero,
 > and `len` returns the number of characters in a string,
-> what index expression will get the last character in the string `name`?
+> what index expression will get the last character in the string `roi_label`?
 > (Note: we will see a simpler way to do this in a later episode.)
 >
 > > ## Solution
 > >
-> > `name[len(name) - 1]`
+> > `roi_label[len(roi_label) - 1]`
 > {: .solution}
 {: .challenge}
