@@ -27,8 +27,8 @@ keypoints:
     and a name in quotation marks to a variable `first_name`.
 
 ~~~
-age = 42
-first_name = 'Ahmed'
+roi_vol = 130
+roi_label = 'hippocampus'
 ~~~
 {: .python}
 
@@ -36,7 +36,7 @@ first_name = 'Ahmed'
     *   cannot start with a digit
     *   cannot contain spaces, quotation marks, or other punctuation
     *   *may* contain an underscore (typically used to separate words in long variable names)
-*   Underscores at the start like `__alistairs_real_age` have a special meaning
+*   Underscores at the start like `__roi_vol` have a special meaning
     so we won't do that until we understand the convention.
 
 ## Use `print` to display values.
@@ -47,11 +47,11 @@ first_name = 'Ahmed'
 *   The values passed to the function are called 'arguments'
 
 ~~~
-print(first_name, 'is', age, 'years old')
+print('The', roi_label , 'is', roi_vol, 'cubic mm')
 ~~~
 {: .python}
 ~~~
-Ahmed is 42 years old
+The hippocampus is 130 cubic mm
 ~~~
 {: .output}
 
@@ -65,16 +65,16 @@ Ahmed is 42 years old
     *   Unlike some languages, which "guess" a default value.
 
 ~~~
-print(last_name)
+print(brain_volume)
 ~~~
 {: .python}
 ~~~
 ---------------------------------------------------------------------------
 NameError                                 Traceback (most recent call last)
 <ipython-input-1-c1fbb4e96102> in <module>()
-----> 1 print(last_name)
+----> 1 print(brain_volume)
 
-NameError: name 'last_name' is not defined
+NameError: name 'brain_volume' is not defined
 ~~~
 {: .error}
 
@@ -84,15 +84,15 @@ NameError: name 'last_name' is not defined
 ## Variables can be used in calculations.
 
 *   We can use variables in calculations just as if they were values.
-    *   Remember, we assigned 42 to `age` a few lines ago.
+    *   Remember, we assigned 130 to `roi_vol` a few lines ago.
 
 ~~~
-age = age + 3
-print('Age in three years:', age)
+corrected_roi_vol = roi_vol + 3
+print('Volume with a correction for a systematic bias:', corrected_roi_vol)
 ~~~
 {: .python}
 ~~~
-Age in three years: 45
+Volume with a correction for a systematic bias: 133
 ~~~
 {: .output}
 
@@ -104,8 +104,8 @@ Age in three years: 45
 *   Locations are numbered from 0 rather than 1.
 
 ~~~
-a_greeting = 'hello world'
-print(a_greeting[0])
+roi_label = 'hippocampus'
+print(roi_label[0])
 ~~~
 {: .python}
 ~~~
@@ -121,12 +121,11 @@ h
 *   So the difference between stop and start is the slice's length.
 
 ~~~
-a_greeting = 'hello world'
-print(a_greeting[0:5])
+print(roi_label[0:5])
 ~~~
 {: .python}
 ~~~
-hello
+hippo
 ~~~
 {: .output}
 
@@ -135,12 +134,11 @@ hello
 the step  by which we take elements from the string.
 
 ~~~
-a_greeting = 'hello world'
-print(a_greeting[0:5:2])
+print(roi_label[0:5:2])
 ~~~
 {: .python}
 ~~~
-hlo
+hpo
 ~~~
 {: .output}
 
@@ -148,7 +146,7 @@ hlo
 ## Use the built-in function `len` to find the length of a string.
 
 ~~~
-print(len('hello world'))
+print(len(roi_label))
 ~~~
 {: .python}
 ~~~
@@ -177,6 +175,9 @@ print(len('hello world'))
 flabadab = 42
 ewr_422_yY = 'Ahmed'
 print(ewr_422_yY, 'is', flabadab, 'years old')
+flabadab = 700
+ewr_422_yY = 'frontal cortex'
+print('The',ewr_422_yY, 'is', flabadab, 'cubic mm')
 ~~~
 {: .python}
 
@@ -192,16 +193,16 @@ print(ewr_422_yY, 'is', flabadab, 'years old')
 > ~~~
 > lowest = 1.0
 > highest = 3.0
-> temp = lowest
+> volume = lowest
 > lowest = highest
-> highest = temp
+> highest = volume
 > ~~~
 > {: .python}
 {: .challenge}
 
 > ## Predicting Values
 >
-> What is the final value of `position` in the program below?
+> What is the final value of `important_label` in the program below?
 > (Try to predict the value without running the program,
 > then check your prediction.)
 >
@@ -209,22 +210,25 @@ print(ewr_422_yY, 'is', flabadab, 'years old')
 > initial = "left"
 > position = initial
 > initial = "right"
+> label = "hippocampus"
+> important_label = label
+> label = "visual"
 > ~~~
 > {: .python}
 {: .challenge}
 
 > ## Challenge
 >
-> If you assign `a = 123`,
-> what happens if you try to get the second digit of `a`?
+> If you assign `roi_vol = 130`,
+> what happens if you try to get the second digit of `roi_vol`?
 >
 > > ## Solution
 > > Numbers are not stored in the written representation,
 > > so they can't be treated like strings.
 > >
 > > ~~~
-> > a = 123
-> > print(a[1])
+> > roi_vol = 130
+> > print(roi_vol[1])
 > > ~~~
 > > {: .python}
 > > ~~~
@@ -257,17 +261,16 @@ print(ewr_422_yY, 'is', flabadab, 'years old')
 > What does the following program print?
 >
 > ~~~
-> element = 'carbon'
-> print('element[1:3] is:', element[1:3])
+> sequence_type = 'MP_RAGE'
+> print('sequence_type[1:3] is:', sequence_type[1:3])
 > ~~~
-> {: .python}
-> ~~~
-> element[1:3] is: ar
-> ~~~
-> {: .output}
->
-> 1.  What does `thing[low:high]` do?
-> 2.  What does `thing[low:]` (without a value after the colon) do?
-> 3.  What does `thing[:high]` (without a value before the colon) do?
-> 4.  What does `thing[:]` (just a colon) do?
-{: .challenge}
+> 
+> > ## Solution
+> > 
+> >
+> >~~~
+> >sequence_type[1:3] is: P_
+> >~~~
+> >{: .output}
+> {: .solution}
+>{: .challenge}
