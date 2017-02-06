@@ -1,4 +1,5 @@
 ---
+start: true
 title: "The layers of computing"
 teaching: 20
 exercises: 0

@@ -4,6 +4,8 @@ Links :
 
 Course info : [site](https://nih-fmrif.github.io/2017-03-13-nimh) and [github repository](https://github.com/nih-fmrif/2017-03-13-nimh)
 
+Course materials site is rendered [here](https://nih-fmrif.github.io/reproducibility_course_day_1).
+
 NIMH's Data Science and Sharing Team will be conducting a workshop on open and reproducible neuroscience the week of March 13th. Over the course of four mornings (8:30a to 12:30p Mon, Wed, Thur, & Fri) we will provide hands on training on:
 
 - Using Python and Github to produce & share reproducible processing pipelines
