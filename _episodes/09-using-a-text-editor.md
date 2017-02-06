@@ -278,7 +278,7 @@ Finally we can run this script in the ipython shell
 
 
 
-## Using a text editor
+## Atom as a text editor
 
 The above commands can be very useful to interactively generate a set of working
 commands and save them to a script; however, sometimes we want the convenience
@@ -290,6 +290,20 @@ text like this. Try typing:
 %edit metasearch_analysis.py 
 ~~~
 {: .python}
+
+Mention all the other good text editors. We're using atom because it is slightly
+easier to learn starting off, it is open-source, and it has a great community
+around it. It provides easy ways to learn how to performs commands using the
+keyboard, which is faster than using a mouse.
+
+Demonstrate that an unsaved file in Atom will not be written to by IPython.
+Show how to use the command palette.
+Show how to change the settings using the command palette and how this affects
+the config file.
+Try installing something that isn't a core package, Hydrogen.
+
+
+
 
 
 
