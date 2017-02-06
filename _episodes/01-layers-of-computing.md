@@ -36,14 +36,23 @@ interface using NoMachine"
 
 ## Getting started
 
-### Open NoMachine
+* Connect to felix or helix using NoMachine
+We'll be conducting this course using a remote desktop utility called [NoMachine](http://www.nomachine.com). You should have already met with the DSST staff to configure and test it. Open the NoMachine App and connect to felix.nimh.nih.gov if you are an NIMH employee or helix.nih.gov if you work for another IC.
+* Open Terminal from the Application-> System Tools menu
+* Start up an IPython window
+We've setup a short [script]() to get you started quickly in the NIH HPC (felix or helix). To run it, type:
+~~~
+/data/DSST/scripts/repro_env_setup.sh
+~~~
+{: .bash}
 
-### Get an IPython window starter
+Your screen should now look something like this:
 
+![image_of_shell](../fig/layers_of_computing.png)
 
+## What is remote desktop and why should you use it.
 
-## Layers of computing
-
+The desktop you're looking inside the NoMachine window is from a computer that lives over in building 13's high performance computing (HPC) center, also sometimes referred to as the Biowulf.
 
 Talk about the layers of computing and where the shell and other higher level
 programs fit into this. Mention remote computing.
@@ -59,7 +68,7 @@ Talk about what a path is etc. using the following figures:
 
 
 ## The IPython console
-Show 
+Show
 
 *  Getting the current working directory with `pwd`
 *  navigating the file system with `cd`
