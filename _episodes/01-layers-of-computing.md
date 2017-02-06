@@ -33,7 +33,17 @@ interface using NoMachine"
 
 ---
 
+## Getting started
+
+### Open NoMachine
+
+### Get an IPython window starter
+
+
+
 ## Layers of computing
+
+
 Talk about the layers of computing and where the shell and other higher level
 programs fit into this. Mention remote computing.
 
