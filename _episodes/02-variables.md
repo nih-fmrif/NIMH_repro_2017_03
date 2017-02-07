@@ -17,6 +17,8 @@ keypoints:
 - "Use the built-in function `len` to find the length of a string."
 - "Python is case-sensitive."
 - "Use meaningful variable names."
+- " Variables in the current environment can be displayed or deleted using the
+`%whos` and `%reset` IPython magics.
 ---
 ## Use variables to store values.
 
@@ -184,6 +186,38 @@ print('The',ewr_422_yY, 'is', flabadab, 'cubic mm')
 *   Use meaningful variable names to help other people understand what the program does.
 *   The most important "other person" is your future self.
 
+## Variables exist in the IPython environment
+We can list the variables we have defined, along with some details about them,
+by executing the IPython magic `%whos`:
+~~~
+%whos
+~~~
+{: .python}
+
+These variables do not exist on the hard disk of the computer. They will not
+continue to exist if we stop our current IPython kernel (by executing `exit`).
+Ideally, in any time in our analysis we should be able to remove these variables
+and regenerate them  again by running a script file containing all  of the
+commands we used to get to our current state. Later on we will learn the tools
+that IPython provides to do this. For now we will simply learn how to delete all
+of the variables in the current environment. This is done using the `%reset`
+IPython magic and typing `y` and enter to confirm:
+~~~
+%reset
+~~~
+{: .python}
+
+~~~
+Once deleted, variables cannot be recovered. Proceed (y/[n])? 
+~~~
+{: .output}
+
+~~~
+y
+~~~
+{: .source}
+
+
 > ## Swapping Values
 >
 > Draw a table showing the values of the variables in this program
@@ -207,9 +241,6 @@ print('The',ewr_422_yY, 'is', flabadab, 'cubic mm')
 > then check your prediction.)
 >
 > ~~~
-> initial = "left"
-> position = initial
-> initial = "right"
 > label = "hippocampus"
 > important_label = label
 > label = "visual"
