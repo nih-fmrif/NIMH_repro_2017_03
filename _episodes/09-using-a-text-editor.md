@@ -1,14 +1,14 @@
 ---
 title: "Working with the command history and script-files"
-teaching: 20
-exercises: 20
+teaching: 15
+exercises: 15
 questions:
 - "How can I save and edit my previous input commands conveniently?"
 objectives:
 - "Work with the IPython magic commands `history`, `cat`, `save`, and `run`."
-- "Use the atom text editor."
-- "Understand how to run commands and change the settings in atom."
-- "Learn how to use atom and IPython together."
+- "Use the Atom text editor."
+- "Understand how to run commands and change the settings in Atom."
+- "Learn how to use Atom and IPython together."
 keypoints:
 - "We can explore our input history and save our code to text files. For python
 files we use '.py'."
@@ -17,8 +17,7 @@ files we use '.py'."
 - "A GUI is convenient. Using the keyboard is faster."
 - "Start learning commands using the command palette."
 - "Settings can be changed in two different ways."
-- "Additional functionality can be added to atom."
-- "Hydrogen allows inline evaluation of Ipython."
+- "Additional functionality can be added to Atom."
 ---
 
 ## Working with the IPython history
@@ -259,9 +258,9 @@ Finally we can run this script in the ipython shell
 
 > ## Resurrecting variables
 >
-> Use the `del` command to remove hte roi_volumes variable from the current
+> Use the `del` command to remove the roi_volumes variable from the current
 > environment. Confirm you have done this. If we rerun the script will the
-> variable exist in our environment again? Check this.
+> variable exist in our environment again? Test whether your guess is correct.
 > 
 >
 >> ## Solution
@@ -284,27 +283,44 @@ The above commands can be very useful to interactively generate a set of working
 commands and save them to a script; however, sometimes we want the convenience
 of a text editor to lay out our thought a little more clearly and to edit
 the flow of our analysis so that it is more coherent later on. We have already
-configured the qtconsole to open the atom text editor when we want to edit some
-text like this. Try typing:
+configured the qtconsole to open the Atom text editor. It will open
+automatically  when we try to edit a file. Try typing:
 ~~~
 %edit metasearch_analysis.py 
 ~~~
 {: .python}
 
-Mention all the other good text editors. We're using atom because it is slightly
-easier to learn starting off, it is open-source, and it has a great community
-around it. It provides easy ways to learn how to performs commands using the
-keyboard, which is faster than using a mouse.
+There are many other good text editors out there. To name a few: vim, sublime,
+ emacs, Notepad++. All of these are sensible choices.
 
-Demonstrate that an unsaved file in Atom will not be written to by IPython.
-Show how to use the command palette.
-Show how to change the settings using the command palette and how this affects
-the config file.
-Try installing something that isn't a core package, Hydrogen.
+The functionality available in the text editor is largely defined by the
+packages installed. Some packages come preinstalled with Atom. These are called
+core packages. One example is the command palette core package. This allows us
+to see many of the commands available in Atom. We can activate this in using
+Ctl+Shift+p or CMD+Shift+p depending on the system we are using.
 
+> ## Viewing the editor settings
+>
+> Use the command palette to view the editor settings.
+{: .challenge}
 
+When we first open the settings we see the some tabs on the left of the
+settings window. If we select the "Packages" tab we can see we have a number of 
+packages that come pre-installed with Atom. 
 
+We will now enable one of the core packages. When working with IPython and Atom
+we don't want to have a situation where we have written text into Atom that is
+unsaved and then try to append text using IPython. The text from IPython won't
+save to the file. To avoid this situation we can enable the autosave core
+package in Atom. We can do this by selecting the "Packages" tab on the left side
+of the settings window, and scroll down to the autosave package in the "Core
+Packages" section. 
 
+It is worth noting that these changes can be all viewed in the same file. Below
+the "Packages" tab is a "Open Config Folder" tab. When we select this we can see
+a file called config.cson. All of our settings are stored here.
 
-
+Finally in order to keep track of our current work within Atom we will add our
+project directory to Atom by using the command palette (or by selecting "File >
+Add Project Folder").
 
