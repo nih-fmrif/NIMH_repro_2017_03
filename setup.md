@@ -9,28 +9,29 @@ For this course we will utilize Felix, an NIMH-dedicated high performance
 computing resource. In order to use this NoMachine must be installed on your
 laptop.
 
-## Windows
-
-## Mac OSX
-
-## Linux
-- [Download](https://www.nomachine.com/download/download&id=3) the installer to
-your downloads directory.
-- In the terminal run:
+* Windows
+  * Download the [installer](https://www.nomachine.com) and install.
+* Mac OSX
+  * Download the [installer](https://www.nomachine.com) and install.
+* Linux (Ubuntu example)
+  * [Download](https://www.nomachine.com/download/download&id=3) the installer
+  to your downloads directory.
+  * In the terminal run:
 
 ~~~
 cd ~/Downloads
 sudo dpkg -i nomachine_5.2.11_1_amd64.deb # the name of the downloaded version
 ~~~
-{: .source}
+{: bash}
 
-## Setting up the environment
+## Setting up the environment on the NIH cluster
 
-Open the terminal application and type:
+Once logged in to felix (or helix) using NoMachine open the terminal application
+and type:
 ~~~
 source /data/DSST/repro_env_setup.sh
 ~~~
-{: .source}
+{: bash}
 
 ## Open the Jupyter qtconsole
 
@@ -39,7 +40,7 @@ You're ready to go after you type:
 ~~~
 jupyter qtconsole &
 ~~~
-{: .source}
+{: bash}
 
 
 
@@ -73,145 +74,153 @@ jupyter qtconsole &
 {: .challenge}
 
 
-## Not part of the reproducibility course
-##  The rest of this page is to guide local installation if desired in future
 
+> ##  A guide for local installation if desired in future
+>
+>We used python 3.5 for the course. Any later version of python will also work
+>fine. Most of the packages in our environment are contained in the
+>Continuum analytics Anaconda environment. Alternatively you can install
+>miniconda and install required modules as you require them.
+>
+>> ## Windows - [Video tutorial][video-windows]
+>>   * Open [http://continuum.io/downloads][continuum-windows]
+>>    with your web browser.
+>>   * Download the Python 3 installer for Windows.
+>>   * Double-click the executable and install Python 3 using _MOST_ of the
+>>    default settings. The only exception is to check the 
+>>    **Make Anaconda the default Python** option.
+>>   * Install the text editor atom.
+>>   * Make sure you have ipython 5.2.X rather than 5.1.X in the environment 
+>> (debugging does not always work in the latter). Also install git if you don't
+>> already have it:
+>> 
+>>   ~~~
+>>   conda config --add channels conda-forge
+>>   conda install -y git 
+>>   conda update -y ipython
+>>   ~~~
+>>   {: .source}
+>>   * To configure jupyter qtconsole to use atom type the following at the
+>>   Anaconda prompt:
+>> 
+>> ~~~
+>> jupyter qtconsole --generate-config
+>> ~~~
+>> {: .source}
+>> 
+>> Then open atom and navigate to the config file listed at the Anaconda prompt.
+>> 
+>> Edit the line containing the text:
+>> ~~~
+>> #c.JupyterWidget.editor = ''
+>> ~~~
+>> {: .source}
+>> 
+>> Change this line to
+>> ~~~
+>>  c.JupyterWidget.editor = 'atom'
+>> ~~~
+>> {: .source}
+>>   * Close atom and the Anaconda prompt. Your system is now set up.
+>> 
+>{: .solution}
+>
+>
+>> ## Mac OS X - [Video tutorial][video-mac]
+>>   * Open [http://continuum.io/downloads][continuum-mac]
+>>    with your web browser.
+>>   * Download the Python 3 installer for OS X.
+>>   * Install Python 3 using all of the defaults for installation.
+>> 
+>>   * Make sure you have ipython 5.2.X rather than 5.1.X in the environment 
+>> (debugging does not always work in the latter). Also install git if you don't
+>> already have it:
+>> 
+>>   ~~~
+>>   conda config --add channels conda-forge
+>>   conda update -y ipython
+>>   ~~~
+>>   {: .source}
+>>   
+>>   *  To configure jupyter qtconsole to use atom type the following at the
+>> terminal prompt:
+>>   
+>>   ~~~
+>> jupyter qtconsole --generate-config
+>> sed -i "/#c.JupyterWidget.editor = ''/a c.JupyterWidget.editor = 'atom'" ~/.jupyter/jupyter_qtconsole_config.py
+>>   ~~~
+>>   {: .source}
+>{: .solution}
+>
+>
+>>## Linux
+>>
+>>  *  Open [http://continuum.io/downloads][continuum-linux] with your web browser.
+>>  *  Download the Python 3 installer for Linux.
+>>  *  Install Python 3 using all of the defaults for installation.
+>>
+>>  *     Open a terminal window.
+>>
+>>  *  Navigate to the folder where you downloaded the installer
+>>
+>>  *  Type
+>>
+>>    ~~~
+>>    $ bash Anaconda3-
+>>    ~~~
+>>    {: .bash}
+>>
+>>    and press tab.  The name of the file you just downloaded should appear.
+>>
+>>  *  Press enter.
+>>
+>>  *  Follow the text-only prompts.  When the license agreement appears (a colon
+>>        will be present at the bottom of the screen) hold the down arrow until the 
+>>        bottom of the text. Type `yes` and press enter to approve the license. Press 
+>>        enter again to approve the default location for the files. Type `yes` and 
+>>        press enter to prepend Anaconda to your `PATH` (this makes the Anaconda 
+>>        distribution the default Python).
+>>
+>>   * Make sure you have ipython 5.2.X rather than 5.1.X in the environment 
+>> (debugging does not always work in the latter). Also install git if you don't
+>> already have it:
+>> 
+>>   ~~~
+>>   conda config --add channels conda-forge
+>>   conda update -y ipython
+>>   ~~~
+>>   {: .source}
+>>   
+>>   *  To configure jupyter qtconsole to use atom type the following at the
+>> terminal prompt:
+>>   
+>>   ~~~
+>> jupyter qtconsole --generate-config
+>> sed -i "/#c.JupyterWidget.editor = ''/a c.JupyterWidget.editor = 'atom'" ~/.jupyter/jupyter_qtconsole_config.py
+>>   ~~~
+>>   {: .source}
+>{: .solution}
+>
+> With the software installed open a terminal (Linux or Mac OSX) or Anaconda
+> prompt (Windows). If you did not install into the default conda environment
+> you must activate it. For windows type:
+>   ~~~
+> activate environment_name
+>   ~~~
+>   {: .source}
+>
+> For Linux and OSX:
+>   ~~~
+> source activate environment_name
+>   ~~~
+>   {: .source}
+> Then type (same for all operating systems):
+>   ~~~
+> jupyter qtconsole &
+>   ~~~
+>   {: .source}
+{: .challenge}
 
-## Installing Python Using Anaconda
-[Python][python] is a popular language for scientific computing, and great for
-general-purpose programming as well. Installing all of its scientific packages
-individually can be a bit difficult, however, so we recommend the all-in-one
-installer [Anaconda][anaconda].
-
-Regardless of how you choose to install it, please make sure you install Python
-version 3.x (e.g., 3.5 is fine). Also, please set up your python environment at 
-least a day in advance of the workshop.  If you encounter problems with the 
-installation procedure, ask your workshop organizers via e-mail for assistance so
-you are ready to go as soon as the workshop begins.
-
-### Windows - [Video tutorial][video-windows]
-
-1. Open [http://continuum.io/downloads][continuum-windows]
-   with your web browser.
-
-2. Download the Python 3 installer for Windows.
-
-3. Double-click the executable and install Python 3 using _MOST_ of the
-   default settings. The only exception is to check the 
-   **Make Anaconda the default Python** option.
-
-4. Install the text editor atom.
-
-5. To setup up a python 3.5 conda environment for the class type (the 2nd and
-3rd command are not required if the Anaconda version you downloaded contains a
- python 3.5 environment as the default environment):
-~~~
-conda config --add channels conda-forge
-conda create -n py3.5 python=3.5 anaconda # this will take a long time
-activate py3.5 # you will always need to type this to use the environment
-conda install -y git 
-conda update -y ipython
-~~~
-{: .source}
-
-6. Configure jupyter qtconsole to use atom:
-Type the following at the Anaconda prompt
-
-~~~
-jupyter qtconsole --generate-config
-~~~
-{: .source}
-
-Then open atom and navigate to the config file listed at the Anaconda prompt.
-
-Edit the line containing the text:
-~~~
-#c.JupyterWidget.editor = ''
-~~~
-{: .source}
-~~~
- c.JupyterWidget.editor = 'atom'
-~~~
-{: .source}
-
-7. Close atom and the Anaconda prompt. Your system is now set up. From now on to
-work with this software open the Anaconda prompt:
-
-~~~
-activate py 3.5 # if this is what you named your environment
-jupyter qtconsole &
-~~~
-{: .source}
-
-
-
-
-### Mac OS X - [Video tutorial][video-mac]
-
-1. Open [http://continuum.io/downloads][continuum-mac]
-   with your web browser.
-
-2. Download the Python 3 installer for OS X.
-
-3. Install Python 3 using all of the defaults for installation.
-
-### Linux
-
-Note that the following installation steps require you to work from the shell. 
-If you run into any difficulties, please request help before the workshop begins.
-
-1.  Open [http://continuum.io/downloads][continuum-linux] with your web browser.
-
-2.  Download the Python 3 installer for Linux.
-
-3.  Install Python 3 using all of the defaults for installation.
-
-    a.  Open a terminal window.
-
-    b.  Navigate to the folder where you downloaded the installer
-
-    c.  Type
-
-    ~~~
-    $ bash Anaconda3-
-    ~~~
-    {: .bash}
-
-    and press tab.  The name of the file you just downloaded should appear.
-
-    d.  Press enter.
-
-    e.  Follow the text-only prompts.  When the license agreement appears (a colon
-        will be present at the bottom of the screen) hold the down arrow until the 
-        bottom of the text. Type `yes` and press enter to approve the license. Press 
-        enter again to approve the default location for the files. Type `yes` and 
-        press enter to prepend Anaconda to your `PATH` (this makes the Anaconda 
-        distribution the default Python).
-
-
-## Starting Python
-
-We will teach Python using the [Jupyter qtconsole][jupyter]. This provides an
- command line interface to an IPython kernel. If you installed Python using
- Anaconda, Jupyter should already be on your system. Using the package manager
- conda is the best way to install jupyter. If you don't want to install Anaconda
- you could install miniconda and then use the conda package manager to install
- Jupyter.
-
-To start the console, open a terminal or git bash and type the command:
-
-~~~
-$ jupyter qtconsole
-~~~
-{: .bash}
-
-To start the Python interpreter without the notebook, open a terminal 
-or Git Bash and type the command:
-
-~~~
-$ python
-~~~
-{: .bash}
 
 [anaconda]: https://www.continuum.io/anaconda
 [continuum-mac]: http://continuum.io/downloads#_macosx
