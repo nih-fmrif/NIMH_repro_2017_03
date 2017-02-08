@@ -31,16 +31,10 @@ We can view at our input history for this session:
 ~~~
 {: .python}
 
-We can limit the number of results that are returned using the `- l` flag:
-~~~
-%history -l 5
-~~~
-{: .python}
-
 It can be more convenient to see the commands associated with the input number
 that they are associated with:
 ~~~
-%history -l 5 -n
+%history -n
 ~~~
 {: .python}
 
@@ -53,15 +47,29 @@ previous commands that contain the pattern `roi`:
 {: .python}
 
 
-We can also limit our search by specifying the line numbers of the current
-session. Lets only search the first 100 lines of this session:
+Instead of searching for a pattern we can also retrieve our history by
+specifying the session and line numbers (patterns and line numbers don't play 
+well together). For the first 10 lines of this session type the following:
 ~~~
-%history -n -g roi 1-100
+%history -n 1-10
 ~~~
 {: .python}
 
-To explore this idea lets start by reading what the IPython `history` magic
-does:
+To return the history from the first 10 lines 4 sessions ago:
+~~~
+%history -n ~4/1-10
+~~~
+{: .python}
+
+
+To return the history from the first line of 4 sessions ago to the hundredth
+line of this session:
+~~~
+%history -n ~4/1-~0/100
+~~~
+{: .python}
+
+Remember to use help if you forget the syntax:
 ~~~
 %history?
 ~~~
@@ -149,24 +157,6 @@ optional arguments:
 ~~~
 {: .output}
 
-
-> ## Searching previous sessions
->
-> Use the history command to search for "roi" in our last 3 IPython sessions and
-> return the line numbers of each match.
->
->> ## Solution
->>  ~~~
->> %history -n -g roi ~3/1-[most recent input number in ipython for this
->> session]
->> ~~~
->> {: .python}
->{: .solution}
->
-{: .challenge}
-
-
-
 ## Saving commands to a script file
 
 *   If we want to save some of these commands to keep track of our analysis for
@@ -210,10 +200,11 @@ print(roi_volumes)
 {: .output}
 
 We'll save this last command to the python script too. We don't want to
-overwrite our original command though:
+overwrite our original command though. If we were to just enter 
 ~~~
 %save metasearch_analysis.py N # enter the line number of the most recent
 command
+# then type "N" to prevent overwriting our previous command!
 ~~~
 {: .python}
 ~~~
@@ -258,14 +249,14 @@ Finally we can run this script in the ipython shell
 
 > ## Resurrecting variables
 >
-> Use the `del` command to remove the roi_volumes variable from the current
+> Use the `%reset` magic to remove the roi_volumes variable from the current
 > environment. Confirm you have done this. If we rerun the script will the
 > variable exist in our environment again? Test whether your guess is correct.
 > 
 >
 >> ## Solution
 >>  ~~~
->> del roi_volumes
+>> %reset # and type y + enter to confirm
 >> print(roi_volumes)
 >> %run metasearch_analysis.py
 >> print(roi_volumes)
@@ -323,4 +314,15 @@ a file called config.cson. All of our settings are stored here.
 Finally in order to keep track of our current work within Atom we will add our
 project directory to Atom by using the command palette (or by selecting "File >
 Add Project Folder").
+
+## Starting to save our workflow
+We are at the point where we can start to begin to save our work as we go. Lets
+save the command with which we downloaded our dataset.
+
+~~~
+%hist -g git clone # to find out the appropriate line number
+%save -a metasearch_analysis.py N # enter the line number 
+~~~
+{: .python}
+
 
