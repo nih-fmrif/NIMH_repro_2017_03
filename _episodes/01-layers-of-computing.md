@@ -41,14 +41,15 @@ We'll be conducting this course using a remote desktop utility called [NoMachine
 * Open Terminal from the Application-> System Tools menu
 * Start up an IPython window
 We've setup a short [script]() to get you started quickly in the NIH HPC (felix or helix). To run it, type:
+
 ~~~
-/data/DSST/scripts/repro_env_setup.sh
+source /data/DSST/scripts/repro_env_setup.sh
 ~~~
 {: .bash}
 
 Your screen should now look something like this:
 
-![image_of_shell](../fig/layers_of_computing.png)
+![image_of_shell](../fig/HPC_desktop.png)
 
 ## What is remote desktop and why should you use it.
 
