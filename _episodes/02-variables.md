@@ -17,9 +17,10 @@ keypoints:
 - "Use the built-in function `len` to find the length of a string."
 - "Python is case-sensitive."
 - "Use meaningful variable names."
-- " Variables in the current environment can be displayed or deleted using the
-`%whos` and `%reset` IPython magics.
+- "Variables in the current environment can be displayed or deleted using the
+`%whos` and `%reset` IPython magics."
 ---
+
 ## Use variables to store values.
 
 *   Variables are names for values.
