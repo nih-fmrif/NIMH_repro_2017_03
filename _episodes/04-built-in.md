@@ -10,7 +10,7 @@ objectives:
 - "Explain the purpose of functions."
 - "Correctly call built-in Python functions."
 - "Correctly nest calls to built-in functions."
-- "Use help to display documentation for built-in functions."
+- "Use help to display documentation and source code for built-in functions."
 - "Correctly describe situations in which SyntaxError and NameError occur."
 keypoints:
 - "Use comments to add documentation to programs."
@@ -136,11 +136,12 @@ round(...)
 ~~~
 {: .output}
 
-## IPython makes using functions easier
+## IPython makes provides easier access to help
 
 *   As we open a parenthesis of a function we can see some useful help
-*   We can type `?` after a function or object to get help about it
-*   For some functions tab completion will show some available named arguements
+*   We can type `?` after a function or object to get help about it that
+includes what is displayed by the Python help function.
+
 
 ~~~
 print?
@@ -158,7 +159,35 @@ end:   string appended after the last value, default a newline.
 flush: whether to forcibly flush the stream.
 Type:      builtin_function_or_method
 ~~~
+
+Additionally IPython provides a convenient manner to view the source code of
+functions. This help is available by using `??`. Most of the built-in functions
+are not written in Python. For performance reasons they are written in compiled
+languages like C. In these cases, the `??` help command will display the same
+content as the previously mentioned help command. Later on we will see how
+useful this help command can be though. It can often provide some extra insight
+and at the very least provides well written code that you can begin to model
+your own code on.
+
+
+~~~
+print??
+~~~
+{: .python}
+~~~
+Docstring:
+print(value, ..., sep=' ', end='\n', file=sys.stdout, flush=False)
+
+Prints the values to a stream, or to sys.stdout by default.
+Optional keyword arguments:
+file:  a file-like object (stream); defaults to the current sys.stdout.
+sep:   string inserted between values, default a space.
+end:   string appended after the last value, default a newline.
+flush: whether to forcibly flush the stream.
+Type:      builtin_function_or_method
+~~~
 {: .output}
+
 
 ## Python reports a syntax error when it can't understand the source of a program.
 
