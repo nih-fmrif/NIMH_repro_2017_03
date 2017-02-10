@@ -1,7 +1,8 @@
 ---
-title: Automated Version Control
+title: Introduction to Version Control and git
 teaching: 5
 exercises: 0
+start: true
 questions:
 - "What is version control and why should I use it?"
 objectives:
