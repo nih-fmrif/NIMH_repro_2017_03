@@ -11,7 +11,7 @@ questions:
 - "What is python? What is IPython? What is Juypter?"
 - "What are the tools we'll be using in the course?"
 objectives:
-- "Build a mental model of data storage, computing, and how they relate to one another"
+- "Understand how the components in your computing stack relate to one another"
 - "Understand the different ways of interacting with your computer and what the pros and cons are"
 - "Explain when and why command-line interfaces should be used instead of graphical interfaces."
 - "Explain the advantages of remote computing including cloud and high performance computing."
@@ -30,7 +30,7 @@ cryptic its commands and operation can be."
 - "Although there are many ways to work remotely, we will use a graphical
 interface using NoMachine"
 - "We will use an IPython console to interact with the Python interpretter"
-- "We can easily interact with the system shell from IPython"
+
 
 ---
 
@@ -51,14 +51,39 @@ Your screen should now look something like this:
 
 ![image_of_shell](../fig/HPC_desktop.png)
 
-## What is remote desktop and why should you use it.
+## Know who (or what) you're talking to
 
-The desktop you're looking inside the NoMachine window is from a computer that lives over in building 13's high performance computing (HPC) center, also sometimes referred to as the Biowulf.
+It's easy and common to click on an icon, open and window and typing, clicking, and analyzing in that window without much thought about how or where those commands are being executed and where the data is being stored. It's worth the effort to take some time and understand exactly wheat your computing (stack)[] looks like and exactly where everything is happening. Understanding this stack can help you make your analysis more efficient and secure.
 
-Talk about the layers of computing and where the shell and other higher level
-programs fit into this. Mention remote computing.
+## Where am I?
+
+The desktop you're looking at inside the NoMachine window is from a computer that lives over in building 13 at NIH's high performance computing (HPC) center. This computer (helix or felix) is separate from but closely affiliated with the large cluster of computers known as the Biowulf.
+
+NoMachine is a remote desktop program. It allows your to interact with the remote computer (helix/felix) almost as if you were sitting right in front of it. (VNC is another common remote desktop program).
+
+The window on the left of your NX desktop is running an IPython shell. On the right side, there is a window running a (Bash) shell. A (shell)[reference] refers to a program that wraps around another program that is usually more complicated and less user-friendly. That program inside the shell is often referred to as a kernel.
 
 ![image_of_shell](../fig/layers_of_computing.png)
+
+For any computer you might be working with, there is a main kernel that is part of the "operating system" at the heart of it.  On top of that kernel there are many other programs running, some of them are designed to provide you with an easy way to interact
+
+# Boxed Text
+Bash vs. IPython
+We'll be working almost exclusively in the IPython shell in this course. IPython provides an easy way to explore and interact with your data that leverages the power of the Python programming language. The Bash shell is an extremely versatile tool designed to allow you to control and interact with files and your computer more generally. You've likely had exposure to Bash (or it's close cousin, tcsh) if you've used analysis packages like AFNI, FSL, and FreeSurfer. The Bash shell is a (great thing to learn)[Link to bash tutorials], but we want to focus on teaching you reproducible computing concepts without getting bogged down in the syntax of too many different languages.
+
+# Exercise
+
+Draw a diagram to illustrate how the programs and computers listed below relate to one another.
+
+* Your laptop
+* Helix & Felix
+* The Biowulf cluster
+* NoMachine Remote Desktop
+* IPython Shell
+* Angry Birds on your phone
+
+No get with your partner and compare your drawings. Discuss the difference and edit as needed.
+
 
 
 ##  The file system
@@ -66,6 +91,19 @@ Talk about what a path is etc. using the following figures:
 ![image_of_shell](../fig/file_system_1.png)
 ![image_of_shell](../fig/file_system_2.png)
 ![image_of_shell](../fig/file_system_3.png)
+
+# Exercise
+
+Use the cd command to change to each of these directories in this order:
+
+In each directory, run the following command to create a simple csv text file
+
+echo $PWD,$USER, Was Here, $TIME > $USER_footprint.csv
+
+When you're finished, list your footprint files:
+find . -name $USER -exec cat {} \;
+
+Copy the output into the Etherpad
 
 
 ## The IPython console
