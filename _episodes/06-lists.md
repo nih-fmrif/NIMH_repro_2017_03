@@ -95,7 +95,10 @@ Our list has now become: [26.5,145.3,12.7,16.2, 27.6,14.2,140]
 *   Use `object_name.method_name` to call methods.
     *   Deliberately resembles the way we refer to things in a library.
 *   We will meet other methods of lists as we go along.
-    *   Use `help(list)` for a preview.
+    *   In IPython, after typing a period after an object we can preview the
+        methods available to us by hitting the tab-key. Alternatively we can
+        see the methods by using the `dir` function or accessing the help for
+        an object
 
 ## Use `del` to remove items from a list entirely.
 

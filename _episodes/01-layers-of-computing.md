@@ -1,7 +1,7 @@
 ---
 start: true
 title: "The layers of computing"
-teaching: 20
+teaching: 30
 exercises: 0
 questions:
 - "Where, exactly, is my data? Where should it be?"
@@ -30,20 +30,32 @@ cryptic its commands and operation can be."
 - "Although there are many ways to work remotely, we will use a graphical
 interface using NoMachine"
 - "We will use an IPython console to interact with the Python interpretter"
-
-
+- "We will learn basic commands for working with the computer file system:
+`pwd`, `ls`, `mkdir` and `cd`."
+-  "Understand the difference between alias, system commands, and IPython magics"
+- "Show how `cd`  behaves differently because each system call is a subprocess"
 ---
 
 ## Getting started
 
 * Connect to felix or helix using NoMachine
-We'll be conducting this course using a remote desktop utility called [NoMachine](http://www.nomachine.com). You should have already met with the DSST staff to configure and test it. Open the NoMachine App and connect to felix.nimh.nih.gov if you are an NIMH employee or helix.nih.gov if you work for another IC.
+We'll be conducting this course using a remote desktop utility called
+[NoMachine](http://www.nomachine.com). You should have already met with the DSST
+staff to configure and test it. Open the NoMachine App and connect to
+felix.nimh.nih.gov if you are an NIMH employee or helix.nih.gov if you work for
+another IC.
 * Open Terminal from the Application-> System Tools menu
-* Start up an IPython window
-We've setup a short [script]() to get you started quickly in the NIH HPC (felix or helix). To run it, type:
+* We've setup a short script to get you started quickly in the NIH HPC (felix or helix). To run it, type:
 
 ~~~
 source /data/DSST/scripts/repro_env_setup.sh
+~~~
+{: .bash}
+
+* Start up an IPython window
+
+~~~
+jupyter qtconsole &
 ~~~
 {: .bash}
 
@@ -106,59 +118,124 @@ find . -name $USER -exec cat {} \;
 Copy the output into the Etherpad
 
 
-## The IPython console
-Show
+## The Jupyter qtconsole
 
-*  Getting the current working directory with `pwd`
-*  navigating the file system with `cd`
-*  Listing directories with `ls`
-*  How these commands are both Ipthon and system commands.
-*  Show how `cd`  behaves differently because each system call is a subprocess
-*  Mention how none of this is not python, which is the majority of what we will
-teach from now on.
+> ## A note on the IPython prompt
+>
+> ~~~
+>  In [1]
+> ~~~
+> {: .source}
+> The IPython prompt, as depicted above, sits before our blinking cursor. It
+> consists of the word "In" followed by a number. It informs us that we are
+> currently entering input. In this case the first input of the Ipython kernel
+> session. Every time we execute a command this number will increment by one.
+ {: .callout}
+
+The Jupyter qtconsole is a developing environment that is optimised for
+interactive computing typical of scientific analyses. It provides lots of
+convenient commands and shortcuts for this. Different languages can used with
+this interface. In our case we will be using Ipython. It provides us with  a
+convenient interface to the system shell and the Python interpreter. We will
+start by typing in the IPython command:
+~~~
+%pwd
+~~~
+{: .source}
+~~~
+/Users/this_user
+~~~
+{: .output}
+
+This returns the present working directory, the file-system-context
+for the commands that we execute. We can refer to these files by simply typing
+their names. We can list these files by using the next command:
+~~~
+%ls
+~~~
+{: .source}
+
+The `'%ls` command returns all the files in the present working directory. When
+we wish to perform actions on these files we can refer to them directly by their
+names and the shell will understand which files we are referring to. Later we
+ will talk about how to add new files to the current directory but for now we
+ will use the `%mkdir` command to add a directory into our present working
+ directory:
 
 ~~~
-pwd
+%mkdir reproducibility_course
 ~~~
 {: .source}
-~~~
-ls
-~~~
-{: .source}
-~~~
-cd Documents
-~~~
-{: .source}
-~~~
-ls
-~~~
-{: .source}
+
+## IPython magics and system commands
+
+The above commands can be entered into the Ipython in slightly different ways.
+Instead of using the "%" sign we can instead use the "!" sign and we will still
+get the same results (although we will not be able to make the same directory
+again).
+
 ~~~
 !pwd
-~~~
-{: .source}
-~~~
 !ls
+!mkdir reproducibility_course
 ~~~
 {: .source}
 ~~~
-!cd Documents
+/Users/this_user
+... A list of files in the current directory...
+mkdir: cannot create directory `reproducibility_course': File exists
 ~~~
-{: .source}
-~~~
-ls
-~~~
-{: .source}
-~~~
-!mkdir ~/reproducibility_course
-~~~
-{: .source}
-~~~
-cd reproducibility_course
-~~~
-{: .source}
+{: .output}
 
+When we use the "%" sign it denotes that the command is an IPython magic. These
+are special commands available in IPython that make doing some common tasks
+easier on the command line. The "!" instead sends the command to the system
+shell. On a Linux or Mac OSX operating system this will likely be the Bash
+shell. All of these commands exist in Bash; however, on a Windows operating
+system the pwd system command does not exist. You can see we have to be careful
+about using system commands. Some will be operating system dependent. Since the
+Ipython magics will work regardless of the operating system used, we shall
+instead use those when we can.
 
+## System commands start a new sub-process
+Apart from the different system commands across platforms there is another
+reason we might have a preference for Ipython magics. Each system command starts
+up a sub-process, executes the commands, and then closes. The effect of this can
+be seen very easily when we use the "!cd" system command to change directories.
+
+~~~
+%pwd
+!cd reproducibility_course
+%pwd
+~~~
+{: .source}
+~~~
+/Users/this_user
+!cd reproducibility_course
+/Users/this_user/reproducibility_course
+~~~
+{: .output}
+
+This woud not be the behaviour we would wish from a command that changes our
+present working directory. This occurs because the changes made to the
+environment in the sub-process are not propagated back to the Ipython shell. If
+we use the Ipython magic `%cd` we get the behaviour we want
+~~~
+%pwd
+%cd reproducibility_course
+%pwd
+~~~
+{: .source}
+~~~
+/Users/this_user
+!cd reproducibility_course
+/Users/this_user/reproducibility_course
+~~~
+{: .output}
+
+*  As we work through the course we will continue to learn some convenient
+shortcuts available to use in the Ipython shall; however, most of the time we
+will be writing commands that are in the Python language.
 
 ## Convenient commands to remember
 

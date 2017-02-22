@@ -325,4 +325,13 @@ save the command with which we downloaded our dataset.
 ~~~
 {: .python}
 
+We should see the download command appear in our python script file. For now
+let's delete the other two lines and comment out the command that downloads the
+data. We do not want to download the data every time we run our script. When we
+know how to test for certain conditions, like the existence of the data
+directory, and how to execute code based on this condition being false we can
+alter our script so that it will work each time but will only download data if
+required.
+
+
 
