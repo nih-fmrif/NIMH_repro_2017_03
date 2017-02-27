@@ -293,6 +293,9 @@ Ctl+Shift+p or CMD+Shift+p depending on the system we are using.
 > ## Viewing the editor settings
 >
 > Use the command palette to view the editor settings.
+> >> ## Solution Select "View" from the menu at the top of the atom window  and
+> >>    then "Toggle Command Palette". Alternatively use the keyboard shortcut
+> >>    "Ctrl + Shift + P"
 {: .challenge}
 
 When we first open the settings we see the some tabs on the left of the
@@ -327,11 +330,8 @@ save the command with which we downloaded our dataset.
 
 We should see the download command appear in our python script file. For now
 let's delete the other two lines and comment out the command that downloads the
-data. We do not want to download the data every time we run our script. When we
-know how to test for certain conditions, like the existence of the data
-directory, and how to execute code based on this condition being false we can
-alter our script so that it will work each time but will only download data if
-required.
+data. We do not want to download the data every time we run our script. We will
+change this later when we learn how to conditionally execute code. 
 
 
 
