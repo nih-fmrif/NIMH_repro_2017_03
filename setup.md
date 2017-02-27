@@ -57,12 +57,12 @@ install the needed software.
 > wish to use jupyter qtconsole as our interface to IPython we generate a
 > configuration file and then use the unix "sed" text processing utility to add
 > atom, as the associated text editor for our work.
-> 
-> 
-> 
+>
+>
+>
 >
 >> ## See script commands
->> 
+>>
 >>~~~
 >> module load Anaconda
 >> module load git
@@ -78,7 +78,7 @@ install the needed software.
 
 
 
-## A guide to local installation 
+## A guide to local installation
 Please install the text editor [atom](https://atom.io).
 
 We will use python 3.5 for the course. Any later version of python will also work
@@ -92,53 +92,53 @@ fine. Most of the packages in our environment are contained in the
  >    with your web browser.
  >      * Download the Python 3 installer for Windows.
  >      * Double-click the executable and install Python 3 using _MOST_ of the
- >    default settings. The only exception is to check the 
+ >    default settings. The only exception is to check the
  >    **Make Anaconda the default Python** option.
  >   
  >   There is a [video tutorial][video-windows] for anaconda installation if
- >   necessary. 
+ >   necessary.
  >   
  >   In addition to installing Anaconda follow the other
  >   instructions below
  >   
- >   * Make sure you have ipython 5.2.X rather than 5.1.X in the environment 
+ >   * Make sure you have ipython 5.2.X rather than 5.1.X in the environment
  > (debugging does not always work in the latter). Also install git if you don't
  > already have it:
- > 
+ >
  >~~~
  >   conda config --add channels conda-forge
- >   conda install -y git 
+ >   conda install -y git
  >   conda update -y ipython
  >~~~
  >{: .source}
  >   * To configure jupyter qtconsole to use atom type the following at the
  >   Anaconda prompt:
- > 
+ >
  >~~~
  > jupyter qtconsole --generate-config
  >~~~
  >{: .source}
- > 
+ >
  > Then open atom and navigate to the config file listed at the Anaconda prompt.
- > 
+ >
  > Edit the line containing the text:
- > 
+ >
  >~~~
  > #c.JupyterWidget.editor = ''
  >~~~
  >{: .source}
- > 
+ >
  > Change this line to
- > 
+ >
  >~~~
  >  c.JupyterWidget.editor = 'atom'
  >~~~
  >{: .source}
  >   * Close atom and the Anaconda prompt. Your system is now set up.
- > 
+ >
  {: .solution}
  > ## Click here for Mac OS X
- > 
+ >
  >   * Anaconda installation:
  >      * Download the Python 3 installer for OS X.
  >      * Open [http://continuum.io/downloads][continuum-mac]
@@ -146,20 +146,20 @@ fine. Most of the packages in our environment are contained in the
  >      * Install Python 3 using all of the defaults for installation.
  >   
  >   There is a [video tutorial][video-mac] for anaconda installation if
- >   necessary. 
+ >   necessary.
  >   
  >   In addition to installing Anaconda follow the other
  >   instructions below
- > 
- >   * Make sure you have ipython 5.2.X rather than 5.1.X in the environment 
+ >
+ >   * Make sure you have ipython 5.2.X rather than 5.1.X in the environment
  > (debugging does not always work in the latter). Also install git if you don't
  > already have it:
- > 
+ >
  >~~~
  >   conda config --add channels conda-forge
  >   conda update -y ipython
  >   # if the command "git --version" returns an error or a version less than 2.7:
- >   conda install git 
+ >   conda install git
  >~~~
  >{: .source}
  >   
@@ -170,19 +170,19 @@ fine. Most of the packages in our environment are contained in the
  > jupyter qtconsole --generate-config
  > ~~~
  >{: .source}
- > 
+ >
  > Then open atom and navigate to the config file listed (probably
  > "~/.jupyter/jupyter_qtconsole_config.py")
- > 
+ >
  > Edit the line containing the text:
- > 
+ >
  >~~~
  > #c.JupyterWidget.editor = ''
  >~~~
  >{: .source}
- > 
+ >
  > Change this line to
- > 
+ >
  >~~~
  >  c.JupyterWidget.editor = 'atom'
  >~~~
@@ -210,16 +210,16 @@ fine. Most of the packages in our environment are contained in the
  >  *  Press enter.
  >
  >  *  Follow the text-only prompts.  When the license agreement appears (a colon
- >        will be present at the bottom of the screen) hold the down arrow until the 
- >        bottom of the text. Type `yes` and press enter to approve the license. Press 
- >        enter again to approve the default location for the files. Type `yes` and 
- >        press enter to prepend Anaconda to your `PATH` (this makes the Anaconda 
+ >        will be present at the bottom of the screen) hold the down arrow until the
+ >        bottom of the text. Type `yes` and press enter to approve the license. Press
+ >        enter again to approve the default location for the files. Type `yes` and
+ >        press enter to prepend Anaconda to your `PATH` (this makes the Anaconda
  >        distribution the default Python).
  >
- >   * Make sure you have ipython 5.2.X rather than 5.1.X in the environment 
+ >   * Make sure you have ipython 5.2.X rather than 5.1.X in the environment
  > (debugging does not always work in the latter). Also install git if you don't
  > already have it:
- > 
+ >
  >~~~
  >   conda config --add channels conda-forge
  >   conda update -y ipython
