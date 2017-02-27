@@ -1,20 +1,25 @@
 ---
-title: Introduction to Version Control and git
-teaching: 10
+title: Introduction to Version Control and Git
+teaching: 20
 exercises: 0
 start: true
 questions:
 - "What is version control and why should I use it?"
 - "How do I get set up to use Git?"
+- "Where does Git store information?"
 objectives:
 - "Understand the benefits of an automated version control system."
 - "Understand the basics of how Git works."
 - "Configure `git` the first time it is used on a computer."
 - "Understand the meaning of the `--global` configuration flag."
+- "Create a local Git repository."
 keypoints:
 - "Version control is like an unlimited 'undo'."
 - "Version control also allows many people to work in parallel."
 -   "Use `git config` to configure a user name, email address, editor, and other preferences once per machine."
+- "`git init` initializes a repository."
+- "`git status` shows the status of a repository."
+
 ---
 
 We'll start by exploring how version control can be used
@@ -82,7 +87,7 @@ across different computers facilitating collaboration among different people.
 {: .challenge}
 
 
-## Setting up git
+## Setting up Git
 When we use Git on a new computer for the first time, we need to configure a
 [few things](http://swcarpentry.github.io/git-novice/02-setup/). Below are a
 few examples of configurations we will set as we get started with Git:
@@ -131,16 +136,16 @@ You can reconfigure these settings whenever you wish.
 > may also need to tell Git about the proxy:
 >
 > ~~~
-> $ git config --global http.proxy proxy-url
-> $ git config --global https.proxy proxy-url
+> !git config --global http.proxy proxy-url
+> !git config --global https.proxy proxy-url
 > ~~~
 > {: .bash}
 >
 > To disable the proxy, use
 >
 > ~~~
-> $ git config --global --unset http.proxy
-> $ git config --global --unset https.proxy
+> !git config --global --unset http.proxy
+> !git config --global --unset https.proxy
 > ~~~
 > {: .bash}
 {: .callout}
@@ -150,8 +155,81 @@ You can reconfigure these settings whenever you wish.
 > Always remember that if you forget a git command, you can access the list of command by using -h and access the git manual by using --help :
 >
 > ~~~
-> $ git config -h
-> $ git config --help
+> !git config -h
+> !git config --help
 > ~~~
 > {: .bash}
 {: .callout}
+
+
+## Initializing a Git repository
+
+To start using Git we must first create a git repository for a given project. In
+order to track the content of our current analysis we want to make sure we are
+in the correct directory. Let's check the contents of the directory too:
+
+~~~
+%cd ~/reproducibility_course
+%ls
+~~~
+{: .bash}
+
+~~~
+metasearch_analysis.py
+~~~
+{: .output}
+
+We will create a git repository in this directory, which we can do by using the
+`git init` command:
+
+~~~
+!git init
+%ls
+~~~
+{: .bash}
+
+~~~
+metasearch_analysis.py
+~~~
+{: .output}
+
+It appears that nothing has changed. But if we add the `-a` flag to show all
+files, including hidden ones, we can see that Git has created a hidden directory
+called `.git`:
+
+~~~
+%ls -a
+~~~
+{: .bash}
+
+~~~
+.   .. .git metasearch_analysis.py
+~~~
+{: .output}
+
+Git stores information about the project in this special sub-directory. If we
+ever delete it, we will lose the project's history.
+
+We can check that everything is set up correctly by asking Git to tell us the
+status of our project:
+
+~~~
+!git status
+~~~
+{: .bash}
+
+~~~
+On branch master
+
+Initial commit
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+        metasearch_analysis.py
+
+nothing added to commit but untracked files present (use "git add" to track)
+~~~
+{: .output}
+
+
