@@ -16,6 +16,7 @@ objectives:
 keypoints:
 - "Version control is like an unlimited 'undo'."
 - "Version control also allows many people to work in parallel."
+- "All changes tracked by git are stored in the hidden repository '.git'."
 -   "Use `git config` to configure a user name, email address, editor, and other preferences once per machine."
 - "`git init` initializes a repository."
 - "`git status` shows the status of a repository."
@@ -139,7 +140,7 @@ You can reconfigure these settings whenever you wish.
 > !git config --global http.proxy proxy-url
 > !git config --global https.proxy proxy-url
 > ~~~
-> {: .bash}
+> {: .source}
 >
 > To disable the proxy, use
 >
@@ -147,7 +148,7 @@ You can reconfigure these settings whenever you wish.
 > !git config --global --unset http.proxy
 > !git config --global --unset https.proxy
 > ~~~
-> {: .bash}
+> {: .source}
 {: .callout}
 
 > ## Git Help and Manual
@@ -158,7 +159,7 @@ You can reconfigure these settings whenever you wish.
 > !git config -h
 > !git config --help
 > ~~~
-> {: .bash}
+> {: .source}
 {: .callout}
 
 
@@ -172,10 +173,10 @@ in the correct directory. Let's check the contents of the directory too:
 %cd ~/reproducibility_course
 %ls
 ~~~
-{: .bash}
+{: .source}
 
 ~~~
-metasearch_analysis.py
+metasearch/ metasearch_analysis.py
 ~~~
 {: .output}
 
@@ -186,10 +187,10 @@ We will create a git repository in this directory, which we can do by using the
 !git init
 %ls
 ~~~
-{: .bash}
+{: .source}
 
 ~~~
-metasearch_analysis.py
+metasearch/  metasearch_analysis.py
 ~~~
 {: .output}
 
@@ -200,10 +201,10 @@ called `.git`:
 ~~~
 %ls -a
 ~~~
-{: .bash}
+{: .source}
 
 ~~~
-.   .. .git metasearch_analysis.py
+./  ../  .git/  metasearch/  metasearch_analysis.py
 ~~~
 {: .output}
 
@@ -211,12 +212,12 @@ Git stores information about the project in this special sub-directory. If we
 ever delete it, we will lose the project's history.
 
 We can check that everything is set up correctly by asking Git to tell us the
-status of our project:
+status of our project. It should display the following text:
 
 ~~~
 !git status
 ~~~
-{: .bash}
+{: .source}
 
 ~~~
 On branch master
@@ -226,10 +227,13 @@ Initial commit
 Untracked files:
   (use "git add <file>..." to include in what will be committed)
 
+        metasearch/
         metasearch_analysis.py
 
 nothing added to commit but untracked files present (use "git add" to track)
 ~~~
 {: .output}
+
+
 
 
