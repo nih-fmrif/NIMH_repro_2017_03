@@ -4,7 +4,6 @@ teaching: 20
 exercises: 0
 questions:
 - "How do I record changes in Git?"
-- "How do I check the status of my version control repository?"
 - "How do I record notes about what changes I made and why?"
 objectives:
 - "Go through the modify-add-commit cycle for one or more files."
@@ -16,53 +15,25 @@ keypoints:
 - "Always write a log message when committing changes."
 ---
 
-Let's create a file called `mars.txt` that contains some notes
-about the Red Planet's suitability as a base.
-(We'll use `nano` to edit the file;
-you can use whatever editor you like.
-In particular, this does not have to be the `core.editor` you set globally earlier.)
+We can check the contents of the file that we previously saved in our project directory using the `%cat` magic:
+~~~
+%cat metasearch_analysis.py
+~~~
+{: .source}
 
 ~~~
-$ nano mars.txt
-~~~
-{: .bash}
-
-Type the text below into the `mars.txt` file:
-
-~~~
-Cold and dry, but everything is my favorite color
+# coding: utf-8
+# get_ipython().system('x git clone https://github.com/OpenNeuroLab/metasearch.git')
 ~~~
 {: .output}
 
-`mars.txt` now contains a single line, which we can see by running:
 
+As we saw previously the status of our git repository shows us that we have
+this untracked file along with our directory with data:
 ~~~
-$ ls
+!git status
 ~~~
-{: .bash}
-
-~~~
-mars.txt
-~~~
-{: .output}
-
-~~~
-$ cat mars.txt
-~~~
-{: .bash}
-
-~~~
-Cold and dry, but everything is my favorite color
-~~~
-{: .output}
-
-If we check the status of our project again,
-Git tells us that it's noticed the new file:
-
-~~~
-$ git status
-~~~
-{: .bash}
+{: .source}
 
 ~~~
 On branch master
@@ -70,28 +41,37 @@ On branch master
 Initial commit
 
 Untracked files:
-   (use "git add <file>..." to include in what will be committed)
+  (use "git add <file>..." to include in what will be committed)
 
-	mars.txt
+        metasearch/
+        metasearch_analysis.py
+
 nothing added to commit but untracked files present (use "git add" to track)
 ~~~
 {: .output}
 
-The "untracked files" message means that there's a file in the directory
-that Git isn't keeping track of.
+We change the status of a file from "Untracked" to "Tracked" by adding it to
+the Git repository. We have to do this just once for every file in our
+repository. Once we have added a file to our repository it's will always be
+tracked.
+
+![The file lifecycle in git](../fig/git_add.png)
+Modified figure from git-scm.com
+
+
 We can tell Git to track a file using `git add`:
 
 ~~~
-$ git add mars.txt
+!git add metasearch_analysis.py
 ~~~
-{: .bash}
+{: .source}
 
-and then check that the right thing happened:
+We check how this changed the way Git see our current project with the `git status` command once again:
 
 ~~~
-$ git status
+!git status
 ~~~
-{: .bash}
+{: .source}
 
 ~~~
 On branch master
@@ -101,103 +81,259 @@ Initial commit
 Changes to be committed:
   (use "git rm --cached <file>..." to unstage)
 
-	new file:   mars.txt
+        new file:   metasearch_analysis.py
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+        metasearch/
 
 ~~~
 {: .output}
 
-Git now knows that it's supposed to keep track of `mars.txt`,
-but it hasn't recorded these changes as a commit yet.
-To get it to do that,
-we need to run one more command:
+Git now knows that it's supposed to keep track of `metasearch_analysis.py`, but
+it hasn't recorded these changes permanently in its repository yet. To
+permanently store the current state of the metasearch_analysis.py file in the
+Git repository we need to commit the changes that are "staged". We use the `git
+commit` command for this:
 
 ~~~
-$ git commit -m "Start notes on Mars as a base"
+!git commit -m "add script for our analysis"
 ~~~
-{: .bash}
+{: .source}
 
 ~~~
-[master (root-commit) f22b25e] Start notes on Mars as a base
- 1 file changed, 1 insertion(+)
- create mode 100644 mars.txt
+[master (root-commit) 0c89fa2] add script for our analysis
+ 1 file changed, 2 insertions(+)
+ create mode 100644 metasearch_analysis.py
 ~~~
 {: .output}
 
-When we run `git commit`,
-Git takes everything we have told it to save by using `git add`
-and stores a copy permanently inside the special `.git` directory.
-This permanent copy is called a [commit]({{ page.root }}/reference/#commit)
-(or [revision]({{ page.root }}/reference/#revision)) and its short identifier is `f22b25e`
-(Your commit may have another identifier.)
+When we run `git commit`, Git takes everything we have told it to save by using
+`git add` and stores a copy permanently inside the special `.git` directory.
+This permanent copy is called a [commit]({{ page.root }}/reference/#commit) (or
+[revision]({{ page.root }}/reference/#revision)) and its short identifier is
+`a897988` (Your commit may have another identifier.)
 
-We use the `-m` flag (for "message")
-to record a short, descriptive, and specific comment that will help us remember later on what we did and why.
-If we just run `git commit` without the `-m` option,
-Git will launch `nano` (or whatever other editor we configured as `core.editor`)
-so that we can write a longer message.
+We use the `-m` flag (for "message") to record a short, descriptive, and
+specific comment that will help us remember later on what we did and why. If we
+just run `git commit` without the `-m` option, Git will launch `atom` (or
+whatever other editor we configured as `core.editor`) so that we can write a
+longer message.
 
 [Good commit messages][commit-messages] start with a brief (<50 characters) summary of
 changes made in the commit.  If you want to go into more detail, add
 a blank line between the summary line and your additional notes.
 
-If we run `git status` now:
+Now when we run `git status` we see:
 
 ~~~
-$ git status
+!git status
 ~~~
-{: .bash}
+{: .source}
 
 ~~~
 On branch master
-nothing to commit, working directory clean
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+        metasearch/
+
+nothing added to commit but untracked files present (use "git add" to track)
 ~~~
 {: .output}
 
-it tells us everything is up to date.
-If we want to know what we've done recently,
-we can ask Git to show us the project's history using `git log`:
+Not only is the metasearch_analysis.py file no longer untracked but
+it is also no longer reported as part of the git repository status. It is now
+in the unmodified state. We can observe a history of our commit to the
+repository. For this, we use `git log`:
 
 ~~~
-$ git log
+!git log
+~~~
+{: .source}
+
+~~~
+commit 0c89fa2638154272519761de68189f8bb0d0b789
+Author: XXX <XXX@hotmail.com>
+Date:   Mon Feb 27 16:12:08 2012 -0500
+
+    add script for our analysis
+~~~
+{: .output}
+
+`git log` lists all commits  made to a repository in reverse chronological
+order. The listing for each commit includes the commit's full identifier (which
+starts with the same characters as the short identifier printed by the `git
+commit` command earlier), the commit's author, when it was created, and the log
+message Git was given when the commit was created.
+
+## Where Are My Changes?
+If we run `ls` at this point, we will see that there has been no obvious change
+to the filesystem. That's because Git saves information about files' history in
+the special `.git` directory mentioned earlier so that our filesystem doesn't
+become cluttered (and so that we can't accidentally edit or delete an old
+version). 
+
+In addition to the distinction between untracked and staged files we have two
+other states that files can occupy from the perspective of Git: modified and
+unmodified. Any time we make a change to any of our files tracked by Git we
+will observe that they are listed as unmodified. We must stage and then commit
+such changes to return the files to their unmodified state. 
+
+![The file lifecycle in git](../fig/git_workflow.png)
+Figure from git-scm.com
+
+
+The cycle of making changes, staging, and committing is continually repeated
+and our project continues to develop with each file being represented in the
+Git repository as a combination of committed changes. We will start
+working through such a cycle now by making another edit to our analysis script.
+For now we'll just add a comment to document the fact that we are using data
+from the the Open Neuroimaging Laboratory at http://openneu.ro.
+
+>## Editing our script file
+> If not already open in our text editor atom, we should open it now using the IPython `%edit` magic:
+> ~~~
+> %edit metasearch_analysis.py
+> ~~~
+> {: .source}
+{: .callout}
+
+## The Git Lifecycle
+Once we have finished editing our script we should observe something like the following:
+
+~~~
+%cat metasearch_analysis.py
+~~~
+{: .source}
+
+~~~
+# coding: utf-8
+# Download the data from the Open Neuroimaging Labaroatory, see http://openneu.ro
+# get_ipython().system('git clone https://github.com/OpenNeuroLab/metasearch.git')
+~~~
+{: .output}
+
+At this point we will see that Git now views this as a modified file:
+
+~~~
+!git status
+~~~
+{: .source}
+
+~~~
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+        modified:   metasearch_analysis.py
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+        metasearch/
+
+no changes added to commit (use "git add" and/or "git commit -a")
+~~~
+{: .output}
+
+We previously used `git add` to add an untracked file to the staging area. This
+time we will use it to add a modified file to the staging area.
+
+~~~
+!git add metasearch_analysis.py
+~~~
+{: .source}
+
+Finally to complete the Git life-cycle for this current change-set we will commit our staged changes:
+
+~~~
+!git commit -m "add comment about Open Neuroimaging Laboratory"
+~~~
+{: .source}
+
+~~~
+[master b7dfff7] add comment about Open Neuroimaging Laboratory
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+~~~
+{: .output}
+
+We can use the `git status` and `git log` commands to confirm that an
+additional commit is stored in the Git repository and no staged or unstaged
+changes exist for the file metasearch_analysis.py.
+
+
+
+
+
+## What if I don't want Git to track some of my changes?
+There are many reasons we might want git to overlook certain files or sub-directories in our project. One such case is if our data contains Personally identifiable information (PII). Git helps us to share our code. This is still difficult to do if the content tracking system we use for our code contains this PII. To help with this we could explicitly include a directory in which we will add such data so that we reduce the risk of accidentally tracking such content.
+
+
+
+
+
+
+
+## Places to Create Git Repositories
+
+The following commands start a new project, `more_scripts`, within the
+`reproducibility_course` project. Is this a sensible idea? What problems
+might it cause?
+~~~
+%mkdir more_scripts    # make a sub-directory reproducibility_course/more_scripts
+%cd more_scripts       # go into reproducibility_course/more_scripts
+!git init       # make the more_scripts sub-directory a Git repository
 ~~~
 {: .bash}
 
-~~~
-commit f22b25e3233b4645dabd0d81e651fe074bd8e73b
-Author: Vlad Dracula <vlad@tran.sylvan.ia>
-Date:   Thu Aug 22 09:51:46 2013 -0400
+Why is it a bad idea to do this? (Notice here that the
+`reproducibility_course` project could now track the entire `more_scripts`
+repository.) How can we undo this `git init`?
 
-    Start notes on Mars as a base
+  
+Git repositories can interfere with each other if they are "nested" in the
+directory of another: the outer repository will try to version-control the
+inner repository. Therefore, it's best to create each new Git repository in a
+separate directory. To be sure that there is no conflicting repository in the
+directory, check the output of `git status`. If it looks like the following,
+you are good to go to create a new repository:
+ 
+~~~
+!git status
+~~~
+{: .bash}
+~~~
+fatal: Not a git repository (or any of the parent directories): .git
 ~~~
 {: .output}
+ 
+  
+  
 
-`git log` lists all commits  made to a repository in reverse chronological order.
-The listing for each commit includes
-the commit's full identifier
-(which starts with the same characters as
-the short identifier printed by the `git commit` command earlier),
-the commit's author,
-when it was created,
-and the log message Git was given when the commit was created.
 
-> ## Where Are My Changes?
->
-> If we run `ls` at this point, we will still see just one file called `mars.txt`.
-> That's because Git saves information about files' history
-> in the special `.git` directory mentioned earlier
-> so that our filesystem doesn't become cluttered
-> (and so that we can't accidentally edit or delete an old version).
-{: .callout}
+ <!-- Similarly, we can ignore (as discussed later) entire directories, such as the `moons` directory:
+Note that we can track files in directories within a Git:
+ -->
+
+
+
+
+
+
+
 
 Now suppose Dracula adds more information to the file.
 (Again, we'll edit with `nano` and then `cat` the file to show its contents;
 you may use a different editor, and don't need to `cat`.)
 
 ~~~
-$ nano mars.txt
-$ cat mars.txt
+!nano mars.txt
+!cat mars.txt
 ~~~
-{: .bash}
+{: .source}
 
 ~~~
 Cold and dry, but everything is my favorite color
@@ -209,9 +345,9 @@ When we run `git status` now,
 it tells us that a file it already knows about has been modified:
 
 ~~~
-$ git status
+!git status
 ~~~
-{: .bash}
+{: .source}
 
 ~~~
 On branch master
@@ -237,9 +373,9 @@ This shows us the differences between the current state
 of the file and the most recently saved version:
 
 ~~~
-$ git diff
+!git diff
 ~~~
-{: .bash}
+{: .source}
 
 ~~~
 diff --git a/mars.txt b/mars.txt
@@ -271,10 +407,10 @@ If we break it down into pieces:
 After reviewing our change, it's time to commit it:
 
 ~~~
-$ git commit -m "Add concerns about effects of Mars' moons on Wolfman"
-$ git status
+!git commit -m "Add concerns about effects of Mars' moons on Wolfman"
+!git status
 ~~~
-{: .bash}
+{: .source}
 
 ~~~
 On branch master
@@ -293,10 +429,10 @@ Git won't commit because we didn't use `git add` first.
 Let's fix that:
 
 ~~~
-$ git add mars.txt
-$ git commit -m "Add concerns about effects of Mars' moons on Wolfman"
+!git add mars.txt
+!git commit -m "Add concerns about effects of Mars' moons on Wolfman"
 ~~~
-{: .bash}
+{: .source}
 
 ~~~
 [master 34961b1] Add concerns about effects of Mars' moons on Wolfman
@@ -344,17 +480,17 @@ but not yet committed.
 
 ![The Git Staging Area](../fig/fig/git-staging-area.svg)
 
-Let's watch as our changes to a file move from our editor
+Let's watch   as our changes to a file move from our editor
 to the staging area
 and into long-term storage.
 First,
 we'll add another line to the file:
 
 ~~~
-$ nano mars.txt
-$ cat mars.txt
+!nano mars.txt
+!cat mars.txt
 ~~~
-{: .bash}
+{: .source}
 
 ~~~
 Cold and dry, but everything is my favorite color
@@ -364,9 +500,9 @@ But the Mummy will appreciate the lack of humidity
 {: .output}
 
 ~~~
-$ git diff
+!git diff
 ~~~
-{: .bash}
+{: .source}
 
 ~~~
 diff --git a/mars.txt b/mars.txt
@@ -387,10 +523,10 @@ Now let's put that change in the staging area
 and see what `git diff` reports:
 
 ~~~
-$ git add mars.txt
-$ git diff
+!git add mars.txt
+!git diff
 ~~~
-{: .bash}
+{: .source}
 
 There is no output:
 as far as Git can tell,
@@ -400,9 +536,9 @@ However,
 if we do this:
 
 ~~~
-$ git diff --staged
+!git diff --staged
 ~~~
-{: .bash}
+{: .source}
 
 ~~~
 diff --git a/mars.txt b/mars.txt
@@ -422,9 +558,9 @@ and what's in the staging area.
 Let's save our changes:
 
 ~~~
-$ git commit -m "Discuss concerns about Mars' climate for Mummy"
+!git commit -m "Discuss concerns about Mars' climate for Mummy"
 ~~~
-{: .bash}
+{: .source}
 
 ~~~
 [master 005937f] Discuss concerns about Mars' climate for Mummy
@@ -435,9 +571,9 @@ $ git commit -m "Discuss concerns about Mars' climate for Mummy"
 check our status:
 
 ~~~
-$ git status
+!git status
 ~~~
-{: .bash}
+{: .source}
 
 ~~~
 On branch master
@@ -448,9 +584,9 @@ nothing to commit, working directory clean
 and look at the history of what we've done so far:
 
 ~~~
-$ git log
+!git log
 ~~~
-{: .bash}
+{: .source}
 
 ~~~
 commit 005937fbe2a98fb83f0ade869025dc2636b4dad5
@@ -495,9 +631,9 @@ Date:   Thu Aug 22 09:51:46 2013 -0400
 > from the last commit you can use
 >
 > ~~~
-> $ git log -1
+> !git log -1
 > ~~~
-> {: .bash}
+> {: .source}
 > 
 > ~~~
 > commit 005937fbe2a98fb83f0ade869025dc2636b4dad5
@@ -512,9 +648,9 @@ Date:   Thu Aug 22 09:51:46 2013 -0400
 > `--oneline` option:
 >
 > ~~~
-> $ git log --oneline
+> !git log --oneline
 > ~~~
-> {: .bash}
+> {: .source}
 > ~~~
 > * 005937f Thoughts about the climate
 > * 34961b1 Concerns about Mars's moons on my furry friend
@@ -526,9 +662,9 @@ Date:   Thu Aug 22 09:51:46 2013 -0400
 > combination is
 >
 > ~~~
-> $ git log --oneline --graph --all --decorate
+> !git log --oneline --graph --all --decorate
 > ~~~
-> {: .bash}
+> {: .source}
 > ~~~
 > * 005937f Thoughts about the climate (HEAD, master)
 > * 34961b1 Concerns about Mars's moons on my furry friend
@@ -565,15 +701,15 @@ repository (`git commit`):
 > Which command(s) below would save the changes of `myfile.txt`
 > to my local Git repository?
 >
-> 1. `$ git commit -m "my recent changes"`
+> 1. `!git commit -m "my recent changes"`
 >
-> 2. `$ git init myfile.txt`  
->    `$ git commit -m "my recent changes"`
+> 2. `!git init myfile.txt`  
+>    `!git commit -m "my recent changes"`
 >
-> 3. `$ git add myfile.txt`  
->    `$ git commit -m "my recent changes"`
+> 3. `!git add myfile.txt`  
+>    `!git commit -m "my recent changes"`
 >
-> 4. `$ git commit -m myfile.txt "my recent changes"`
+> 4. `!git commit -m myfile.txt "my recent changes"`
 >
 > > ## Solution
 > >
@@ -600,19 +736,19 @@ repository (`git commit`):
 > >
 > > First we make our changes to the `mars.txt` and `venus.txt` files:
 > > ~~~
-> > $ nano mars.txt
-> > $ cat mars.txt
+> > !nano mars.txt
+> > !cat mars.txt
 > > ~~~
-> > {: .bash}
+> > {: .source}
 > > ~~~
 > > Maybe I should start with a base on Venus.
 > > ~~~
 > > {: .output}
 > > ~~~
-> > $ nano venus.txt
-> > $ cat venus.txt
+> > !nano venus.txt
+> > !cat venus.txt
 > > ~~~
-> > {: .bash}
+> > {: .source}
 > > ~~~
 > > Venus is a nice planet and I definitely should consider it as a base.
 > > ~~~
@@ -620,20 +756,20 @@ repository (`git commit`):
 > > Now you can add both files to the staging area. We can do that in one line:
 > >
 > > ~~~
-> > $ git add mars.txt venus.txt
+> > !git add mars.txt venus.txt
 > > ~~~
-> > {: .bash}
+> > {: .source}
 > > Or with multiple commands:
 > > ~~~
-> > $ git add mars.txt
-> > $ git add venus.txt
+> > !git add mars.txt
+> > !git add venus.txt
 > > ~~~
-> > {: .bash}
+> > {: .source}
 > > Now the files are ready to commit. You can check that using `git status`. If you are ready to commit use:
 > > ~~~
-> > $ git commit -m "Wrote down my plans to start a base on Venus"
+> > !git commit -m "Wrote down my plans to start a base on Venus"
 > > ~~~
-> > {: .bash}
+> > {: .source}
 > > ~~~
 > > [master cc127c2]
 > > Wrote down my plans to start a base on venus
@@ -652,16 +788,16 @@ repository (`git commit`):
 > commits:
 >
 > ~~~
-> $ git log --format=full
+> !git log --format=full
 > ~~~
-> {: .bash}
+> {: .source}
 >
 > When commiting you can name someone else as the author:
 >
 > ~~~
-> $ git commit --author="Vlad Dracula <vlad@tran.sylvan.ia>"
+> !git commit --author="Vlad Dracula <vlad@tran.sylvan.ia>"
 > ~~~
-> {: .bash}
+> {: .source}
 >
 > Create a new repository and create two commits: one without the
 > `--author` option and one by naming a colleague of yours as the
@@ -671,16 +807,16 @@ repository (`git commit`):
 > > ## Solution
 > >
 > > ~~~
-> > $ git add me.txt
-> > $ git commit -m "Updated Vlad's bio." --author="Frank N. Stein <franky@monster.com>"
+> > !git add me.txt
+> > !git commit -m "Updated Vlad's bio." --author="Frank N. Stein <franky@monster.com>"
 > > ~~~
-> > {: .bash}
+> > {: .source}
 > > ~~~
 > > [master 4162a51] Updated Vlad's bio.
 > > Author: Frank N. Stein <franky@monster.com>
 > > 1 file changed, 2 insertions(+), 2 deletions(-)
 > >
-> > $ git log --format=full
+> > !git log --format=full
 > > commit 4162a51b273ba799a9d395dd70c45d96dba4e2ff
 > > Author: Frank N. Stein <franky@monster.com>
 > > Commit: Vlad Dracula <vlad@tran.sylvan.ia>
