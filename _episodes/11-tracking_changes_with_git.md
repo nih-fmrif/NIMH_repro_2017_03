@@ -10,9 +10,10 @@ objectives:
 - "Explain where information is stored at each stage of Git commit workflow."
 keypoints:
 - "Files can be stored in a project's working directory (which users see), the staging area (where the next commit is being built up) and the local repository (where commits are permanently recorded)."
-- "`git add` puts files in the staging area."
-- "`git commit` saves the staged content as a new commit in the local repository."
+- ""git add" puts files in the staging area."
+- ""git commit" saves the staged content as a new commit in the local repository."
 - "Always write a log message when committing changes."
+- "View previous commits using the "git log" command."
 ---
 
 We can check the contents of the file that we previously saved in our project directory using the `%cat` magic:
@@ -23,7 +24,7 @@ We can check the contents of the file that we previously saved in our project di
 
 ~~~
 # coding: utf-8
-# get_ipython().system('x git clone https://github.com/OpenNeuroLab/metasearch.git')
+# get_ipython().system('git clone https://github.com/OpenNeuroLab/metasearch.git')
 ~~~
 {: .output}
 
@@ -50,23 +51,20 @@ nothing added to commit but untracked files present (use "git add" to track)
 ~~~
 {: .output}
 
-We change the status of a file from "Untracked" to "Tracked" by adding it to
-the Git repository. We have to do this just once for every file in our
-repository. Once we have added a file to our repository it's will always be
-tracked.
+The first step in tracking a file in Git is to add it to the Git staging area.
 
 ![The file lifecycle in git](../fig/git_add.png)
 Modified figure from git-scm.com
 
 
-We can tell Git to track a file using `git add`:
+In order to add a file to the Git staging area we use "git add":
 
 ~~~
 !git add metasearch_analysis.py
 ~~~
 {: .source}
 
-We check how this changed the way Git see our current project with the `git status` command once again:
+We check how this changed the way Git see our current project with the "git status" command once again:
 
 ~~~
 !git status
@@ -94,7 +92,7 @@ Untracked files:
 Git now knows that it's supposed to keep track of `metasearch_analysis.py`, but
 it hasn't recorded these changes permanently in its repository yet. To
 permanently store the current state of the metasearch_analysis.py file in the
-Git repository we need to commit the changes that are "staged". We use the `git
+Git repository we need to commit the changes that are staged. We use the `git
 commit` command for this:
 
 ~~~
@@ -109,15 +107,15 @@ commit` command for this:
 ~~~
 {: .output}
 
-When we run `git commit`, Git takes everything we have told it to save by using
-`git add` and stores a copy permanently inside the special `.git` directory.
+When we run "git commit", Git takes everything we have told it to save by using
+"git add" and stores a copy permanently inside the special `.git` directory.
 This permanent copy is called a [commit]({{ page.root }}/reference/#commit) (or
 [revision]({{ page.root }}/reference/#revision)) and its short identifier is
-`a897988` (Your commit may have another identifier.)
+`0c89fa2` (Your commit may have another identifier.)
 
 We use the `-m` flag (for "message") to record a short, descriptive, and
 specific comment that will help us remember later on what we did and why. If we
-just run `git commit` without the `-m` option, Git will launch `atom` (or
+just run "git commit" without the `-m` option, Git will launch `atom` (or
 whatever other editor we configured as `core.editor`) so that we can write a
 longer message.
 
@@ -125,7 +123,7 @@ longer message.
 changes made in the commit.  If you want to go into more detail, add
 a blank line between the summary line and your additional notes.
 
-Now when we run `git status` we see:
+Now when we run "git status" we see:
 
 ~~~
 !git status
@@ -143,10 +141,10 @@ nothing added to commit but untracked files present (use "git add" to track)
 ~~~
 {: .output}
 
-Not only is the metasearch_analysis.py file no longer untracked but
-it is also no longer reported as part of the git repository status. It is now
-in the unmodified state. We can observe a history of our commit to the
-repository. For this, we use `git log`:
+Not only is the metasearch_analysis.py file now tracked but it is also
+no longer part of the output of  "git status". It is now in the unmodified
+state. When we look at our repository's history we can observe our commit. For
+this, we use "git log":
 
 ~~~
 !git log
@@ -162,45 +160,59 @@ Date:   Mon Feb 27 16:12:08 2012 -0500
 ~~~
 {: .output}
 
-`git log` lists all commits  made to a repository in reverse chronological
+"git log" lists all commits  made to a repository in reverse chronological
 order. The listing for each commit includes the commit's full identifier (which
 starts with the same characters as the short identifier printed by the `git
 commit` command earlier), the commit's author, when it was created, and the log
 message Git was given when the commit was created.
 
 ## Where Are My Changes?
-If we run `ls` at this point, we will see that there has been no obvious change
-to the filesystem. That's because Git saves information about files' history in
-the special `.git` directory mentioned earlier so that our filesystem doesn't
-become cluttered (and so that we can't accidentally edit or delete an old
-version). 
+If we run `%ls` at this point, we will see that there has been no obvious change
+to the filesystem:
 
-In addition to the distinction between untracked and staged files we have two
-other states that files can occupy from the perspective of Git: modified and
-unmodified. Any time we make a change to any of our files tracked by Git we
-will observe that they are listed as unmodified. We must stage and then commit
-such changes to return the files to their unmodified state. 
+~~~
+%ls
+~~~
+{: .source}
 
-![The file lifecycle in git](../fig/git_workflow.png)
-Figure from git-scm.com
+~~~
+metasearch/ metasearch_analysis.py
+~~~
+{: .output}
+
+There are no obvious changes observed in the project directory because Git
+saves information about files' history in the special `.git` directory
+mentioned earlier so that our filesystem doesn't become cluttered (and so that
+we can't accidentally edit or delete an old version).
+  
+## The Git Lifecycle
 
 
-The cycle of making changes, staging, and committing is continually repeated
+We have now seen the different states that files typically inhabit as Git
+tracks them. The default file state is unmodified. Any time we make a change to
+any of our files tracked by Git we will observe that they are listed as
+modified. We must stage and then commit such changes to return the files to
+their unmodified state.
+
+The cycle of making changes to files, staging these changes, and then committing them is continually repeated
 and our project continues to develop with each file being represented in the
 Git repository as a combination of committed changes. We will start
 working through such a cycle now by making another edit to our analysis script.
 For now we'll just add a comment to document the fact that we are using data
 from the the Open Neuroimaging Laboratory at http://openneu.ro.
 
+![The file lifecycle in git](../fig/git_workflow.png)
+Figure from git-scm.com
+
+
 >## Editing our script file
-> If not already open in our text editor atom, we should open it now using the IPython `%edit` magic:
+> If not already open in our text editor atom, we should now open it using the IPython `%edit` magic:
 > ~~~
 > %edit metasearch_analysis.py
 > ~~~
 > {: .source}
 {: .callout}
 
-## The Git Lifecycle
 Once we have finished editing our script we should observe something like the following:
 
 ~~~
@@ -239,7 +251,7 @@ no changes added to commit (use "git add" and/or "git commit -a")
 ~~~
 {: .output}
 
-We previously used `git add` to add an untracked file to the staging area. This
+We previously used "git add" to add an untracked file to the staging area. This
 time we will use it to add a modified file to the staging area.
 
 ~~~
@@ -260,7 +272,7 @@ Finally to complete the Git life-cycle for this current change-set we will commi
 ~~~
 {: .output}
 
-We can use the `git status` and `git log` commands to confirm that an
+We can use the "git status" and "git log" commands to confirm that an
 additional commit is stored in the Git repository and no staged or unstaged
 changes exist for the file metasearch_analysis.py.
 
@@ -269,7 +281,11 @@ changes exist for the file metasearch_analysis.py.
 
 
 ## What if I don't want Git to track some of my changes?
-There are many reasons we might want git to overlook certain files or sub-directories in our project. One such case is if our data contains Personally identifiable information (PII). Git helps us to share our code. This is still difficult to do if the content tracking system we use for our code contains this PII. To help with this we could explicitly include a directory in which we will add such data so that we reduce the risk of accidentally tracking such content.
+There are many reasons we might want git to overlook certain files or sub-directories in our project. One such case is if our data contains Personally identifiable information (PII). Git helps us to share our code. This is still difficult to do if the content tracking system we use for our code contains this PII. To help with this we could explicitly include a directory in which we will add such data so that we reduce the risk of accidentally tracking such content. Let's do that now and add our dataset to this so that we don't accidentally include things we don't want to:
+
+~~~
+mkdir data_not_in_repo
+mv metasearch data_not_in_repo
 
 
 
@@ -291,14 +307,14 @@ might it cause?
 
 Why is it a bad idea to do this? (Notice here that the
 `reproducibility_course` project could now track the entire `more_scripts`
-repository.) How can we undo this `git init`?
+repository.) How can we undo this "git init"?
 
   
 Git repositories can interfere with each other if they are "nested" in the
 directory of another: the outer repository will try to version-control the
 inner repository. Therefore, it's best to create each new Git repository in a
 separate directory. To be sure that there is no conflicting repository in the
-directory, check the output of `git status`. If it looks like the following,
+directory, check the output of "git status". If it looks like the following,
 you are good to go to create a new repository:
  
 ~~~
@@ -341,7 +357,7 @@ The two moons may be a problem for Wolfman
 ~~~
 {: .output}
 
-When we run `git status` now,
+When we run "git status" now,
 it tells us that a file it already knows about has been modified:
 
 ~~~
@@ -365,10 +381,10 @@ The last line is the key phrase:
 "no changes added to commit".
 We have changed this file,
 but we haven't told Git we will want to save those changes
-(which we do with `git add`)
-nor have we saved them (which we do with `git commit`).
+(which we do with "git add")
+nor have we saved them (which we do with "git commit").
 So let's do that now. It is good practice to always review
-our changes before saving them. We do this using `git diff`.
+our changes before saving them. We do this using "git diff".
 This shows us the differences between the current state
 of the file and the most recently saved version:
 
@@ -425,7 +441,7 @@ no changes added to commit (use "git add" and/or "git commit -a")
 {: .output}
 
 Whoops:
-Git won't commit because we didn't use `git add` first.
+Git won't commit because we didn't use "git add" first.
 Let's fix that:
 
 ~~~
@@ -461,12 +477,12 @@ but not yet committed.
 > ## Staging Area
 >
 > If you think of Git as taking snapshots of changes over the life of a project,
-> `git add` specifies *what* will go in a snapshot
+> "git add" specifies *what* will go in a snapshot
 > (putting things in the staging area),
-> and `git commit` then *actually takes* the snapshot, and
+> and "git commit" then *actually takes* the snapshot, and
 > makes a permanent record of it (as a commit).
-> If you don't have anything staged when you type `git commit`,
-> Git will prompt you to use `git commit -a` or `git commit --all`,
+> If you don't have anything staged when you type "git commit",
+> Git will prompt you to use "git commit -a" or "git commit --all",
 > which is kind of like gathering *everyone* for the picture!
 > However, it's almost always better to
 > explicitly add things to the staging area, because you might
@@ -520,7 +536,7 @@ So far, so good:
 we've added one line to the end of the file
 (shown with a `+` in the first column).
 Now let's put that change in the staging area
-and see what `git diff` reports:
+and see what "git diff" reports:
 
 ~~~
 !git add mars.txt
@@ -611,7 +627,7 @@ Date:   Thu Aug 22 09:51:46 2013 -0400
 
 > ## Paging the Log
 >
-> When the output of `git log` is too long to fit in your screen,
+> When the output of "git log" is too long to fit in your screen,
 > `git` uses a program to split it into pages of the size of your screen.
 > When this "pager" is called, you will notice that the last line in your
 > screen is a `:`, instead of your usual prompt.
@@ -624,7 +640,7 @@ Date:   Thu Aug 22 09:51:46 2013 -0400
 
 > ## Limit Log Size
 >
-> To avoid that `git log` cover all your terminal screen you can
+> To avoid that "git log" cover all your terminal screen you can
 > limit the numbers of commit that Git will list by using `-N`
 > where `N` is the number of commits that you want to receive
 > the information. For example, if you only want the information
@@ -675,8 +691,8 @@ Date:   Thu Aug 22 09:51:46 2013 -0400
 
 To recap, when we want to add changes to our repository,
 we first need to add the changed files to the staging area
-(`git add`) and then commit the staged changes to the
-repository (`git commit`):
+("git add") and then commit the staged changes to the
+repository ("git commit"):
 
 ![The Git Commit Workflow](../fig/fig/git-committing.svg)
 
@@ -765,7 +781,7 @@ repository (`git commit`):
 > > !git add venus.txt
 > > ~~~
 > > {: .source}
-> > Now the files are ready to commit. You can check that using `git status`. If you are ready to commit use:
+> > Now the files are ready to commit. You can check that using "git status". If you are ready to commit use:
 > > ~~~
 > > !git commit -m "Wrote down my plans to start a base on Venus"
 > > ~~~
@@ -801,7 +817,7 @@ repository (`git commit`):
 >
 > Create a new repository and create two commits: one without the
 > `--author` option and one by naming a colleague of yours as the
-> author. Run `git log` and `git log --format=full`. Think about ways
+> author. Run "git log" and "git log --format=full". Think about ways
 > how that can allow you to collaborate with your colleagues.
 >
 > > ## Solution
