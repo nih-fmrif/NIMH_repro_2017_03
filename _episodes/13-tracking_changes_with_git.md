@@ -1,7 +1,7 @@
 ---
-title: "Versioning edits with Git"
+title: Versioning edits with Git
 teaching: 30
-exercises: 0
+exercises: 5
 questions:
 - "How do I record changes in Git?"
 - "How do I record notes about what changes I made and why?"
@@ -10,10 +10,11 @@ objectives:
 - "Explain where information is stored at each stage of Git commit workflow."
 keypoints:
 - "Files can be stored in a project's working directory (which users see), the staging area (where the next commit is being built up) and the local repository (where commits are permanently recorded)."
-- ""git add" puts files in the staging area."
-- ""git commit" saves the staged content as a new commit in the local repository."
+- "`git add` puts files in the staging area."
+- "`git commit` saves the staged content as a new commit in the local repository."
 - "Always write a log message when committing changes."
 - "View previous commits using the "git log" command."
+
 ---
 
 We can check the contents of the file that we previously saved in our project directory using the `%cat` magic:
