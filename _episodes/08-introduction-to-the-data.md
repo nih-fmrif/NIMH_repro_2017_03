@@ -1,6 +1,6 @@
 ---
 title: "Introduction to the data"
-teaching: 10
+teaching: 15
 exercises: 10
 questions:
 - "Where can I get neuroimaging data"
