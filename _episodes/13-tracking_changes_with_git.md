@@ -1,6 +1,6 @@
 ---
-title: Tracking Changes
-teaching: 20
+title: "Versioning edits with Git"
+teaching: 30
 exercises: 0
 questions:
 - "How do I record changes in Git?"
@@ -286,7 +286,8 @@ There are many reasons we might want git to overlook certain files or sub-direct
 ~~~
 mkdir data_not_in_repo
 mv metasearch data_not_in_repo
-
+~~~
+{: .source}
 
 
 

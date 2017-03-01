@@ -186,10 +186,8 @@ fine. Most of the packages in our environment are contained in the
  > > ~~~
  > > {: .bash}
  > > 
- > >    When atom opens select Atom in the menu bar and then "Install Shell
- > >    commands" and exit Atom. After this, in a new iTerm window the editor
- > >    should be opened by executing the command atom (if not make sure that
- > >    /usr/local/bin is on the PATH).
+ > >   After this, in a new iTerm window the editor should be opened by
+ > >    executing the command "atom".
  > {: .solution} 
  >    
  >   * Anaconda installation:

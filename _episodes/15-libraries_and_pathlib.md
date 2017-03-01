@@ -1,7 +1,7 @@
 ---
-title: "Libraries"
-teaching: 10
-exercises: 10
+title: "Libraries and pathlib"
+teaching: 15
+exercises: 15
 questions:
 - "How can I use software that other people have written?"
 - "How can I find out what that software does?"
@@ -16,6 +16,7 @@ keypoints:
 - "Import specific items from a library to shorten programs."
 - "Create an alias for a library when importing it to shorten programs."
 ---
+
 ## Most of the power of a programming language is in its libraries.
 
 *   A *library* is a collection of functions that can be used by other programs.
