@@ -1,5 +1,5 @@
 ---
-title: "Introduction to the data"
+title: "Open Science"
 teaching: 30
 exercises: 0
 questions:

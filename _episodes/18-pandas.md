@@ -1,5 +1,5 @@
 ---
-title: "Writing Functions"
+title: "Pandas"
 teaching: 20
 exercises: 25
 questions:

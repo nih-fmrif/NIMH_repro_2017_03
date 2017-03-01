@@ -1,6 +1,6 @@
 ---
-title: "Writing Functions"
-teaching: 10
+title: "Pandas intro and functions"
+teaching: 15
 exercises: 15
 questions:
 - "How can I create my own functions?"
