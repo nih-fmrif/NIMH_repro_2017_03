@@ -57,12 +57,12 @@ install the needed software.
 > wish to use jupyter qtconsole as our interface to IPython we generate a
 > configuration file and then use the unix "sed" text processing utility to add
 > atom, as the associated text editor for our work.
->
->
->
+> 
+> 
+> 
 >
 >> ## See script commands
->>
+>> 
 >>~~~
 >> module load Anaconda
 >> module load git
@@ -78,7 +78,7 @@ install the needed software.
 
 
 
-## A guide to local installation
+## A guide to local installation 
 Please install the text editor [atom](https://atom.io).
 
 We will use python 3.5 for the course. Any later version of python will also work
@@ -92,53 +92,106 @@ fine. Most of the packages in our environment are contained in the
  >    with your web browser.
  >      * Download the Python 3 installer for Windows.
  >      * Double-click the executable and install Python 3 using _MOST_ of the
- >    default settings. The only exception is to check the
+ >    default settings. The only exception is to check the 
  >    **Make Anaconda the default Python** option.
  >   
  >   There is a [video tutorial][video-windows] for anaconda installation if
- >   necessary.
+ >   necessary. 
  >   
  >   In addition to installing Anaconda follow the other
  >   instructions below
  >   
- >   * Make sure you have ipython 5.2.X rather than 5.1.X in the environment
+ >   * Make sure you have ipython 5.2.X rather than 5.1.X in the environment 
  > (debugging does not always work in the latter). Also install git if you don't
  > already have it:
- >
+ > 
  >~~~
  >   conda config --add channels conda-forge
- >   conda install -y git
+ >   conda install -y git 
  >   conda update -y ipython
  >~~~
  >{: .source}
  >   * To configure jupyter qtconsole to use atom type the following at the
  >   Anaconda prompt:
- >
+ > 
  >~~~
  > jupyter qtconsole --generate-config
  >~~~
  >{: .source}
- >
+ > 
  > Then open atom and navigate to the config file listed at the Anaconda prompt.
- >
+ > 
  > Edit the line containing the text:
- >
+ > 
  >~~~
  > #c.JupyterWidget.editor = ''
  >~~~
  >{: .source}
- >
+ > 
  > Change this line to
- >
+ > 
  >~~~
  >  c.JupyterWidget.editor = 'atom'
  >~~~
  >{: .source}
  >   * Close atom and the Anaconda prompt. Your system is now set up.
- >
+ > 
  {: .solution}
  > ## Click here for Mac OS X
- >
+ > 
+ > > ## A note to administrators
+ > > 
+ > >  
+ > > * Upon installation Anacaconda prepends itself to the PATH (command placed
+ > >   in ~/.bash_profile). This won't work cleanly on many NIH laptops as
+ > >   their login shell is set to /bin/sh. Note "echo $SHELL" will still say
+ > >   /bin/bash. The login shell should be set to /bin/bash for everything to
+ > >   work.
+ > >   
+ > > * If conda already exists on the laptop (eg. in bash check for output from
+ > >   `ls ~|grep conda`) then this can be used to construct a working
+ > >   environment for the class:
+ > > 
+ > > ~~~
+ > > conda create -n py3.5 python=3.5 jupyter git pandas seaborn
+ > > conda config --add channels conda-forge
+ > > conda update -y ipython
+ > > ~~~
+ > > {: .bash}
+ > > And then modify the qtconsole config file as described below.
+ > >   
+ > > * Many users wish to have tcsh as they're default shell. Our current
+ > >   solution for this is the following: In order to maintain tcsh as their
+ > >   login shell and separate the setup for this course as cleanly as
+ > >   possible for the user we have installed the terminal application iterm2.
+ > >   In the preferences for this application, under the profile tab, is a
+ > >   section called "Command". Changing the selection from "Login shell" to
+ > >   "Command" and typing /bin/bash here will set all iterm sessions to
+ > >   interactive bash sessions. All modifications to the path for these
+ > >   sessions must be made in ~/.bashrc instead of ~/.bash_profile. The change
+ > >   comprises the package manager conda (an path with anaconda3
+ > >   in it in this case) and /usr/local/bin if it is not already on the path
+ > >   so that the text editor atom works from the command line.
+ > >   
+ > >  * Installation of atom has posed some problems for people. One easily
+ > >     solvable problem is that /usr/local/bin is not on the path. The other
+ > >     problem has been that for computers where the user does not have
+ > >     administrative privileges. The solution to this is the following:
+ > >        * Download Atom, extract it, move it to applications, select "Authenticate", type in the admin password.
+ > >    In bash: 
+ > > 
+ > > ~~~~
+ > > su - admin_user # change as appropriate
+ > > sudo /Applications/Atom.app/Contents/Resources/app/atom.sh
+ > > ~~~
+ > > {: .bash}
+ > > 
+ > >    When atom opens select Atom in the menu bar and then "Install Shell
+ > >    commands" and exit Atom. After this, in a new iTerm window the editor
+ > >    should be opened by executing the command atom (if not make sure that
+ > >    /usr/local/bin is on the PATH).
+ > {: .solution} 
+ >    
  >   * Anaconda installation:
  >      * Download the Python 3 installer for OS X.
  >      * Open [http://continuum.io/downloads][continuum-mac]
@@ -146,20 +199,20 @@ fine. Most of the packages in our environment are contained in the
  >      * Install Python 3 using all of the defaults for installation.
  >   
  >   There is a [video tutorial][video-mac] for anaconda installation if
- >   necessary.
+ >   necessary. 
  >   
  >   In addition to installing Anaconda follow the other
  >   instructions below
- >
- >   * Make sure you have ipython 5.2.X rather than 5.1.X in the environment
+ > 
+ >   * Make sure you have ipython 5.2.X rather than 5.1.X in the environment 
  > (debugging does not always work in the latter). Also install git if you don't
  > already have it:
- >
+ > 
  >~~~
  >   conda config --add channels conda-forge
  >   conda update -y ipython
  >   # if the command "git --version" returns an error or a version less than 2.7:
- >   conda install git
+ >   conda install git 
  >~~~
  >{: .source}
  >   
@@ -170,19 +223,19 @@ fine. Most of the packages in our environment are contained in the
  > jupyter qtconsole --generate-config
  > ~~~
  >{: .source}
- >
+ > 
  > Then open atom and navigate to the config file listed (probably
  > "~/.jupyter/jupyter_qtconsole_config.py")
- >
+ > 
  > Edit the line containing the text:
- >
+ > 
  >~~~
  > #c.JupyterWidget.editor = ''
  >~~~
  >{: .source}
- >
+ > 
  > Change this line to
- >
+ > 
  >~~~
  >  c.JupyterWidget.editor = 'atom'
  >~~~
@@ -210,16 +263,16 @@ fine. Most of the packages in our environment are contained in the
  >  *  Press enter.
  >
  >  *  Follow the text-only prompts.  When the license agreement appears (a colon
- >        will be present at the bottom of the screen) hold the down arrow until the
- >        bottom of the text. Type `yes` and press enter to approve the license. Press
- >        enter again to approve the default location for the files. Type `yes` and
- >        press enter to prepend Anaconda to your `PATH` (this makes the Anaconda
+ >        will be present at the bottom of the screen) hold the down arrow until the 
+ >        bottom of the text. Type `yes` and press enter to approve the license. Press 
+ >        enter again to approve the default location for the files. Type `yes` and 
+ >        press enter to prepend Anaconda to your `PATH` (this makes the Anaconda 
  >        distribution the default Python).
  >
- >   * Make sure you have ipython 5.2.X rather than 5.1.X in the environment
+ >   * Make sure you have ipython 5.2.X rather than 5.1.X in the environment 
  > (debugging does not always work in the latter). Also install git if you don't
  > already have it:
- >
+ > 
  >~~~
  >   conda config --add channels conda-forge
  >   conda update -y ipython
