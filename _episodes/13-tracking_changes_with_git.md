@@ -1,7 +1,7 @@
 ---
-title: Versioning edits with Git
+title:  Versioning edits with Git
 teaching: 30
-exercises: 5
+exercises: 0
 questions:
 - "How do I record changes in Git?"
 - "How do I record notes about what changes I made and why?"
@@ -13,8 +13,7 @@ keypoints:
 - "`git add` puts files in the staging area."
 - "`git commit` saves the staged content as a new commit in the local repository."
 - "Always write a log message when committing changes."
-- "View previous commits using the "git log" command."
-
+- "View previous commits using the `git log` command."
 ---
 
 We can check the contents of the file that we previously saved in our project directory using the `%cat` magic:
