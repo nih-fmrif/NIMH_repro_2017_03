@@ -105,19 +105,6 @@ Talk about what a path is etc. using the following figures:
 ![image_of_shell](../fig/file_system_2.png)
 ![image_of_shell](../fig/file_system_3.png)
 
-# Exercise
-
-Use the cd command to change to each of these directories in this order:
-
-In each directory, run the following command to create a simple csv text file
-
-echo $PWD,$USER, Was Here, $TIME > $USER_footprint.csv
-
-When you're finished, list your footprint files:
-find . -name $USER -exec cat {} \;
-
-Copy the output into the Etherpad
-
 
 ## The Jupyter qtconsole
 
