@@ -95,7 +95,7 @@ Draw a diagram to illustrate how the programs and computers listed below relate 
 * IPython Shell
 * Angry Birds on your phone
 
-No get with your partner and compare your drawings. Discuss the difference and edit as needed.
+Now get with your partner and compare your drawings. Discuss the difference and edit as needed.
 
 
 
