@@ -49,13 +49,13 @@ previous commands that contain the pattern `roi`:
 
 Instead of searching for a pattern we can also retrieve our history by
 specifying the session and line numbers (patterns and line numbers don't play 
-well together). For the first 10 lines of this session type the following:
+well together). For the first 10 commands of this session type the following:
 ~~~
 %history -n 1-10
 ~~~
 {: .python}
 
-To return the history from the first 10 lines 4 sessions ago:
+We can also retrieve history of previous times we have used iPython. To return the history from the first 10 commands that were executed 4 sessions ago:
 ~~~
 %history -n ~4/1-10
 ~~~
@@ -215,7 +215,7 @@ File `metasearch_analysis.py` exists. Overwrite (y/[N])?
 Instead we need to provide the `-a` flag to append text to the pre-existing
 file:
 ~~~
-%save metasearch_analysis.py N # enter the line number of the most recent
+%save -a metasearch_analysis.py N # enter the line number of the most recent
 command
 ~~~
 {: .python}

@@ -222,8 +222,8 @@ IndexError: string index out of range
 > ~~~
 > {: .python}
 > ~~~
-> ['A', 'D', 'H', 'D']
-> 'cns'
+> string to list: ['A', 'D', 'H', 'D']
+> list to string: 'cns'
 > ~~~
 > {: .output}
 >

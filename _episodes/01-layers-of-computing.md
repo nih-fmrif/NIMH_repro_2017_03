@@ -56,6 +56,7 @@ source /data/DSST/scripts/repro_env_setup.sh
 
 ~~~
 jupyter qtconsole &
+%automagic
 ~~~
 {: .bash}
 
@@ -65,7 +66,7 @@ Your screen should now look something like this:
 
 ## Know who (or what) you're talking to
 
-It's easy and common to click on an icon, open and window and typing, clicking, and analyzing in that window without much thought about how or where those commands are being executed and where the data is being stored. It's worth the effort to take some time and understand exactly wheat your computing (stack)[] looks like and exactly where everything is happening. Understanding this stack can help you make your analysis more efficient and secure.
+It's easy and common to click on an icon, open and window and typing, clicking, and analyzing in that window without much thought about how or where those commands are being executed and where the data is being stored. It's worth the effort to take some time and understand exactly what your computing (stack)[] looks like and exactly where everything is happening. Understanding this stack can help you make your analysis more efficient and secure.
 
 ## Where am I?
 
@@ -94,7 +95,7 @@ Draw a diagram to illustrate how the programs and computers listed below relate 
 * IPython Shell
 * Angry Birds on your phone
 
-No get with your partner and compare your drawings. Discuss the difference and edit as needed.
+Now get with your partner and compare your drawings. Discuss the difference and edit as needed.
 
 
 
@@ -103,19 +104,6 @@ Talk about what a path is etc. using the following figures:
 ![image_of_shell](../fig/file_system_1.png)
 ![image_of_shell](../fig/file_system_2.png)
 ![image_of_shell](../fig/file_system_3.png)
-
-# Exercise
-
-Use the cd command to change to each of these directories in this order:
-
-In each directory, run the following command to create a simple csv text file
-
-echo $PWD,$USER, Was Here, $TIME > $USER_footprint.csv
-
-When you're finished, list your footprint files:
-find . -name $USER -exec cat {} \;
-
-Copy the output into the Etherpad
 
 
 ## The Jupyter qtconsole
@@ -234,7 +222,7 @@ we use the Ipython magic `%cd` we get the behaviour we want
 {: .output}
 
 *  As we work through the course we will continue to learn some convenient
-shortcuts available to use in the Ipython shall; however, most of the time we
+shortcuts available to use in the Ipython shell; however, most of the time we
 will be writing commands that are in the Python language.
 
 ## Convenient commands to remember
