@@ -281,7 +281,14 @@ changes exist for the file metasearch_analysis.py.
 
 
 ## What if I don't want Git to track some of my changes?
-There are many reasons we might want git to overlook certain files or sub-directories in our project. One such case is if our data contains Personally identifiable information (PII). Git helps us to share our code. This is still difficult to do if the content tracking system we use for our code contains this PII. To help with this we could explicitly include a directory in which we will add such data so that we reduce the risk of accidentally tracking such content. Let's do that now and add our dataset to this so that we don't accidentally include things we don't want to:
+There are many reasons we might want git to overlook certain files or sub-
+directories in our project. One such case is if our data contains Personally
+identifiable information (PII). Git helps us to share our code. This is still
+difficult to do if the content tracking system we use for our code contains
+this PII. To help with this we could explicitly include a directory in which we
+will add such data so that we reduce the risk of accidentally tracking such
+content. Let's create such a directory and add our dataset to it so that we don't
+accidentally include things we don't want to:
 
 ~~~
 mkdir data_not_in_repo
@@ -289,27 +296,19 @@ mv metasearch data_not_in_repo
 ~~~
 {: .source}
 
+To ask Git not to track this directory at all we can add it to a file called
+".gitignore" that doesn't exist it. We can create and open the file using Atom:
 
-
-
-
-
-## Places to Create Git Repositories
-
-The following commands start a new project, `more_scripts`, within the
-`reproducibility_course` project. Is this a sensible idea? What problems
-might it cause?
 ~~~
-%mkdir more_scripts    # make a sub-directory reproducibility_course/more_scripts
-%cd more_scripts       # go into reproducibility_course/more_scripts
-!git init       # make the more_scripts sub-directory a Git repository
+%edit .gitignore
+# Add the text: data_not_in_repo
+# Then save the file. 
 ~~~
-{: .bash}
+{: .source}
 
-Why is it a bad idea to do this? (Notice here that the
-`reproducibility_course` project could now track the entire `more_scripts`
-repository.) How can we undo this "git init"?
-
+Now when we check the status we no longer see the metasearch directory as
+untracked by the repository. Furthermore, we will not be able to add any of the
+files in this directory into the git repository.
   
 Git repositories can interfere with each other if they are "nested" in the
 directory of another: the outer repository will try to version-control the
