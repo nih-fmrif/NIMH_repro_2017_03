@@ -291,8 +291,8 @@ content. Let's create such a directory and add our dataset to it so that we don'
 accidentally include things we don't want to:
 
 ~~~
-mkdir data_not_in_repo
-mv metasearch data_not_in_repo
+%mkdir data_not_in_repo
+%mv metasearch data_not_in_repo
 ~~~
 {: .source}
 
