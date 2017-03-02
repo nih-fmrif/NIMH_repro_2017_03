@@ -263,6 +263,7 @@ print(total)
 > sum += number
 > print(cumulative)
 > data = [1,2,2,5]
+> sum=0
 > ~~~
 > {: .python}
 {: .challenge}
