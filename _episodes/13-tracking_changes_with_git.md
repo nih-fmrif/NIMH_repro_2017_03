@@ -284,8 +284,8 @@ changes exist for the file metasearch_analysis.py.
 There are many reasons we might want git to overlook certain files or sub-directories in our project. One such case is if our data contains Personally identifiable information (PII). Git helps us to share our code. This is still difficult to do if the content tracking system we use for our code contains this PII. To help with this we could explicitly include a directory in which we will add such data so that we reduce the risk of accidentally tracking such content. Let's do that now and add our dataset to this so that we don't accidentally include things we don't want to:
 
 ~~~
-mkdir data_not_in_repo
-mv metasearch data_not_in_repo
+%mkdir data_not_in_repo
+%mv metasearch data_not_in_repo
 ~~~
 {: .source}
 
