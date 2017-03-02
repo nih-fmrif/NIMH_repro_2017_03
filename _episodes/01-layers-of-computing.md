@@ -65,7 +65,7 @@ Your screen should now look something like this:
 
 ## Know who (or what) you're talking to
 
-It's easy and common to click on an icon, open and window and typing, clicking, and analyzing in that window without much thought about how or where those commands are being executed and where the data is being stored. It's worth the effort to take some time and understand exactly wheat your computing (stack)[] looks like and exactly where everything is happening. Understanding this stack can help you make your analysis more efficient and secure.
+It's easy and common to click on an icon, open and window and typing, clicking, and analyzing in that window without much thought about how or where those commands are being executed and where the data is being stored. It's worth the effort to take some time and understand exactly what your computing (stack)[] looks like and exactly where everything is happening. Understanding this stack can help you make your analysis more efficient and secure.
 
 ## Where am I?
 
