@@ -56,6 +56,7 @@ source /data/DSST/scripts/repro_env_setup.sh
 
 ~~~
 jupyter qtconsole &
+%automagic
 ~~~
 {: .bash}
 
