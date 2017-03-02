@@ -136,7 +136,7 @@ round(...)
 ~~~
 {: .output}
 
-## IPython makes provides easier access to help
+## IPython provides easier access to help
 
 *   As we open a parenthesis of a function we can see some useful help
 *   We can type `?` after a function or object to get help about it that
