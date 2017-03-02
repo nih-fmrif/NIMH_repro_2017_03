@@ -2,9 +2,7 @@ NIMH course for reproducibility in neuroimaging.
 ==========================
 Links :
 
-Course info : [site](https://nih-fmrif.github.io/2017-03-13-nimh) and [github repository](https://github.com/nih-fmrif/2017-03-13-nimh)
-
-Course materials site is rendered [here](https://nih-fmrif.github.io/reproducibility_course_day_1).
+Course materials site is rendered [here](https://nih-fmrif.github.io/NIMH_repro_2017).
 
 NIMH's Data Science and Sharing Team will be conducting a workshop on open and reproducible neuroscience the week of March 13th. Over the course of four mornings (8:30a to 12:30p Mon, Wed, Thur, & Fri) we will provide hands on training on:
 
@@ -36,7 +34,7 @@ The course will:
 + Be divided into 4 days (described in more depth in [google doc](https://docs.google.com/document/d/1RtLaNrbFtXLmj53_dGmolqh0iGRxseQ5d6LkG-ojv28/edit?usp=sharing)):
 
 ### The course materials
-The course materials are maintained in a similar manner to software carpentry from which we have imported this repository. A separate repository will be maintained for each day of the course.  Jekyll is used to render the repository as a website. So "nih-fmrif/reproducibility_course_day_1" will be hosted at https://nih-fmrif.github.io/reproducibility_course_day_1. Changes pushed to the repository will update the website. In order to push said changes, clone this repository, make your changes, and then push the changes back to the remote. The content for the main page is in index.md. The content for the individual lessons is in `_episodes/X.md`. Until the content has been edited it may bear no relation to the actual course material that day. We will use the  basic structure of the repository/website for convenience though. And there is some overlap in the material...
+The course materials are maintained in a similar manner to software carpentry from which we have imported this repository. A separate repository will be maintained for each day of the course.  Jekyll is used to render the repository as a website. Changes pushed to the repository will update the website. In order to push said changes, clone this repository, make your changes, and then push the changes back to the remote. The content for the main page is in index.md. The content for the individual lessons is in `_episodes/X.md`. Until the content has been edited it may bear no relation to the actual course material that day. We will use the  basic structure of the repository/website for convenience though. And there is some overlap in the material...
 
 
 ### Testing the website locally
