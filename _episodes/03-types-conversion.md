@@ -117,7 +117,7 @@ print(len(dna_repeat_sequence))
 ~~~
 {: .python}
 ~~~
-11
+30
 ~~~
 {: .output}
 
