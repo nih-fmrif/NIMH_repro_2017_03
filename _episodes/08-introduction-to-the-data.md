@@ -31,6 +31,4 @@ thousands of brain volumes available for community use."
 ~~~
 {: .source}
 
-In order to work with the files we have downloaded we will learn about libraries
-in python. In particular, the pathlib library is useful for our current purposes.
 
