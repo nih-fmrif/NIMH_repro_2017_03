@@ -215,7 +215,7 @@ File `metasearch_analysis.py` exists. Overwrite (y/[N])?
 Instead we need to provide the `-a` flag to append text to the pre-existing
 file:
 ~~~
-%save metasearch_analysis.py N # enter the line number of the most recent
+%save -a metasearch_analysis.py N # enter the line number of the most recent
 command
 ~~~
 {: .python}
