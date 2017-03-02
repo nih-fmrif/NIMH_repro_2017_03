@@ -235,7 +235,7 @@ we use the Ipython magic `%cd` we get the behaviour we want
 {: .output}
 
 *  As we work through the course we will continue to learn some convenient
-shortcuts available to use in the Ipython shall; however, most of the time we
+shortcuts available to use in the Ipython shell; however, most of the time we
 will be writing commands that are in the Python language.
 
 ## Convenient commands to remember
