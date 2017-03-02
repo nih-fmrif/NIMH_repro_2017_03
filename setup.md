@@ -81,36 +81,17 @@ install the needed software.
 ## A guide to local installation 
 Please install the text editor [atom](https://atom.io).
 
-We will use python 3.5 for the course. Any later version of python will also work
-fine. Most of the packages in our environment are contained in the
-[Continuum analytics Anaconda](https://www.continuum.io/) environment. Alternatively you can install
-[miniconda](https://conda.io/miniconda.html) and install modules as you require them.
-
  > ## Click here for Windows
- >   * Anaconda installation:
- >      *  Open [http://continuum.io/downloads][continuum-windows]
- >    with your web browser.
- >      * Download the Python 3 installer for Windows.
- >      * Double-click the executable and install Python 3 using _MOST_ of the
- >    default settings. The only exception is to check the 
- >    **Make Anaconda the default Python** option.
- >   
- >   There is a [video tutorial][video-windows] for anaconda installation if
- >   necessary. 
- >   
- >   In addition to installing Anaconda follow the other
- >   instructions below
- >   
- >   * Make sure you have ipython 5.2.X rather than 5.1.X in the environment 
- > (debugging does not always work in the latter). Also install git if you don't
- > already have it:
- > 
+ >  *  Download and install [miniconda](https://conda.io/miniconda.html) if you
+ >     do not already have conda installed on your system
+ >  
+ >  *  Once installed open the Anaconda prompt and type:
+ >  
  >~~~
- >   conda config --add channels conda-forge
- >   conda install -y git 
- >   conda update -y ipython
+ >   conda create -n create py3.5 python=3.5 jupyter pandas seaborn git
  >~~~
  >{: .source}
+
  >   * To configure jupyter qtconsole to use atom type the following at the
  >   Anaconda prompt:
  > 
@@ -154,10 +135,9 @@ fine. Most of the packages in our environment are contained in the
  > > 
  > > ~~~
  > > conda create -n py3.5 python=3.5 jupyter git pandas seaborn
- > > conda config --add channels conda-forge
- > > conda update -y ipython
  > > ~~~
  > > {: .bash}
+ > > 
  > > And then modify the qtconsole config file as described below.
  > >   
  > > * Many users wish to have tcsh as they're default shell. Our current
@@ -170,14 +150,15 @@ fine. Most of the packages in our environment are contained in the
  > >   interactive bash sessions. All modifications to the path for these
  > >   sessions must be made in ~/.bashrc instead of ~/.bash_profile. The change
  > >   comprises the package manager conda (an path with anaconda3
- > >   in it in this case) and /usr/local/bin if it is not already on the path
+ > >   in it in this case) and `/usr/local/bin` if it is not already on the path
  > >   so that the text editor atom works from the command line.
  > >   
  > >  * Installation of atom has posed some problems for people. One easily
- > >     solvable problem is that /usr/local/bin is not on the path. The other
- > >     problem has been that for computers where the user does not have
- > >     administrative privileges. The solution to this is the following:
- > >        * Download Atom, extract it, move it to applications, select "Authenticate", type in the admin password.
+ > >    solvable problem is that `/usr/local/bin` is not on the path. The other
+ > >    problem has been that for computers where the user does not have
+ > >    administrative privileges. The solution to this is the following:
+ > > 
+ > >  * Download Atom, extract it, move it to applications, select "Authenticate", type in the admin password.
  > >    In bash: 
  > > 
  > > ~~~~
@@ -190,27 +171,12 @@ fine. Most of the packages in our environment are contained in the
  > >    executing the command "atom".
  > {: .solution} 
  >    
- >   * Anaconda installation:
- >      * Download the Python 3 installer for OS X.
- >      * Open [http://continuum.io/downloads][continuum-mac]
- >    with your web browser.
- >      * Install Python 3 using all of the defaults for installation.
- >   
- >   There is a [video tutorial][video-mac] for anaconda installation if
- >   necessary. 
- >   
- >   In addition to installing Anaconda follow the other
- >   instructions below
- > 
- >   * Make sure you have ipython 5.2.X rather than 5.1.X in the environment 
- > (debugging does not always work in the latter). Also install git if you don't
- > already have it:
- > 
+ >  *  Download and install [miniconda](https://conda.io/miniconda.html) if you
+ >     do not already have conda installed on your system
+ >  
+ >  *  Once installed (The command `which conda` at a terminal should return a path to the installation)
  >~~~
- >   conda config --add channels conda-forge
- >   conda update -y ipython
- >   # if the command "git --version" returns an error or a version less than 2.7:
- >   conda install git 
+ >   conda create -n create py3.5 python=3.5 jupyter pandas seaborn git
  >~~~
  >{: .source}
  >   
@@ -241,41 +207,12 @@ fine. Most of the packages in our environment are contained in the
  {: .solution}
  >## Click here for Linux
  >
- >  *  Open [http://continuum.io/downloads][continuum-linux] with your web browser.
- >  *  Download the Python 3 installer for Linux.
- >  *  Install Python 3 using all of the defaults for installation.
- >
- >  *     Open a terminal window.
- >
- >  *  Navigate to the folder where you downloaded the installer
- >
- >  *  Type
- >
+ >  *  Download and install [miniconda](https://conda.io/miniconda.html) if you
+ >     do not already have conda installed on your system
+ >  
+ >  *  Once installed (The command `which conda` at a terminal should return a path to the installation)
  >~~~
- >    bash Anaconda3-
- >~~~
- >    {: .bash}
- >
- >    and press tab.  The name of the file you just downloaded should appear.
- >
- >  *  Press enter.
- >
- >  *  Follow the text-only prompts.  When the license agreement appears (a colon
- >        will be present at the bottom of the screen) hold the down arrow until the 
- >        bottom of the text. Type `yes` and press enter to approve the license. Press 
- >        enter again to approve the default location for the files. Type `yes` and 
- >        press enter to prepend Anaconda to your `PATH` (this makes the Anaconda 
- >        distribution the default Python).
- >
- >   * Make sure you have ipython 5.2.X rather than 5.1.X in the environment 
- > (debugging does not always work in the latter). Also install git if you don't
- > already have it:
- > 
- >~~~
- >   conda config --add channels conda-forge
- >   conda update -y ipython
- >   # if the command "git --version" returns an error or a version less than 2.7:
- >   conda install git    
+ >   conda create -n create py3.5 python=3.5 jupyter pandas seaborn git
  >~~~
  >{: .source}
  >   
