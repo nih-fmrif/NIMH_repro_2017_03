@@ -319,7 +319,23 @@ print(total)
 > sum=0
 > ~~~
 > {: .python}
+>
+> > ## Solution
+> >
+> > ~~~
+> > sum=0
+> > cumulative = []
+> > data = [1,2,2,5]
+> > for number in data:
+> >     sum += number
+> >     cumulative += [sum]
+> > print(cumulative)
+> >        
+> > ~~~
+> > {: .python}
+> {: .solution}
 {: .challenge}
+
 
 > ## Identifying Variable Name Errors
 >
