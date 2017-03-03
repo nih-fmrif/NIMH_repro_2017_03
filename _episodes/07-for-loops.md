@@ -219,7 +219,7 @@ print(total)
 > > print(result)
 > >        
 > > ~~~
-> > {: .output}
+> > {: .python}
 > {: .solution}
 {: .challenge}
 
