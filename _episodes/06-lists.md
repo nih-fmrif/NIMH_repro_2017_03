@@ -249,6 +249,17 @@ IndexError: string index out of range
 > 4.  How can you display all elements but the last one without 
 > changing `values`?
 >     (Hint: you will need to combine slicing and negative indexing.)
+>
+> > ## Solution
+> >
+> > ~~~
+> > 1: the length of the list -1
+> > 2: -N. This location is the first element in the list
+> > 3: It deletes the last element in the list
+> > 4: values[0:-1]
+> > ~~~
+> > {: .output}
+> {: .solution}
 {: .challenge}
 
 > ## Stepping Through a List
