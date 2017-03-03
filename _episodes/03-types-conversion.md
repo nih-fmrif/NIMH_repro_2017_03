@@ -311,20 +311,23 @@ brain_volume is 1400 and brain_volume_corrected is 1495.2
 > print("fractional string to int:", int("3.4"))
 > ~~~
 > {: .python}
-> 
+>
 > > ## Solution
-> >
+> > ~~~
 > > We would expect to return an integer value of 3.
 > > However, it returns the error:
 > >
-> >~~~
-> >---------------------------------------------------------------------------
-> >ValueError                                Traceback (most recent call last)
-> ><ipython-input-18-f025fc4d9856> in <module>()
-> >----> 1 print("fractional string to int:", int("3.4"))
-
-> >ValueError: invalid literal for int() with base 10: '3.4'
-> >~~~
-> >{: .error}
+> > ~~~
+> > {: .output}
+> >
+> > ~~~
+> > ---------------------------------------------------------------------------
+> > ValueError                                Traceback (most recent call last)
+> >  <ipython-input-18-f025fc4d9856> in <module>()
+> > ----> 1 print("fractional string to int:", int("3.4"))
+> >
+> > ValueError: invalid literal for int() with base 10: '3.4'
+> > ~~~
+> > {: .error}
 > {: .solution}
 {: .challenge}
