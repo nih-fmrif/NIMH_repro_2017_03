@@ -270,10 +270,17 @@ IndexError: string index out of range
 > > ~~~
 > > hpoaps
 > > supmacoppih
-> > 1: stride is the step to go through the list
-> > 2:listobject[1::2]
+> > 
 > > ~~~
 > > {: .output}
+> > 1: stride is the step to go through the list
+> >
+> > The answer to question 2 is:
+> >
+> > ~~~
+> > listobject[1::2]
+> > ~~~
+> > {: .python}
 > {: .solution}
 {: .challenge}
 
