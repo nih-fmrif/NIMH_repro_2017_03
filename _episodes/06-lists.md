@@ -204,6 +204,20 @@ IndexError: string index out of range
 > second time: [3, 5]
 > ~~~
 > {: .output}
+>
+> > ## Solution
+> >
+> > ~~~
+> > values = []
+> > values.append(1)
+> > values.append(3)
+> > values.append(5)
+> > print('first time:', values)
+> > values = values[1:3]
+> > print('second time:', values)
+> > ~~~
+> > {: .python}
+> {: .solution}
 {: .challenge}
 
 > ## How Large is a Slice?
