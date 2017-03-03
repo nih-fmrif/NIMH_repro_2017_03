@@ -74,15 +74,15 @@ The desktop you're looking at inside the NoMachine window is from a computer tha
 
 NoMachine is a remote desktop program. It allows your to interact with the remote computer (helix/felix) almost as if you were sitting right in front of it. (VNC is another common remote desktop program).
 
-The window on the left of your NX desktop is running an IPython shell. On the right side, there is a window running a (Bash) shell. A (shell)[reference] refers to a program that wraps around another program that is usually more complicated and less user-friendly. That program inside the shell is often referred to as a kernel.
+The window on the left of your NX desktop is running an IPython shell. On the right side, there is a window running a (Bash) shell. A shell refers to a program that wraps around another program that is usually more complicated and less user-friendly. That program inside the shell is often referred to as a kernel.
 
 ![image_of_shell](../fig/layers_of_computing.png)
 
-For any computer you might be working with, there is a main kernel that is part of the "operating system" at the heart of it.  On top of that kernel there are many other programs running, some of them are designed to provide you with an easy way to interact
+For any computer you might be working with, there is a main kernel that is part of the "operating system" at the heart of it.  On top of that kernel there are many other programs running, some of them are designed to provide you with an easy way to interact.
 
 # Boxed Text
 Bash vs. IPython
-We'll be working almost exclusively in the IPython shell in this course. IPython provides an easy way to explore and interact with your data that leverages the power of the Python programming language. The Bash shell is an extremely versatile tool designed to allow you to control and interact with files and your computer more generally. You've likely had exposure to Bash (or it's close cousin, tcsh) if you've used analysis packages like AFNI, FSL, and FreeSurfer. The Bash shell is a (great thing to learn)[Link to bash tutorials], but we want to focus on teaching you reproducible computing concepts without getting bogged down in the syntax of too many different languages.
+We'll be working almost exclusively in the IPython shell in this course. IPython provides an easy way to explore and interact with your data that leverages the power of the Python programming language. The Bash shell is an extremely versatile tool designed to allow you to control and interact with files and your computer more generally. You've likely had exposure to Bash (or it's close cousin, tcsh) if you've used analysis packages like AFNI, FSL, and FreeSurfer. The Bash shell is a [great thing to learn](https://swcarpentry.github.io/shell-novice/), but we want to focus on teaching you reproducible computing concepts without getting bogged down in the syntax of too many different languages.
 
 # Exercise
 
@@ -116,14 +116,14 @@ Talk about what a path is etc. using the following figures:
 > {: .source}
 > The IPython prompt, as depicted above, sits before our blinking cursor. It
 > consists of the word "In" followed by a number. It informs us that we are
-> currently entering input. In this case the first input of the Ipython kernel
+> currently entering input. In this case the first input of the IPython kernel
 > session. Every time we execute a command this number will increment by one.
  {: .callout}
 
-The Jupyter qtconsole is a developing environment that is optimised for
+The [Jupyter qtconsole](https://jupyter.readthedocs.io/en/latest/index.html) is a developing environment that is optimised for
 interactive computing typical of scientific analyses. It provides lots of
 convenient commands and shortcuts for this. Different languages can used with
-this interface. In our case we will be using Ipython. It provides us with  a
+this interface. In our case we will be using IPython. It provides us with  a
 convenient interface to the system shell and the Python interpreter. We will
 start by typing in the IPython command:
 ~~~
@@ -157,7 +157,7 @@ names and the shell will understand which files we are referring to. Later we
 
 ## IPython magics and system commands
 
-The above commands can be entered into the Ipython in slightly different ways.
+The above commands can be entered into the IPython in slightly different ways.
 Instead of using the "%" sign we can instead use the "!" sign and we will still
 get the same results (although we will not be able to make the same directory
 again).
@@ -182,12 +182,12 @@ shell. On a Linux or Mac OSX operating system this will likely be the Bash
 shell. All of these commands exist in Bash; however, on a Windows operating
 system the pwd system command does not exist. You can see we have to be careful
 about using system commands. Some will be operating system dependent. Since the
-Ipython magics will work regardless of the operating system used, we shall
+IPython magics will work regardless of the operating system used, we shall
 instead use those when we can.
 
 ## System commands start a new sub-process
 Apart from the different system commands across platforms there is another
-reason we might have a preference for Ipython magics. Each system command starts
+reason we might have a preference for IPython magics. Each system command starts
 up a sub-process, executes the commands, and then closes. The effect of this can
 be seen very easily when we use the "!cd" system command to change directories.
 
@@ -206,8 +206,10 @@ be seen very easily when we use the "!cd" system command to change directories.
 
 This woud not be the behaviour we would wish from a command that changes our
 present working directory. This occurs because the changes made to the
+
 environment in the sub-process are not propagated back to the Ipython shell. If
 we use the Ipython magic `%cd` we get the behaviour we want.
+
 ~~~
 %pwd
 %cd reproducibility_course
@@ -222,7 +224,7 @@ we use the Ipython magic `%cd` we get the behaviour we want.
 {: .output}
 
 *  As we work through the course we will continue to learn some convenient
-shortcuts available to use in the Ipython shell; however, most of the time we
+shortcuts available to use in the IPython shell; however, most of the time we
 will be writing commands that are in the Python language.
 
 ## Convenient commands to remember
