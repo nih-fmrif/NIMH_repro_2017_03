@@ -293,7 +293,7 @@ IndexError: string index out of range
 >
 > What do these two programs print?
 > In simple terms, explain the difference between `new = old` and `new = old[:]`.
-> [Deep copy vs shallow copy](https://docs.python.org/3/library/copy.html) 
+> For more information read about [deep copy vs shallow copy](https://docs.python.org/3/library/copy.html) 
 >
 > ~~~
 > # Program A
