@@ -74,7 +74,7 @@ The desktop you're looking at inside the NoMachine window is from a computer tha
 
 NoMachine is a remote desktop program. It allows your to interact with the remote computer (helix/felix) almost as if you were sitting right in front of it. (VNC is another common remote desktop program).
 
-The window on the left of your NX desktop is running an IPython shell. On the right side, there is a window running a (Bash) shell. A (shell)[reference] refers to a program that wraps around another program that is usually more complicated and less user-friendly. That program inside the shell is often referred to as a kernel.
+The window on the left of your NX desktop is running an IPython shell. On the right side, there is a window running a (Bash) shell. A shell refers to a program that wraps around another program that is usually more complicated and less user-friendly. That program inside the shell is often referred to as a kernel.
 
 ![image_of_shell](../fig/layers_of_computing.png)
 
