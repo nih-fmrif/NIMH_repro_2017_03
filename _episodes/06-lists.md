@@ -276,6 +276,15 @@ IndexError: string index out of range
 > print(roi_label[-1:3])
 > ~~~
 > {: .python}
+>
+> > ## Solution
+> >
+> > ~~~
+> > hippocampus
+> >        
+> > ~~~
+> > {: .output}
+> {: .solution}
 {: .challenge}
 
 > ## Sort and Sorted
