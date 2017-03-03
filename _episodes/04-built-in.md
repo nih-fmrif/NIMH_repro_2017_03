@@ -289,7 +289,7 @@ The output of print is None
 > ## Spot the Difference
 >
 > 1. Predict what each of the `print` statements in the program below will print.
-> 2. Does `max(len(rich), poor)` run or produce an error message?
+> 2. Does `max(len(grey_matter), white_matter)` run or produce an error message?
 >    If it runs, does its result make any sense?
 >
 > ~~~
