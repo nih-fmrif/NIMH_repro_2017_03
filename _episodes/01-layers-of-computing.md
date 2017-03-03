@@ -116,11 +116,11 @@ Talk about what a path is etc. using the following figures:
 > {: .source}
 > The IPython prompt, as depicted above, sits before our blinking cursor. It
 > consists of the word "In" followed by a number. It informs us that we are
-> currently entering input. In this case the first input of the Ipython kernel
+> currently entering input. In this case the first input of the IPython kernel
 > session. Every time we execute a command this number will increment by one.
  {: .callout}
 
-The Jupyter qtconsole is a developing environment that is optimised for
+The [Jupyter qtconsole](https://jupyter.readthedocs.io/en/latest/index.html) is a developing environment that is optimised for
 interactive computing typical of scientific analyses. It provides lots of
 convenient commands and shortcuts for this. Different languages can used with
 this interface. In our case we will be using Ipython. It provides us with  a
