@@ -297,6 +297,24 @@ IndexError: string index out of range
 >
 > 1.  If we write a slice as `low:high:stride`, what does `stride` do?
 > 2.  What expression would select all of the even-numbered items from a collection?
+>
+> > ## Solution
+> >
+> > ~~~
+> > hpoaps
+> > supmacoppih
+> > 
+> > ~~~
+> > {: .output}
+> > 1: stride is the step to go through the list
+> >
+> > The answer to question 2 is:
+> >
+> > ~~~
+> > listobject[1::2]
+> > ~~~
+> > {: .python}
+> {: .solution}
 {: .challenge}
 
 > ## Slice Bounds
