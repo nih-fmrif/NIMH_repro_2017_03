@@ -208,6 +208,19 @@ print(total)
 > print(result)
 > ~~~
 > {: .python}
+>
+> > ## Solution
+> >
+> > ~~~
+> > original = "tin"
+> > result=""
+> > for char in original:
+> >     result = char+result
+> > print(result)
+> >        
+> > ~~~
+> > {: .python}
+> {: .solution}
 {: .challenge}
 
 > ## Practice Accumulating
