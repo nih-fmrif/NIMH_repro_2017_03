@@ -285,7 +285,7 @@ brain_volume is 1400 and brain_volume_corrected is 1495.2
 > to reach everyone once.
 {: .challenge}
 
-> ## Strings to Numbers
+> ## Type Conversions with Numbers
 >
 > `float` will convert a string to a floating point number,
 > and `int` will convert a floating point number to an integer:
