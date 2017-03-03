@@ -26,8 +26,8 @@ keypoints:
 *   Variables are names for values.
 *   In Python the `=` symbol assigns the value on the right to the name on the left.
 *   The variable is created when a value is assigned to it.
-*   Here, Python assigns an age to a variable `age`
-    and a name in quotation marks to a variable `first_name`.
+*   Here, Python assigns a volume size to a variable `roi_vol`
+    and a name in quotation marks to a variable `roi_label`.
 
 ~~~
 roi_vol = 130
