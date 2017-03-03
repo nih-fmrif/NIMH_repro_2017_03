@@ -97,8 +97,8 @@ Our list has now become: [26.5,145.3,12.7,16.2, 27.6,14.2,140]
 *   We will meet other methods of lists as we go along.
     *   In IPython, after typing a period after an object we can preview the
         methods available to us by hitting the tab-key. Alternatively we can
-        see the methods by using the `dir` function or accessing the help for
-        an object
+        see the methods by using the `dir` function or by accessing the help for
+        an object.
 
 ## Use `del` to remove items from a list entirely.
 
@@ -204,12 +204,34 @@ IndexError: string index out of range
 > second time: [3, 5]
 > ~~~
 > {: .output}
+>
+> > ## Solution
+> >
+> > ~~~
+> > values = []
+> > values.append(1)
+> > values.append(3)
+> > values.append(5)
+> > print('first time:', values)
+> > values = values[1:3]
+> > print('second time:', values)
+> > ~~~
+> > {: .python}
+> {: .solution}
 {: .challenge}
 
 > ## How Large is a Slice?
 >
 > If 'low' and 'high' are both non-negative integers,
 > how long is the list `values[low:high]`?
+>
+> > ## Solution
+> >
+> > ~~~
+> > high-low
+> > ~~~
+> > {: .output}
+> {: .solution}
 {: .challenge}
 
 > ## From Strings to Lists and Back
@@ -249,6 +271,17 @@ IndexError: string index out of range
 > 4.  How can you display all elements but the last one without 
 > changing `values`?
 >     (Hint: you will need to combine slicing and negative indexing.)
+>
+> > ## Solution
+> >
+> > ~~~
+> > 1: It retrieves elements by stepping backwards through the string.
+> > 2: -N. This location is the first element in the list.
+> > 3: It deletes the last element in the list.
+> > 4: values[0:-1]
+> > ~~~
+> > {: .output}
+> {: .solution}
 {: .challenge}
 
 > ## Stepping Through a List
@@ -264,6 +297,24 @@ IndexError: string index out of range
 >
 > 1.  If we write a slice as `low:high:stride`, what does `stride` do?
 > 2.  What expression would select all of the even-numbered items from a collection?
+>
+> > ## Solution
+> >
+> > ~~~
+> > hpoaps
+> > supmacoppih
+> > 
+> > ~~~
+> > {: .output}
+> > 1: stride is the step to go through the list
+> >
+> > The answer to question 2 is:
+> >
+> > ~~~
+> > listobject[1::2]
+> > ~~~
+> > {: .python}
+> {: .solution}
 {: .challenge}
 
 > ## Slice Bounds
@@ -276,6 +327,15 @@ IndexError: string index out of range
 > print(roi_label[-1:3])
 > ~~~
 > {: .python}
+>
+> > ## Solution
+> >
+> > ~~~
+> > hippocampus
+> >        
+> > ~~~
+> > {: .output}
+> {: .solution}
 {: .challenge}
 
 > ## Sort and Sorted
