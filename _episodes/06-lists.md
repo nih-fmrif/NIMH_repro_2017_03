@@ -253,9 +253,9 @@ IndexError: string index out of range
 > > ## Solution
 > >
 > > ~~~
-> > 1: the length of the list -1
-> > 2: -N. This location is the first element in the list
-> > 3: It deletes the last element in the list
+> > 1: It retrieves elements by stepping backwards through the string.
+> > 2: -N. This location is the first element in the list.
+> > 3: It deletes the last element in the list.
 > > 4: values[0:-1]
 > > ~~~
 > > {: .output}
