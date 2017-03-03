@@ -28,7 +28,7 @@ networked machines."
 cryptic its commands and operation can be."
 - "We will work on a remote instance of the linux operating system"
 - "Although there are many ways to work remotely, we will use a graphical
-interface using NoMachine"
+interface using NoMachine."
 - "We will use an IPython console to interact with the Python interpretter"
 - "We will learn basic commands for working with the computer file system:
 `pwd`, `ls`, `mkdir` and `cd`."
@@ -207,7 +207,7 @@ be seen very easily when we use the "!cd" system command to change directories.
 This woud not be the behaviour we would wish from a command that changes our
 present working directory. This occurs because the changes made to the
 environment in the sub-process are not propagated back to the Ipython shell. If
-we use the Ipython magic `%cd` we get the behaviour we want
+we use the Ipython magic `%cd` we get the behaviour we want.
 ~~~
 %pwd
 %cd reproducibility_course
@@ -230,6 +230,6 @@ will be writing commands that are in the Python language.
 *   Use tab completion when possible. The computer is more precise than we are.
 *   We can cycle through previous commands using up and down arrows.
 *   We can cycle through previous commands starting with the current text using
-Ctl + n/p
+Ctl + n/p.
 *   Enter,  Ctl + Enter / Shift + Enter allow us to run commands in different
-ways
+ways.
