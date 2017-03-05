@@ -92,6 +92,15 @@ Please install the text editor [atom](https://atom.io).
  >~~~
  >{: .source}
  >   
+ >   * To use the version of python along with the packages that we installed
+ >    we must activate the py3.5 conda environment. We do this by typing the
+ >    following at the Anaconda prompt:
+ > 
+ >~~~
+ > activate py3.5
+ >~~~
+ >{: .source}
+ > 
  >   * To configure jupyter qtconsole to use atom type the following at the
  >   Anaconda prompt:
  > 
@@ -138,6 +147,7 @@ Please install the text editor [atom](https://atom.io).
  > > ~~~
  > > {: .bash}
  > > 
+ > > 
  > > And then modify the qtconsole config file as described below.
  > >   
  > > * Many users wish to have tcsh as they're default shell. Our current
@@ -174,12 +184,23 @@ Please install the text editor [atom](https://atom.io).
  >  *  Download and install [miniconda](https://conda.io/miniconda.html) if you
  >     do not already have conda installed on your system
  >  
- >  *  Once installed (The command `which conda` at a terminal should return a path to the installation)
+ >  *  Once installed the command "`which conda`" at a terminal should return
+ >     a path to the installation. Then type:
  >  
  >~~~
  >   conda create -n create py3.5 python=3.5 jupyter pandas seaborn git
  >~~~
  >{: .source}
+ >   
+ >   * To use the version of python along with the packages that we installed
+ >    we must activate the py3.5 conda environment. We do this by typing the
+ >    following at bash terminal:
+ > 
+ >~~~
+ > source activate py3.5
+ >~~~
+ >{: .source}
+ > 
  >   
  >   *  To configure jupyter qtconsole to use atom type the following at the
  > terminal prompt:
@@ -211,13 +232,23 @@ Please install the text editor [atom](https://atom.io).
  >  *  Download and install [miniconda](https://conda.io/miniconda.html) if you
  >     do not already have conda installed on your system
  >  
- >  *  Once installed (The command `which conda` at a terminal should return a path to the installation)
+ >  *  Once installed the command "`which conda`" at a terminal should return
+ >     a path to the installation. Then type:
  >  
  >~~~
  >   conda create -n create py3.5 python=3.5 jupyter pandas seaborn git
  >~~~
  >{: .source}
  >   
+ >   * To use the version of python along with the packages that we installed
+ >    we must activate the py3.5 conda environment. We do this by typing the
+ >    following at bash terminal:
+ > 
+ >~~~
+ > source activate py3.5
+ >~~~
+ >{: .source}
+ > 
  >   *  To configure jupyter qtconsole to use atom type the following at the
  > terminal prompt:
  >   
