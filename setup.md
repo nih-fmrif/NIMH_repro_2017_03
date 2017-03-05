@@ -88,7 +88,7 @@ Please install the text editor [atom](https://atom.io).
  >  *  Once installed open the Anaconda prompt and type:
  >  
  >~~~
- >   conda create -n create py3.5 python=3.5 jupyter pandas seaborn git
+ >   conda create -n py3.5 python=3.5 jupyter pandas seaborn git
  >~~~
  >{: .source}
  >   
@@ -188,7 +188,7 @@ Please install the text editor [atom](https://atom.io).
  >     a path to the installation. Then type:
  >  
  >~~~
- >   conda create -n create py3.5 python=3.5 jupyter pandas seaborn git
+ >   conda create -n py3.5 python=3.5 jupyter pandas seaborn git
  >~~~
  >{: .source}
  >   
@@ -236,7 +236,7 @@ Please install the text editor [atom](https://atom.io).
  >     a path to the installation. Then type:
  >  
  >~~~
- >   conda create -n create py3.5 python=3.5 jupyter pandas seaborn git
+ >   conda create -n py3.5 python=3.5 jupyter pandas seaborn git
  >~~~
  >{: .source}
  >   

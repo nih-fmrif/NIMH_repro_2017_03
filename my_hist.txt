@@ -1,0 +1,25 @@
+>>> %ls
+>>> %cd metasearch/
+>>> %ls
+>>> readme_symlink_the_wrong_way = Path('a_symlink')
+>>> from pathlib import Path
+>>> readme_symlink_the_wrong_way = Path('a_symlink')
+>>> readme_symlink_the_wrong_way.symlink_to('README.md')
+>>> %ls
+>>> readme_symlink_the_wrong_way.resolve()
+PosixPath('/home/rodgersleejg/reproducibility_course/metasearch/README.md')
+>>> %cd ..
+>>> readme_symlink_the_wrong_way.resolve()
+>>> %cd metasearch/
+>>> readme_symlink_the_right_way = Path('a_symlink').absolute()
+>>> readme_symlink_the_right_way.symlink_to('README.md')
+>>> %rm a_symlink
+>>> readme_symlink_the_right_way.symlink_to('README.md')
+>>> readme_symlink_the_right_way.resolve()
+PosixPath('/home/rodgersleejg/reproducibility_course/metasearch/README.md')
+>>> %cd ..
+>>> readme_symlink_the_right_way.resolve()
+PosixPath('/home/rodgersleejg/reproducibility_course/metasearch/README.md')
+>>> %cat readme_symlink_the_right_way.resolve()
+>>> %cat {readme_symlink_the_right_way.resolve()}
+>>> %hist -p -o 2-25 -f my_hist.txt
