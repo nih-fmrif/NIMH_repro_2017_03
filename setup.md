@@ -91,7 +91,7 @@ Please install the text editor [atom](https://atom.io).
  >   conda create -n create py3.5 python=3.5 jupyter pandas seaborn git
  >~~~
  >{: .source}
-
+ >   
  >   * To configure jupyter qtconsole to use atom type the following at the
  >   Anaconda prompt:
  > 
@@ -175,6 +175,7 @@ Please install the text editor [atom](https://atom.io).
  >     do not already have conda installed on your system
  >  
  >  *  Once installed (The command `which conda` at a terminal should return a path to the installation)
+ >  
  >~~~
  >   conda create -n create py3.5 python=3.5 jupyter pandas seaborn git
  >~~~
@@ -206,11 +207,12 @@ Please install the text editor [atom](https://atom.io).
  >{: .source}
  {: .solution}
  >## Click here for Linux
- >
+ > 
  >  *  Download and install [miniconda](https://conda.io/miniconda.html) if you
  >     do not already have conda installed on your system
  >  
  >  *  Once installed (The command `which conda` at a terminal should return a path to the installation)
+ >  
  >~~~
  >   conda create -n create py3.5 python=3.5 jupyter pandas seaborn git
  >~~~
