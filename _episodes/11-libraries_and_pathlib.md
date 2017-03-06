@@ -150,7 +150,8 @@ metasearch
 ~~~
 {: .output}
 
-*   The `absolute()` method for can be used to convert a relative path to an absolute path:
+*   The `absolute()` method can be used to convert a relative path to an
+    absolute path:
 
 ~~~
 print(metasearch_dir.absolute())
@@ -163,7 +164,11 @@ print(metasearch_dir.absolute())
 
 ## Data descriptors of a Path object
 
-The metasearch_dir Path object has more than convenient methods to work with filesystem paths. It also has attributes or data descriptors that can be helpful. As an example we'll use the `parent` data descriptor:
+In addition to some convenient methods to work with filesystem paths the
+metasearch_dir object has more useful things to help us when we work with
+paths.  More specifically it has what are termed data descriptors. These are
+accessed in a similar manner to the methods but without parentheses. As an
+example we'll use the `parent` data descriptor:
 
 
 ~~~
@@ -187,7 +192,7 @@ PosixPath('/home/rodgersleejg/reproducibility_course')
 ~~~
 {: .output}
 
-Another example of a useful Path attribute is the `name` attribute:
+Another example of a useful Path data descriptor is the `name` attribute:
 
 ~~~
 metasearch_dir.name
@@ -198,7 +203,8 @@ metasearch_dir.name
 ~~~
 {: .output}
 
- An error occurs if we attempt to call an attribute as if it were a method:
+ An error occurs if we attempt to call a data descriptor as if it were a
+ method:
 
  ~~~
  metasearch_dir.name()
@@ -214,7 +220,8 @@ TypeError: 'str' object is not callable
  ~~~
  {: .output}
 
- If we try to use a method as if it were an attribute nothing useful is displayed:
+ If we try to use a method as if it were a data descriptor nothing useful is
+ displayed:
 
  ~~~
  metasearch_dir.absolute
@@ -225,7 +232,9 @@ TypeError: 'str' object is not callable
  ~~~
  {: .output}
 
-If we keep track of what is a method and what is a data-descriptor it helps us to avoid these mistakes. We can view the data-descriptors at the end of the help for the Path class from the pathlib library:
+If we keep track of what is a method and what is a data-descriptor it helps us
+to avoid these mistakes. We can view the data-descriptors at the end of the
+help for the Path class from the pathlib library:
 
 ~~~
 help(Path)
