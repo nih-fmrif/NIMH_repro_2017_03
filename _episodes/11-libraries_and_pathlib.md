@@ -240,6 +240,7 @@ help for the Path class from the pathlib library:
 help(Path)
 ~~~
 {: .python}
+
 ~~~
 
    ⋮ ⋮ ⋮ 
@@ -280,17 +281,13 @@ help(Path)
 ~~~
 {: .output}
 
+##  More useful methods for working with Path objects
 
-
-*   The concrete path classes include a `resolve()` method for normalizing a path by looking at the filesystem for directories and producing the absolute path referred to by a name. Symlinks will be resolved and on Windows slashes will be replaced with backslashes. 
-
-~~~
-print(metasearch_dir.resolve())
-~~~
-{: .python}
-
-
-*   Given an existing path object, it is easy to build a new one with minor differences such as referring to a different file in the same directory. Use `with_name()` to create a new path that replaces the name portion of a path with a different file name. Use `with_suffix()` to create a new path that replaces the file name’s extension with a different value.
+Given an existing path object, it is easy to build a new one with minor
+differences. For example, we can easily construct a path to a  different file
+in the same directory by using the `with_name()` method. We can use the
+`with_suffix()` method to create a new path that replaces the file name’s
+extension with that of a different filetype.
 
 ~~~
 crawler_dir = metasearch_dir.joinpath('crawler')
@@ -323,8 +320,8 @@ metasearch/crawler/metadata
 ~~~
 {: .output}
 
-It's worth noting that if we want to pass multiple arguments into a function
-like this can be done by unpacking using the star operator:
+A more convenient way of passing a list as multiple arguments to a function is
+to use the star operator to "unpack" them:
 ~~~
 subdirs = ['crawler', 'metadata']
 metadata_dir = metasearch_dir.joinpath(*subdirs)
@@ -351,6 +348,13 @@ True
 
 
 ------------------------- Below this is still being developed -------------------------
+
+*   The concrete path classes include a `resolve()` method for normalizing a path by looking at the filesystem for directories and producing the absolute path referred to by a name. Symlinks will be resolved and on Windows slashes will be replaced with backslashes. 
+
+~~~
+print(metasearch_dir.resolve())
+~~~
+{: .python}
 
 
 ## Working with multiple Paths
