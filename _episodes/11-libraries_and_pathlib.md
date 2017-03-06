@@ -125,14 +125,20 @@ cos(pi) is -1.0
 
 
 ## Working with the pathlib library
-Since we have downloaded a lot of files as part of the metasearch repository we would like to use a library that will allow us to work with these files more efficiently. The pathlib library is an ideal library to use for this. Let's import from this to start working with paths:
+Since we have downloaded a lot of files as part of the metasearch repository we
+would like to use a library that will allow us to work with these files more
+efficiently. The pathlib library is ideal for this. Let's import from this to
+start working with paths:
 
 ~~~
 from pathlib import Path
 ~~~
 {: .python}
 
-*   For example, to instantiate a new path, give a string as the first argument. The string representation of the path object is this name value. This example demonstrates printing this string representation for the metasearch repository that you have cloned from github.
+*   We use the Path class in the pathlib library to create Path objects, which
+    we can then use for subsequent processing. To create a new path object we
+    provide a name as the first argument. This name is a string representation of a
+    path. We will create a Path object that represents the directory we downloaded:
 
 ~~~
 metasearch_dir = Path('metasearch')
