@@ -2,6 +2,7 @@
 title: "Libraries and pathlib"
 teaching: 15
 exercises: 15
+start: true
 questions:
 - "How can I use software that other people have written?"
 - "How can I find out what that software does?"
@@ -166,9 +167,10 @@ print(metasearch_dir.absolute())
 
 In addition to some convenient methods to work with filesystem paths the
 metasearch_dir object has more useful things to help us when we work with
-paths.  More specifically it has what are termed data descriptors. These are
-accessed in a similar manner to the methods but without parentheses. As an
-example we'll use the `parent` data descriptor:
+paths.  More specifically it has what are termed
+https://docs.python.org/3/howto/descriptor.html. These are accessed in a
+similar manner to the methods but without parentheses. As an example we'll use
+the `parent` data descriptor:
 
 
 ~~~
@@ -281,33 +283,60 @@ help(Path)
 ~~~
 {: .output}
 
-##  More useful methods for working with Path objects
+##  Other useful methods for working with Path objects
 
 Given an existing path object, it is easy to build a new one with minor
 differences. For example, we can easily construct a path to a  different file
-in the same directory by using the `with_name()` method. We can use the
-`with_suffix()` method to create a new path that replaces the file name’s
-extension with that of a different filetype.
+in the same directory by using the `with_name()` method. 
 
 ~~~
 crawler_dir = metasearch_dir.joinpath('crawler')
 py = crawler_dir.with_name('transform.py')
 print(py)
-
-ipynb = py.with_suffix('.ipynb')
-print(ipynb)
 ~~~
 {: .python}
 ~~~
 metasearch/transform.py
+~~~
+{: .output}
+
+We can use the
+`with_suffix()` method to create a new path that replaces the file name’s
+extension with that of a different filetype.
+
+~~~
+ipynb = py.with_suffix('.ipynb')
+print(ipynb)
+~~~
+{: .python}
+
+~~~
 metasearch/transform.ipynb
+~~~
+{: .output}
+
+*   Our metasearch_dir object includes a `resolve()` method for normalizing a
+    path by looking at the filesystem for directories and producing the
+    absolute path referred to by a name. Symbolic links will be resolved and on
+    Windows slashes will be replaced with backslashes. Our path does not
+    contain symbolic links and the resolved path is identical to the absolute
+    path:
+
+~~~
+print(metasearch_dir.resolve())
+~~~
+{: .python}
+
+~~~
+/home/username/reproducibility_course/metasearch
 ~~~
 {: .output}
 
 
 ## Constructing paths with multiple directory arguments
 
-*   We can build up a path by providing directories to the joinpath(). We pass each path segment as a separate argument:
+We can build up a path by providing directories to the joinpath(). We pass each
+path segment as a separate argument:
 
 ~~~
 metadata_dir = metasearch_dir.joinpath('crawler', 'metadata')
@@ -347,59 +376,153 @@ True
 {: .output} 
 
 
-------------------------- Below this is still being developed -------------------------
-
-*   The concrete path classes include a `resolve()` method for normalizing a path by looking at the filesystem for directories and producing the absolute path referred to by a name. Symlinks will be resolved and on Windows slashes will be replaced with backslashes. 
-
-~~~
-print(metasearch_dir.resolve())
-~~~
-{: .python}
-
-
 ## Working with multiple Paths
 
-*   The Path object can be iterated, for example using list comprehension, discussed previously, in order to retrieve all the files (and subdirectories) that live within that particular path.
-*   If the Path does not refer to a directory, `iterdir()` raises NotADirectoryError.
+*   Some methods of the Path object return contents of the directory as an
+    iterable. Specifically it returns a generator. We can use a list
+    comprehension, discussed previously, to retrieve all the files (and
+    subdirectories) captured by the generator.
 
 ~~~
-[x for x in metasearch_dir.iterdir()]
+[x for x in crawler.iterdir()]
+~~~
+{: .python}
+
+~~~
+[PosixPath('metasearch/crawler/Load.ipynb'),
+ PosixPath('metasearch/crawler/brain-development'),
+ PosixPath('metasearch/crawler/brainbox-csv'),
+ PosixPath('metasearch/crawler/clean-csv'),
+ PosixPath('metasearch/crawler/dataverse'),
+ PosixPath('metasearch/crawler/example_repository'),
+ PosixPath('metasearch/crawler/fcp-indi.gz'),
+ PosixPath('metasearch/crawler/fcp-indi'),
+ PosixPath('metasearch/crawler/fcp-info.ipynb'),
+ PosixPath('metasearch/crawler/ixi-crawl.ipynb'),
+ PosixPath('metasearch/crawler/metadata'),
+ PosixPath('metasearch/crawler/process-clean-csv.ipynb'),
+ PosixPath('metasearch/crawler/process-csv.ipynb'),
+ PosixPath('metasearch/crawler/transform.ipynb')]
+ ~~~
+{: .output}
+
+*   If the Path does not refer to a directory, `iterdir()` raises
+    NotADirectoryError.
+
+We can be more selective in the contents that we return if we use the `glob()`
+method. This method allows us to find only files matching a pattern. We'll try
+to find files that end in "csv":
+
+
+~~~
+[f for f in crawler_dir.glob('*.csv')]
 ~~~
 {: .python}
 
+~~~
+[]
+~~~
+{: .output}
 
-
-*   Use `glob()` to find only files matching a pattern.
+We didn't find any csv files. There are some ipython notebooks in the current
+directory though:
 
 ~~~
-some_dir_with_csv = metasearch_dir.joinpath('crawler', 'clean-csv').resolve()
-%cd $some_dir_with_csv
-for f in some_dir_with_csv.glob('*.csv'):
-    print(f)
-    ~~~
-{: .python}
-
-*   The glob processor supports recursive scanning using the pattern prefix ** or by calling `rglob()` instead of `glob()`. Multiple wildcards can be passed to glob methods.
-
-~~~
-for f in metasearch_dir.rglob('*-*.csv'):
-    print(f)
+[x for x in crawler_dir.glob('*.ipynb')]
 ~~~
 {: .python}
+
+~~~
+[PosixPath('metasearch/crawler/Load.ipynb'),
+ PosixPath('metasearch/crawler/fcp-info.ipynb'),
+ PosixPath('metasearch/crawler/ixi-crawl.ipynb'),
+ PosixPath('metasearch/crawler/process-clean-csv.ipynb'),
+ PosixPath('metasearch/crawler/process-csv.ipynb'),
+ PosixPath('metasearch/crawler/transform.ipynb')]
+~~~
+{: .output}
+
+*   The glob processor supports recursive scanning using the pattern prefix
+    `**`. Multiple wildcards can be passed to glob methods.
+
+~~~
+[f for f in crawler_dir.glob('**/*-*.ipynb')]
+~~~
+{: .python}
+
+~~~
+[PosixPath('metasearch/crawler/fcp-info.ipynb'),
+ PosixPath('metasearch/crawler/ixi-crawl.ipynb'),
+ PosixPath('metasearch/crawler/process-clean-csv.ipynb'),
+ PosixPath('metasearch/crawler/process-csv.ipynb'),
+ PosixPath('metasearch/crawler/fcp-indi/fcp-indi-extractor.ipynb')]
+~~~
+{: .output}
+
+We will be able to interpret the content from csv files more readily so we'll
+recursively search for csv files in the crawler directory:
+
+~~~
+csvs = [f for f in crawler_dir.glob('**/*-*.csv')]
+csvs
+~~~
+{: .python}
+
+~~~
+[PosixPath('metasearch/crawler/brainbox-csv/all-mris.csv'),
+ PosixPath('metasearch/crawler/clean-csv/ABIDE_Initiative-clean.csv'),
+ PosixPath('metasearch/crawler/clean-csv/ACPI-clean.csv'),
+ PosixPath('metasearch/crawler/clean-csv/ADHD200-clean.csv'),
+ PosixPath('metasearch/crawler/clean-csv/BrainGenomicsSuperstructProject-clean.csv'),
+ PosixPath('metasearch/crawler/clean-csv/CORR-clean.csv'),
+ PosixPath('metasearch/crawler/clean-csv/HypnosisBarrios-clean.csv'),
+ PosixPath('metasearch/crawler/clean-csv/IXI-clean.csv'),
+ PosixPath('metasearch/crawler/clean-csv/RocklandSample-clean.csv'),
+ PosixPath('metasearch/crawler/clean-csv/all-session.csv'),
+ PosixPath('metasearch/crawler/fcp-indi/rocklandsample/nki-rs_lite_r4_phenotypic_v1.csv'),
+ PosixPath('metasearch/crawler/fcp-indi/rocklandsample/nki-rs_lite_r6_phenotypic_v1.csv'),
+ PosixPath('metasearch/crawler/fcp-indi/rocklandsample/nki-rs_lite_r7_phenotypic_v1.csv'),
+ PosixPath('metasearch/crawler/fcp-indi/rocklandsample/nki-rs_lite_r8_phenotypic_v1.csv')]
+~~~
+{: .output}
 
 ## Reading and Writing Files
 
-*   Each Path instance includes methods for working with the contents of the file to which it refers. For immediately retrieving the contents, use `read_bytes()` or `read_text()`. Use the `open()` method to open the file and retain the file handle, instead of passing the name to the built-in `open()` function.
+*   Each Path instance includes methods for working with the contents of the
+    file to which it refers. For immediately retrieving the contents, use
+    `read_bytes()` or `read_text()`. 
 
 ~~~
-some_csvs = [x for x in metasearch_dir.rglob('*-*.csv')]
-some_csv = some_csvs[0]
+test = csvs[0]
+text_output = test.read_text()
+print('Length of output: ', len(text_output))
+print('First 100 characters: ', text_output[0:100])
+
+~~~
+{: .python}
+
+~~~
+Length of output:  984535
+First 100 characters:  https://s3.amazonaws.com/fcp-indi/data/Projects/ABIDE_Initiative/Outputs/freesurfer/5.1/Pitt_0050002
+~~~
+{: .output}
+
+Use the `open()` method to open the file
+and retain the file handle, instead of passing the name to the built-in
+`open()` function.
+
+~~~
 with some_csv.open('r', encoding='utf-8') as handle:
     print('read from open(): {!r}'.format(handle.read()))
 
 print('read_text(): {!r}'.format(f.read_text('utf-8')))
 ~~~
 {: .python}
+
+~~~
+output
+~~~
+{: .output}
 
 *   To write to the file, use `write_bytes()` or `write_text()`.
 
