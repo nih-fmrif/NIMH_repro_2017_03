@@ -376,6 +376,7 @@ True
 {: .output} 
 
 
+
 ## Working with multiple Paths
 
 *   Some methods of the Path object return contents of the directory as an
@@ -486,7 +487,9 @@ csvs
 ~~~
 {: .output}
 
-## Reading and Writing Files
+
+
+## Reading and Writing Files : File IO
 
 *   Each Path instance includes methods for working with the contents of the
     file to which it refers. For immediately retrieving the contents, use
@@ -496,7 +499,7 @@ csvs
 test = csvs[0]
 text_output = test.read_text()
 print('Length of output: ', len(text_output))
-print('First 100 characters: ', text_output[0:100])
+print('The first 100 characters: ', text_output[0:100])
 
 ~~~
 {: .python}
@@ -507,58 +510,64 @@ First 100 characters:  https://s3.amazonaws.com/fcp-indi/data/Projects/ABIDE_Ini
 ~~~
 {: .output}
 
-Use the `open()` method to open the file
-and retain the file handle, instead of passing the name to the built-in
-`open()` function.
+We can use the `open()` method if we wish to have more control over the reading
+process. This can be helpful if we don't wish to read the entire contents of a
+file into memory. When using this method we retain a file handle for subsequent
+reading from or writing to the file:
 
 ~~~
-with some_csv.open('r', encoding='utf-8') as handle:
-    print('read from open(): {!r}'.format(handle.read()))
-
-print('read_text(): {!r}'.format(f.read_text('utf-8')))
+with test.open('r', encoding='utf-8') as file_handle:
+    print('read from file: {!s}'.format(file_handle.readlines(200)))
 ~~~
 {: .python}
 
+
 ~~~
-output
+read from file: ['https://s3.amazonaws.com/fcp-indi/data/Projects/ABIDE_Initiative/Outputs/freesurfer/5.1/Pitt_0050002/mri/T1.mgz,50002,abide_initiative\n', 'https://s3.amazonaws.com/fcp-indi/data/Projects/ABIDE_Initiative/Outputs/freesurfer/5.1/Pitt_0050003/mri/T1.mgz,50003,abide_initiative\n']
 ~~~
 {: .output}
 
-*   To write to the file, use `write_bytes()` or `write_text()`.
+*   To write to the file, use `write_text()` or `write_bytes()`. The
+    `write_text()` method will create the file if it does not exist and
+    overwrite exiting content if it does.
 
 ~~~
 f = metasearch_dir.joinpath('example.txt')
-f.write_bytes('This is the content'.encode('utf-8'))
+f.write_text('This is the content'.encode('utf-8'))
 ~~~
 {: .python}
-
-*   This will create the file if it does not exist and overwrite exiting content if it does.
+ 
+We'll check that this worked by displaying the contents of all files with names
+starting with "ex" in the metasearch directory:
 
 ~~~
 %cat $metasearch_dir/ex*
 ~~~
 {: .python}
 
-## File Properties
-
-*   Detailed information about a file can be accessed using the methods stat().
-
 ~~~
-stat_info = f.stat()
-
-import time
-print('{}:'.format(f))
-print('  Size (kB)    :', stat_info.st_size)
-print('  Created      :', time.ctime(stat_info.st_ctime))
-print('  Last modified:', time.ctime(stat_info.st_mtime))
-print('  Last accessed:', time.ctime(stat_info.st_atime))
+This is the content
 ~~~
-{: .python}
+{: .output}
 
-## Deleting
+> ## Getting help when using file IO operations
+> 
+> The pathlib library provides convenient access to some of python's built-in
+> functions for reading and writing files. There is lots of useful help for
+> these functions. 
+> 
+> As an example try:
+> 
+> ~~~
+> help(open)
+> ~~~
+> {: .python}
+{: .callout}
 
-*   For testing if a particular Path object corresponds to an actual file use `exists()`.
-*   For removing files use unlink().
+
+## Removing files from the filesystem
+
+The unlink() method of the Path class allows us to delete files from our filesystem:
 
 ~~~
 print('exists before removing:', f.exists())
@@ -567,19 +576,35 @@ print('exists after removing:', f.exists())
 ~~~
 {: .python}
 
+> ## File Properties
+> 
+> *   Detailed information about a file can be accessed using the methods stat().
+> 
+> ~~~
+> stat_info = metasearch_dir.stat()
+> 
+> import time
+> print('{}:'.format(stat_info))
+> print('  Size (kB)    :', stat_info.st_size)
+> print('  Created      :', time.ctime(stat_info.st_ctime))
+> print('  Last modified:', time.ctime(stat_info.st_mtime))
+> print('  Last accessed:', time.ctime(stat_info.st_atime))
+> ~~~
+> {: .python}
+> 
+> ~~~
+> os.stat_result(st_mode=16872, st_ino=173483174, st_dev=20, st_nlink=7,
+> st_uid=37163, st_gid=37163, st_size=4096, st_atime=1488916170,
+> st_mtime=1488907986, st_ctime=1488907986):
+>  Size (kB)    : 4096
+>  Created      : Tue Mar  7 12:33:06 2017
+>  Last modified: Tue Mar  7 12:33:06 2017
+>  Last accessed: Tue Mar  7 14:49:30 2017
+>  ~~~
+>  {: .output}
+{: .callout}
 
 
-
-
-
-
-
-> ## Exploring the Math Library
->
-> 1. What function from the `math` library can you use to calculate a square root
->    *without* using `sqrt`?
-> 2. Since the library contains this function, why does `sqrt` exist?
-{: .challenge}
 
 > ## Locating the Right Library
 >
@@ -605,20 +630,6 @@ print('exists after removing:', f.exists())
 > What has your colleague forgotten to do?
 {: .challenge}
 
-> ## Importing With Aliases
->
-> 1. Fill in the blanks so that the program below prints `90.0`.
-> 2. Rewrite the program so that it uses `import` *without* `as`.
-> 3. Which form do you find easier to read?
->
-> ~~~
-> import math as m
-> angle = ____.degrees(____.pi / 2)
-> print(____)
-> ~~~
-> {: .python}
-{: .challenge}
-
 > ## Importing Specific Items
 >
 > 1. Fill in the blanks so that the program below prints `90.0`.
@@ -633,17 +644,143 @@ print('exists after removing:', f.exists())
 > {: .python}
 {: .challenge}
 
-> ## Identifying Input Variable Range Error
->
-> 1. Read the code below and try to identify what the errors are without running it.
-> 2. Run the code, and read the error message. What type of error is it?
-> 3. Fix the error.
->
+> ## Path construction
+> 
+> Construct a Path object with the following list and the metasearch_dir as the
+> parent directory. Does this path exist in the metasearch repository? If it
+> such a path didn't exist how would we create it?
+> 
+>  path_elements = ['csv_repository', 'brains.csv']
+>  
+>> ## Solution
+>> ~~~
+>>  constructed_path = metasearch_dir.joinpath(*path_elements)
+>>  print('The path constructed is ', constructed_path)
+>>  print(constructed_path.exists())
+>> ~~~
+>> {: .python}
+>> 
+>> ~~~
+>> The path constructed is  metasearch/csv_repository/brains.csv
+>> False
+>> ~~~
+>> {: .output}
+>> 
+>> To construct this path we can use the method `touch()`; however since the
+>> parent directory also doesn't exist we should create that first:
+>> 
+>> ~~~
+>> constucted_path.parent.mkdir()
+>> constructed_path.touch()
+>> print(constructed_path.exists())
+>> ~~~
+>> {: .python}
+>> 
+>> ~~~
+>> True
+>> ~~~
+>> {: .output}
+>> 
+> {: .solution}
+{: .challenge}
+
+
+> ## Find the movies
+> 
+> Find movies.csv in the download metasearch repository and create a Path
+> object called movies with this path as its name. Check that you have done
+> this correctly by confirming that the methods of the Path object are
+> available for your movies variable.
+> 
+>> ## Solution
+>> 
+>> We can search for any movies.csv file by using the glob method of our
+>> metasearch_dir Path object. We need to be careful to extract the Path object
+>> returned. We can use a list comprehension to avoid working with the generator
+>> iterable returned by `glob()` and we can index into the resulting list to
+>> return the desired Path object:
+>> 
+>> ~~~
+>> movies = [csv for csv in metasearch_dir.glob()][0]
+>> print(movies)
+>> ~~~
+>> {: .python}
+>> 
+>> ~~~
+>> metasearch/docs/lib/parcoords/examples/data/movies.csv
+>> ~~~
+>> {: .output}
+>>  
+> {: .solution}
+{: .challenge}
+
+> ## What's in a csv?
+> 
+> Edit the code below to read the first 2 lines of all.csv located somewhere in the
+> metasearch file tree. Write the output text to a file with the path
+> "metasearch/my_dir/exercise.txt" using the Path class methods (so do not
+> use IPython magic commands for filesystem manipulation).
+> 
 > ~~~
-> from math import log
-> log(0)
+> nlines = 5
+> output = ''
+> with path_object.open('r') as f:
+>     for ii in range(nlines):
+>         output += 'csv-file "{!s}" , line {!s} : {!s}'.format(path.stem, ii+1,f.readline())
+> print(output)
 > ~~~
-> {: .python}
+> {: .output}
+> 
+> 
+> 
+> 
+> 
+> 
+>> ## Solution
+>> 
+>> We'll first create a Path object with the name of our target file:
+>> 
+>> ~~~
+>> csv_file = [csv for csv in metasearch_dir.glob('**/all.csv')][0]
+>> print(csv_file.exists())
+>> ~~~
+>> {: .python}
+>> 
+>> ~~~
+>> True
+>> ~~~
+>> {: .output}
+>> 
+>> Then we will create a Path object the name of our output file. Since the
+>> parent directory of our target file does not exist we will create that too:
+>> 
+>> ~~~
+>> target_file = Path('my_dir/exercise.txt')
+>> target_file.parent.mkdir()
+>> ~~~
+>> {: .python}
+>> 
+>> Finally we will read the contents of our csv_file and write the contents to our target file:
+>> 
+>> 
+>> 
+>> 
+>> 
+>> 
+>> 
+>> 
+>> ~~~
+>> movies = [csv for csv in metasearch_dir.glob()][0]
+>> print(movies)
+>> ~~~
+>> {: .python}
+>> 
+>> ~~~
+>> metasearch/docs/lib/parcoords/examples/data/movies.csv
+>> ~~~
+>> {: .output}
+>>  
+> {: .solution}
 {: .challenge}
 
 [pypi]: https://pypi.python.org/pypi/
