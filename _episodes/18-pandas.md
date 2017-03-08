@@ -1,5 +1,5 @@
 ---
-title: "Pandas"
+title: "Pandas (template lesson)"
 teaching: 20
 exercises: 25
 questions:

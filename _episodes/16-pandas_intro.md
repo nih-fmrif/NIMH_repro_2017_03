@@ -1,5 +1,5 @@
 ---
-title: "Pandas intro and functions"
+title: "Pandas intro and functions (template lesson)"
 teaching: 15
 exercises: 15
 questions:

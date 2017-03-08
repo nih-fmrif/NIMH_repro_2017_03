@@ -1,5 +1,5 @@
 ---
-title: "Conditionals"
+title: "Conditionals (template lesson)"
 teaching: 15
 exercises: 15
 questions:
@@ -206,6 +206,31 @@ final velocity: 30.0
 *   The program must have a `print` statement *outside* the body of the loop
     to show the final value of `velocity`,
     since its value is updated by the last iteration of the loop.
+
+
+> ## Identifying Variable Name Errors
+>
+> 1. Read the code below and try to identify what the errors are
+>    *without* running it.
+> 2. Run the code and read the error message.
+>    What type of `NameError` do you think this is?
+>    Is it a string with no quotes, a misspelled variable, or a 
+>    variable that should have been defined but was not?
+> 3. Fix the error.
+> 4. Repeat steps 2 and 3, until you have fixed all the errors.
+>
+> ~~~
+> for number in range(10):
+>     # use a if the number is a multiple of 3, otherwise use b
+>     if (Number % 3) == 0:
+>         message = message + a
+>     else:
+>         message = message + "b"
+> print(message)
+> ~~~
+> {: .python}
+{: .challenge}
+
 
 > ## Compound Relations Using `and`, `or`, and Parentheses
 >
