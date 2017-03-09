@@ -79,9 +79,10 @@ install the needed software.
 
 
 ## A guide to local installation 
-Please install the text editor [atom](https://atom.io).
+
 
  > ## Click here for Windows
+ > * Please install the text editor [Atom](atom.io).
  >  *  Download and install [miniconda](https://conda.io/miniconda.html) if you
  >     do not already have conda installed on your system
  >  
@@ -181,6 +182,12 @@ Please install the text editor [atom](https://atom.io).
  > >    executing the command "atom".
  > {: .solution} 
  >    
+ > * Please install the text editor [Atom](atom.io). Do this by downloading it
+ >   and moving it to the Applications folder. You will require administrator
+ >   privileges for this. Once installed open Atom and select "Atom> Install
+ >   Shell Commands" in the menu bar. Once this is done, typing "atom" in a
+ >   bash terminal should open the application. If not you may have to add
+ >   "/usr/local/bin" to your path.
  >  *  Download and install [miniconda](https://conda.io/miniconda.html) if you
  >     do not already have conda installed on your system
  >  
@@ -229,6 +236,7 @@ Please install the text editor [atom](https://atom.io).
  {: .solution}
  >## Click here for Linux
  > 
+ > * Please install the text editor [Atom](atom.io).
  >  *  Download and install [miniconda](https://conda.io/miniconda.html) if you
  >     do not already have conda installed on your system
  >  
