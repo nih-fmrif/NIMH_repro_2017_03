@@ -14,6 +14,149 @@ keypoints:
 - "Arguments in call are matched to parameters in definition."
 - "Functions may return a result to their caller using `return`."
 ---
+
+
+~~~
+import pandas as pd
+~~~
+{: .python}
+
+
+One can access the values stored in a dataframe in many ways.
+
+Three import components of the dataframe are the raw values, the column labels,
+and the row labels. This can be accessed using the following attributes
+respectively:
+~~~
+df_male_adult.values
+df_male_adult.columns
+df_male_adult.index
+~~~
+{: .python}
+~~~
+no output for now
+~~~
+{: .output}
+
+To obtain subsets of these values we will look at four approaches. Integer based indexing, label based indexing, attribute based indexing, and dictionary based indexing. Using the iloc  for the
+implicit indices of the dataframe include referring to the columns (as attributes of the
+dataframe), loc for the explicit indices of the dataframe, and .
+
+
+The columns can be accessed and used conveniently through the attributes of the dataframe:
+~~~
+df_male_adult.age
+df_male_adult.age>50 # returns a pandas series object containing boolean values
+~~~
+{: .python}
+~~~
+no output for now
+~~~
+{: .output}
+
+
+An equivalent syntax is to index the columns in the same way as a dictionary.
+This takes more typing and impedes autocompletion:
+~~~
+df_male_adult['age']
+df_male_adult['age']>50
+~~~
+{: .python}
+~~~
+no output for now
+~~~
+{: .output}
+
+This alternative syntax has the advantage of not causing subtle bugs occurring
+due to the fact that an attribute may have the same name as a method. This is
+should be used for assigning values to new columns.
+~~~
+df_male_adult['age_in_ten_years'] = df_male_adult.age + 10
+~~~
+{: .python}
+~~~
+no output for now
+~~~
+{: .output}
+
+
+
+
+`loc` is an indexer attribute. Like other attributes it is not a method so does
+not use parentheses; however, it is different in that uses square brackets for
+index in a similar manner to lists. Specifically the `loc` indexing attribute
+allows us to access the explicitly defined labels for all columns and rows of
+the dataframe.
+~~~
+# Selecting individual elements
+df_male_adult.loc[8,'project']
+
+# Specifying ranges 
+df_male_adult.loc[0:8, 'project':'occupation']
+
+# Selecting multiple rows using a list
+df_male_adult.loc[[1,8,35],'project':'occupation']
+
+# Using masking to select rows
+df_male_adult.loc[[True,False,True,True,False],'age']
+
+df_male_adult.loc[df_male_adult.loc[:,'age']>50, 'age']
+~~~
+{: .python}
+~~~
+no output for now
+~~~
+{: .output}
+
+This seems awfully complicated to just get the rows where age is greater than 50. It is! We can do this far more easily by accessing the values in the age column by using the age attribute of the dataframe. Yes the column labels are stored as attributes.
+~~~
+df_male_adult.age
+df_male_adult.age>50 # returns a pandas series object containing boolean values
+~~~
+{: .python}
+~~~
+no output for now
+~~~
+{: .output}
+
+This results in a far more pleasant way to get all the rows are greater than 50:
+~~~
+df_male_adult.loc[df_male_adult.age>50, : ]
+~~~
+{: .python}
+~~~
+no output for now
+~~~
+{: .output}
+
+
+Using the attributes to refer to columns comes with a caveat though. What
+happens if we want to create a column called "shape". We already have an
+attribute called shape. So we definitely don't want to use this approach when
+assigning values for new columns. Instead we should take advantage of the
+dictionary indexing approach. This approach treats a dataframe as a set of key
+value pairs where each value is actually a column of values. So to create a new column called shape we would type:
+~~~
+df_male_adult.loc[df_male_adult.age>50, : ]
+~~~
+{: .python}
+~~~
+no output for now
+~~~
+{: .output}
+
+
+Finally we may want to slice the rows by means other than comparison. We can
+look through the methods to explore the various means of doing this
+~~~
+df_male_adult.loc[df_male_adult.age>50, : ]
+~~~
+{: .python}
+~~~
+no output for now
+~~~
+{: .output}
+
 ## Break programs down into functions to make them easier to understand.
 
 *   Human beings can only keep a few items in working memory at a time.
