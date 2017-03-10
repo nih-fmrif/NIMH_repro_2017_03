@@ -24,37 +24,26 @@ keypoints:
     *   Body containing one or more statements is indented (usually by 4 spaces)
 
 ~~~
-mass = 3.54
-if mass > 3.0:
-    print(mass, 'is large')
-
-mass = 2.07
-if mass > 3.0:
-    print (mass, 'is large')
+metasearch_dir = Path('data_not_in_repo/metasearch')
+if metasearch_dir.exists():
+    print('Data directory has been downloaded')
 ~~~
 {: .python}
+
 ~~~
-3.54 is large
+Data directory has been downloaded
 ~~~
 {: .output}
 
-## Conditionals are often used inside loops.
-
-*   Not much point using a conditional when we know the value (as above).
-*   But useful when we have a collection to process.
+If the statement does not evaluate to `True` the indented code will not be
+evaluated and in this case nothing will be printed:
 
 ~~~
-masses = [3.54, 2.07, 9.22, 1.86, 1.71]
-for m in masses:
-    if m > 3.0:
-        print(m, 'is large')
+fake_dir = Path('metasearch/fast_cars')
+if fake_dir.exists():
+    print('Directory exists!')
 ~~~
 {: .python}
-~~~
-3.54 is large
-9.22 is large
-~~~
-{: .output}
 
 ## Use `else` to execute a block of code when an `if` condition is *not* true.
 
@@ -62,20 +51,16 @@ for m in masses:
 *   Allows us to specify an alternative to execute when the `if` *branch* isn't taken.
 
 ~~~
-masses = [3.54, 2.07, 9.22, 1.86, 1.71]
-for m in masses:
-    if m > 3.0:
-        print(m, 'is large')
-    else:
-        print(m, 'is small')
+fake_dir = Path('metasearch/fast_cars')
+if fake_dir.exists():
+    print('Directory exists!')
+else:
+    print('There is no directory with the path: ', fake_dir)
 ~~~
 {: .python}
+
 ~~~
-3.54 is large
-2.07 is small
-9.22 is large
-1.86 is small
-1.71 is small
+There is no directory with the path: metasearch/fast_cars
 ~~~
 {: .output}
 
@@ -97,6 +82,7 @@ for m in masses:
         print(m, 'is small')
 ~~~
 {: .python}
+
 ~~~
 3.54 is large
 2.07 is small
@@ -121,6 +107,7 @@ elif grade >= 90:
     print('grade is A')
 ~~~
 {: .python}
+
 ~~~
 grade is C
 ~~~
@@ -137,6 +124,7 @@ else:
     velocity = 50.0
 ~~~
 {: .python}
+
 ~~~
 adjusting velocity
 ~~~
@@ -157,6 +145,7 @@ for i in range(5): # execute the loop 5 times
 print('final velocity:', velocity)
 ~~~
 {: .python}
+
 ~~~
 0 : 10.0
 moving too slow
@@ -171,6 +160,71 @@ moving too slow
 final velocity: 30.0
 ~~~
 {: .output}
+
+
+
+## Changing the flow of our analysis
+
+At this point we can control the flow of execution in our
+metasearch_analysis.py script to the extent that we can conditionally download
+our dataset. If it already exists we certainly don't want to download it again:
+
+~~~
+metasearch_dir = Path('data_not_in_repo/metasearch')
+if metasearch_dir.exists():
+    print('Data directory has already been downloaded')
+else:
+    !git clone https://github.com/OpenNeuroLab/metasearch.git data_not_in_repo    
+~~~
+{: .python}
+
+~~~
+Data directory has already been downloaded
+~~~
+{: .output}
+
+
+~~~
+%save -a metasearch_analysis.py 42 # enter the number of the last command executed
+~~~
+{: .python}
+
+~~~
+The following commands were written to file `metasearch_analysis.py`:
+if metasearch_dir.exists():
+    print('Data directory has already been downloaded')
+else:
+    get_ipython().system('git clone https://github.com/OpenNeuroLab/metasearch.git data_not_in_repo')
+~~~
+{: .output}
+
+
+We should edit our script at this point to tidy it up. What changes can we make
+that will best promote reproducibility? Ideally we would have written a
+conditional statement at the beginning of our analysis so that we are certain
+that both conditions of our if/else code block evaluated. In reality we will
+always have bits of code that we have to add to our code in retrospect. Ideally
+at this point we would delete our data directory
+
+## Conditionals are often used inside loops.
+
+*   Not much point using a conditional when we know the value (as above).
+*   But useful when we have a collection to process.
+
+~~~
+masses = [3.54, 2.07, 9.22, 1.86, 1.71]
+for m in masses:
+    if m > 3.0:
+        print(m, 'is large')
+~~~
+{: .python}
+
+~~~
+3.54 is large
+9.22 is large
+~~~
+{: .output}
+
 
 ## Create a table showing variables' values to trace a program's execution.
 
