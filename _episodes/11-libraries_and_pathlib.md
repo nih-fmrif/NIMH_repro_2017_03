@@ -498,8 +498,10 @@ csvs
 ~~~
 test = csvs[0]
 text_output = test.read_text()
-print('Length of output: ', len(text_output))
-print('The first 100 characters: ', text_output[0:100])
+# Length of output:  
+len(text_output)
+# The first 100 characters:  
+text_output[0:100]
 
 ~~~
 {: .python}
@@ -570,9 +572,11 @@ This is the content
 The unlink() method of the Path class allows us to delete files from our filesystem:
 
 ~~~
-print('exists before removing:', f.exists())
+# exists before removing: 
+f.exists()
 f.unlink()
-print('exists after removing:', f.exists())
+# exists after removing: 
+f.exists()
 ~~~
 {: .python}
 

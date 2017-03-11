@@ -242,7 +242,8 @@ def average(values):
 
 ~~~
 a = average([1, 3, 4])
-print('average of actual values:', a)
+# average of actual values: 
+a
 ~~~
 {: .python}
 ~~~
@@ -251,7 +252,8 @@ print('average of actual values:', a)
 {: .output}
 
 ~~~
-print('average of empty list:', average([]))
+# average of empty list: 
+average([])
 ~~~
 {: .python}
 ~~~
@@ -264,7 +266,8 @@ None
 
 ~~~
 result = print_date(1871, 3, 19)
-print('result of call is:', result)
+# result of call is: 
+result
 ~~~
 {: .python}
 ~~~

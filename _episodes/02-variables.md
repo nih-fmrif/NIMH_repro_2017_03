@@ -91,7 +91,8 @@ NameError: name 'brain_volume' is not defined
 
 ~~~
 corrected_roi_vol = roi_vol + 3
-print('Volume with a correction for a systematic bias:', corrected_roi_vol)
+# Volume with a correction for a systematic bias: 
+corrected_roi_vol
 ~~~
 {: .python}
 ~~~

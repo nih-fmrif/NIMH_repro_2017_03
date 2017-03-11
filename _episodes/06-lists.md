@@ -34,8 +34,10 @@ number would correspond to the volume of a particular ROI like `cingulate`,
 
 ~~~
 roi_volumes = [2.73,145.3,12.7,16.2, 27.6]
-print('Volume of ROIs : ', roi_volumes)
-print('length:', len(roi_volumes))
+# Volume of ROIs :  
+roi_volumes
+# length: 
+len(roi_volumes)
 ~~~
 {: .python}
 ~~~
@@ -49,8 +51,10 @@ length: 5
 *   Just like strings.
 
 ~~~
-print('The item with index 0 in the list is :', roi_volumes[0])
-print('The item with index 4 in the list is :', roi_volumes[4])
+# The item with index 0 in the list is : 
+roi_volumes[0]
+# The item with index 4 in the list is : 
+roi_volumes[4]
 ~~~
 {: .python}
 ~~~
@@ -65,7 +69,8 @@ The item with index 4 in the list is : 27.6
 
 ~~~
 roi_volumes[0] = 26.5
-print('Our list is now:', roi_volumes)
+# Our list is now: 
+roi_volumes
 ~~~
 {: .python}
 ~~~
@@ -78,10 +83,12 @@ Our list is now: [26.5,145.3,12.7,16.2, 27.6]
 *   Use `list_name.append` to add items to the end of a list.
 
 ~~~
-print('Our list is initially:', roi_volumes )
+# Our list is initially: 
+roi_volumes 
 roi_volumes.append(14.2)
 roi_volumes.append(140)
-print('Our list has now become:', roi_volumes)
+# Our list has now become: 
+roi_volumes
 ~~~
 {: .python}
 ~~~
@@ -106,9 +113,11 @@ Our list has now become: [26.5,145.3,12.7,16.2, 27.6,14.2,140]
 *   Not a function or a method, but a statement in the language.
 
 ~~~
-print('roi_volumes before removing last item:', roi_volumes)
+# roi_volumes before removing last item: 
+roi_volumes
 del roi_volumes[6]
-print('roi_volumes after removing last item:', roi_volumes)
+# roi_volumes after removing last item: 
+roi_volumes
 ~~~
 {: .python}
 ~~~
@@ -139,8 +148,10 @@ goals = [1, 'Create lists.', 2, 'Extract items from lists.', 3, 'Modify lists.']
 
 ~~~
 label_for_roi = 'cortex_left'
-print('The character indexed by 0:', label_for_roi[0])
-print('The character indexed by 3:', label_for_roi[3])
+# The character indexed by 0: 
+label_for_roi[0]
+# The character indexed by 3: 
+label_for_roi[3]
 ~~~
 {: .python}
 ~~~
@@ -176,7 +187,8 @@ TypeError: 'str' object does not support item assignment
         because the index might be calculated based on data.
 
 ~~~
-print('The character indexed by 99 is:', label_for_roi[99])
+# The character indexed by 99 is: 
+label_for_roi[99]
 ~~~
 {: .python}
 ~~~

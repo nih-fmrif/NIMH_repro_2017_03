@@ -142,7 +142,8 @@ for i in range(5): # execute the loop 5 times
     else:
         print('moving too slow')
         velocity = velocity + 10.0
-print('final velocity:', velocity)
+# final velocity: 
+velocity
 ~~~
 {: .python}
 
