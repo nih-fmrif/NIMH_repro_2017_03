@@ -165,7 +165,7 @@ Talk about what a path is etc. using the following figures:
  {: .callout}
 
 The [Jupyter qtconsole](https://jupyter.readthedocs.io/en/latest/index.html) is
-a developing environment that is optimised for interactive computing typical of
+a developing environment that is optimized for interactive computing typical of
 scientific analyses. It provides lots of convenient commands and shortcuts for
 this. Different languages can used with this interface. In our case we will be
 using IPython. It provides us with  a convenient interface to the system shell
@@ -196,7 +196,7 @@ now we will use the `%mkdir` command to add a directory into our present
 working directory:
 
 ~~~
-%mkdir reproducibility_course
+%mkdir repro_course
 ~~~
 {: .source}
 
@@ -210,13 +210,13 @@ again).
 ~~~
 !pwd
 !ls
-!mkdir reproducibility_course
+!mkdir repro_course
 ~~~
 {: .source}
 ~~~
 /Users/this_user
 ... A list of files in the current directory...
-mkdir: cannot create directory `reproducibility_course': File exists
+mkdir: cannot create directory `repro_course': File exists
 ~~~
 {: .output}
 
@@ -238,33 +238,33 @@ be seen very easily when we use the "!cd" system command to change directories.
 
 ~~~
 %pwd
-!cd reproducibility_course
+!cd repro_course
 %pwd
 ~~~
 {: .source}
 ~~~
 /Users/this_user
-!cd reproducibility_course
-/Users/this_user/reproducibility_course
+/Users/this_user
 ~~~
 {: .output}
 
-This woud not be the behaviour we would wish from a command that changes our
+This would not be the behavior we would wish from a command that changes our
 present working directory. This occurs because the changes made to the
 
-environment in the sub-process are not propagated back to the Ipython shell. If
-we use the Ipython magic `%cd` we get the behaviour we want.
+environment in the sub-process are not propagated back to the IPython shell. If
+we use the IPython magic `%cd` we get the behavior we want.
 
 ~~~
 %pwd
-%cd reproducibility_course
+%cd repro_course
 %pwd
 ~~~
 {: .source}
+
 ~~~
 /Users/this_user
-!cd reproducibility_course
-/Users/this_user/reproducibility_course
+/Users/this_user/repro_course
+/Users/this_user/repro_course
 ~~~
 {: .output}
 
