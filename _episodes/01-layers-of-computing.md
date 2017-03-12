@@ -56,7 +56,6 @@ source /data/DSST/scripts/repro_env_setup.sh
 
 ~~~
 jupyter qtconsole &
-%automagic
 ~~~
 {: .bash}
 
@@ -64,29 +63,73 @@ Your screen should now look something like this:
 
 ![image_of_shell](../fig/HPC_desktop.png)
 
+Before we do anything we should all type the following command. For now we
+don't need to know what it does but it will help to avoid confusion as we learn
+about our command line interface:
+
+
+~~~
+%automagic
+~~~
+{: .python}
+
+~~~
+Automagic is OFF, % prefix IS needed for line magics.
+~~~
+{: .output}
+
+
 ## Know who (or what) you're talking to
 
-It's easy and common to click on an icon, open and window and typing, clicking, and analyzing in that window without much thought about how or where those commands are being executed and where the data is being stored. It's worth the effort to take some time and understand exactly what your computing (stack)[] looks like and exactly where everything is happening. Understanding this stack can help you make your analysis more efficient and secure.
+It's easy and common to click on an icon, open and window and typing, clicking,
+and analyzing in that window without much thought about how or where those
+commands are being executed and where the data is being stored. It's worth the
+effort to take some time and understand exactly what your computing (stack)[]
+looks like and exactly where everything is happening. Understanding this stack
+can help you make your analysis more efficient and secure.
 
 ## Where am I?
 
-The desktop you're looking at inside the NoMachine window is from a computer that lives over in building 13 at NIH's high performance computing (HPC) center. This computer (helix or felix) is separate from but closely affiliated with the large cluster of computers known as the Biowulf.
+The desktop you're looking at inside the NoMachine window is from a computer
+that lives over in building 13 at NIH's high performance computing (HPC)
+center. This computer (helix or felix) is separate from but closely affiliated
+with the large cluster of computers known as the Biowulf.
 
-NoMachine is a remote desktop program. It allows your to interact with the remote computer (helix/felix) almost as if you were sitting right in front of it. (VNC is another common remote desktop program).
+NoMachine is a remote desktop program. It allows your to interact with the
+remote computer (helix/felix) almost as if you were sitting right in front of
+it. (VNC is another common remote desktop program).
 
-The window on the left of your NX desktop is running an IPython shell. On the right side, there is a window running a (Bash) shell. A shell refers to a program that wraps around another program that is usually more complicated and less user-friendly. That program inside the shell is often referred to as a kernel.
+The window on the left of your NX desktop is running an IPython shell. On the
+right side, there is a window running a (Bash) shell. A shell refers to a
+program that wraps around another program that is usually more complicated and
+less user-friendly. That program inside the shell is often referred to as a
+kernel.
 
 ![image_of_shell](../fig/layers_of_computing.png)
 
-For any computer you might be working with, there is a main kernel that is part of the "operating system" at the heart of it.  On top of that kernel there are many other programs running, some of them are designed to provide you with an easy way to interact.
+For any computer you might be working with, there is a main kernel that is part
+of the "operating system" at the heart of it.  On top of that kernel there are
+many other programs running, some of them are designed to provide you with an
+easy way to interact.
 
 # Boxed Text
-Bash vs. IPython
-We'll be working almost exclusively in the IPython shell in this course. IPython provides an easy way to explore and interact with your data that leverages the power of the Python programming language. The Bash shell is an extremely versatile tool designed to allow you to control and interact with files and your computer more generally. You've likely had exposure to Bash (or it's close cousin, tcsh) if you've used analysis packages like AFNI, FSL, and FreeSurfer. The Bash shell is a [great thing to learn](https://swcarpentry.github.io/shell-novice/), but we want to focus on teaching you reproducible computing concepts without getting bogged down in the syntax of too many different languages.
+Bash vs. IPython 
+
+We'll be working almost exclusively in the IPython shell in this course.
+IPython provides an easy way to explore and interact with your data that
+leverages the power of the Python programming language. The Bash shell is an
+extremely versatile tool designed to allow you to control and interact with
+files and your computer more generally. You've likely had exposure to Bash (or
+it's close cousin, tcsh) if you've used analysis packages like AFNI, FSL, and
+FreeSurfer. The Bash shell is a [great thing to
+learn](https://swcarpentry.github.io/shell-novice/), but we want to focus on
+teaching you reproducible computing concepts without getting bogged down in the
+syntax of too many different languages.
 
 # Exercise
 
-Draw a diagram to illustrate how the programs and computers listed below relate to one another.
+Draw a diagram to illustrate how the programs and computers listed below relate
+to one another.
 
 * Your laptop
 * Helix & Felix
@@ -95,7 +138,8 @@ Draw a diagram to illustrate how the programs and computers listed below relate 
 * IPython Shell
 * Angry Birds on your phone
 
-Now get with your partner and compare your drawings. Discuss the difference and edit as needed.
+Now get with your partner and compare your drawings. Discuss the difference and
+edit as needed.
 
 
 
@@ -120,12 +164,13 @@ Talk about what a path is etc. using the following figures:
 > session. Every time we execute a command this number will increment by one.
  {: .callout}
 
-The [Jupyter qtconsole](https://jupyter.readthedocs.io/en/latest/index.html) is a developing environment that is optimised for
-interactive computing typical of scientific analyses. It provides lots of
-convenient commands and shortcuts for this. Different languages can used with
-this interface. In our case we will be using IPython. It provides us with  a
-convenient interface to the system shell and the Python interpreter. We will
-start by typing in the IPython command:
+The [Jupyter qtconsole](https://jupyter.readthedocs.io/en/latest/index.html) is
+a developing environment that is optimised for interactive computing typical of
+scientific analyses. It provides lots of convenient commands and shortcuts for
+this. Different languages can used with this interface. In our case we will be
+using IPython. It provides us with  a convenient interface to the system shell
+and the Python interpreter. We will start by typing in the IPython command:
+
 ~~~
 %pwd
 ~~~
@@ -144,11 +189,11 @@ their names. We can list these files by using the next command:
 {: .source}
 
 The `'%ls` command returns all the files in the present working directory. When
-we wish to perform actions on these files we can refer to them directly by their
-names and the shell will understand which files we are referring to. Later we
- will talk about how to add new files to the current directory but for now we
- will use the `%mkdir` command to add a directory into our present working
- directory:
+we wish to perform actions on these files we can refer to them directly by
+their names and the shell will understand which files we are referring to.
+Later we will talk about how to add new files to the current directory but for
+now we will use the `%mkdir` command to add a directory into our present
+working directory:
 
 ~~~
 %mkdir reproducibility_course
