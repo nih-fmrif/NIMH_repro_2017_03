@@ -24,9 +24,13 @@ keypoints:
 ---
 
 ## What's a software container? (And what's it good for?)
-* containers allow you to do lots of things
-* they differ from VMs
+Software containers allow you to package an application along with all of its dependencies in a portable, shareable format. Containers package <b>ALL</b> of an apps dependencies... including the operating system!  This ensures reproducibility across different computers and environments.  Containers allow you to do things like:
 
+* Package an analysis pipeline so that it runs on your laptop, in the cloud, and in a high performance computing (HPC) environment and produces the same result.
+* Publish all of the software and data from a project along with the paper so that others can reproduce your results.
+* Install and run an application that requires a complicated software stack on a new computer with a few keystrokes.
+
+Containers are a type of virtualization and they are related to virtual machines (VMs).    
 [Singularity Home](http://singularity.lbl.gov/)
 [Singularity at the NIH HPC](https://hpc.nih.gov/apps/singularity.html)
 
