@@ -36,13 +36,22 @@ number would correspond to the volume of a particular ROI like `cingulate`,
 roi_volumes = [2.73,145.3,12.7,16.2, 27.6]
 # Volume of ROIs :  
 roi_volumes
+~~~
+{: .python}
+
+~~~
+[2.73,145.3,12.7,16.2, 27.6]
+~~~
+{: .output}
+
+~~~
 # length: 
 len(roi_volumes)
 ~~~
 {: .python}
+
 ~~~
-Volume of ROIs: [2.73,145.3,12.7,16.2, 27.6]
-length: 5
+5
 ~~~
 {: .output}
 
@@ -53,13 +62,22 @@ length: 5
 ~~~
 # The item with index 0 in the list is : 
 roi_volumes[0]
+~~~
+{: .python}
+
+~~~
+2.73
+~~~
+{: .output}
+
+~~~
 # The item with index 4 in the list is : 
 roi_volumes[4]
 ~~~
 {: .python}
+
 ~~~
-The item with index 0 in the list is : 2.73
-The item with index 4 in the list is : 27.6
+27.6
 ~~~
 {: .output}
 
@@ -73,6 +91,7 @@ roi_volumes[0] = 26.5
 roi_volumes
 ~~~
 {: .python}
+
 ~~~
 Our list is now: [26.5,145.3,12.7,16.2, 27.6]
 ~~~
@@ -85,22 +104,31 @@ Our list is now: [26.5,145.3,12.7,16.2, 27.6]
 ~~~
 # Our list is initially: 
 roi_volumes 
+~~~
+{: .python}
+
+~~~
+[26.5,145.3,12.7,16.2, 27.6]
+~~~
+{: .output}
+
+~~~
 roi_volumes.append(14.2)
 roi_volumes.append(140)
 # Our list has now become: 
 roi_volumes
 ~~~
 {: .python}
+
 ~~~
-Our list is initially: [26.5,145.3,12.7,16.2, 27.6]
-Our list has now become: [26.5,145.3,12.7,16.2, 27.6,14.2,140]
+[26.5,145.3,12.7,16.2, 27.6,14.2,140]
 ~~~
 {: .python}
 
 *   `append` is a *method* of lists.
     *   Like a function, but tied to a particular object.
 *   Use `object_name.method_name` to call methods.
-    *   Deliberately resembles the way we refer to things in a library.
+    *   Deliberately resembles the way we refer to things in a package. We'll learn about packages later.
 *   We will meet other methods of lists as we go along.
     *   In IPython, after typing a period after an object we can preview the
         methods available to us by hitting the tab-key. Alternatively we can
@@ -115,14 +143,23 @@ Our list has now become: [26.5,145.3,12.7,16.2, 27.6,14.2,140]
 ~~~
 # roi_volumes before removing last item: 
 roi_volumes
+~~~
+{: .python}
+
+~~~
+[26.5,145.3,12.7,16.2, 27.6,14.2,140]
+~~~
+{: .output}
+
+~~~
 del roi_volumes[6]
 # roi_volumes after removing last item: 
 roi_volumes
 ~~~
 {: .python}
+
 ~~~
-roi_volumes before removing last item: [26.5,145.3,12.7,16.2, 27.6,14.2,140]
-roi_volumes after removing last item:  [26.5,145.3,12.7,16.2, 27.6,14.2]
+[26.5,145.3,12.7,16.2, 27.6,14.2]
 ~~~
 {: .output}
 
@@ -142,6 +179,8 @@ goals = [1, 'Create lists.', 2, 'Extract items from lists.', 3, 'Modify lists.']
 ~~~
 {: .python}
 
+While this list can be created there are better ways of representing this type of information.
+
 ## Character strings can be indexed like lists.
 
 *   As we saw before, indexing into strings is the same as lists.
@@ -151,12 +190,22 @@ label_for_roi = 'cortex_left'
 # The character indexed by 0: 
 label_for_roi[0]
 # The character indexed by 3: 
+~~~
+{: .python}
+
+~~~
+c
+~~~
+{: .output}
+
+~~~
 label_for_roi[3]
 ~~~
 {: .python}
+
 ~~~
-The character indexed by 0: c
-The character indexed by 3: t
+
+t
 ~~~
 {: .output}
 
@@ -172,6 +221,7 @@ The character indexed by 3: t
 label_for_roi[0] = 'C'
 ~~~
 {: .python}
+
 ~~~
 TypeError: 'str' object does not support item assignment
 ~~~
@@ -191,15 +241,16 @@ TypeError: 'str' object does not support item assignment
 label_for_roi[99]
 ~~~
 {: .python}
+
 ~~~
 IndexError: string index out of range
 ~~~
 {: .output}
 
 > ## Fill in the Blanks
->
+> 
 > Fill in the blanks so that the program below produces the output shown.
->
+> 
 > ~~~
 > values = ____
 > values.____(1)
@@ -210,15 +261,15 @@ IndexError: string index out of range
 > print('second time:', values)
 > ~~~
 > {: .python}
->
+> 
 > ~~~
 > first time: [1, 3, 5]
 > second time: [3, 5]
 > ~~~
 > {: .output}
->
+> 
 > > ## Solution
-> >
+> > 
 > > ~~~
 > > values = []
 > > values.append(1)
@@ -233,12 +284,12 @@ IndexError: string index out of range
 {: .challenge}
 
 > ## How Large is a Slice?
->
+> 
 > If 'low' and 'high' are both non-negative integers,
 > how long is the list `values[low:high]`?
->
+> 
 > > ## Solution
-> >
+> > 
 > > ~~~
 > > high-low
 > > ~~~
@@ -247,9 +298,9 @@ IndexError: string index out of range
 {: .challenge}
 
 > ## From Strings to Lists and Back
->
+> 
 > Given this:
->
+> 
 > ~~~
 > print('string to list:', list('ADHD'))
 > print('list to string:', ''.join(['c', 'n', 's']))
@@ -260,21 +311,21 @@ IndexError: string index out of range
 > list to string: 'cns'
 > ~~~
 > {: .output}
->
+> 
 > 1.  Explain in simple terms what `list('some string')` does.
 > 2.  What does `'-'.join(['x', 'y'])` generate?
 {: .challenge}
 
 > ## Working With the End
->
+> 
 > What does the following program print?
->
+> 
 > ~~~
 > roi_label = 'hippocampus'
 > print(roi_label[-1])
 > ~~~
 > {: .python}
->
+> 
 > 1.  How does Python interpret a negative index?
 > 2.  If a list or string has N elements,
 > what is the most negative index that can safely be used with it,
@@ -283,9 +334,9 @@ IndexError: string index out of range
 > 4.  How can you display all elements but the last one without 
 > changing `values`?
 >     (Hint: you will need to combine slicing and negative indexing.)
->
+> 
 > > ## Solution
-> >
+> > 
 > > ~~~
 > > 1: It retrieves elements by stepping backwards through the string.
 > > 2: -N. This location is the first element in the list.
@@ -297,21 +348,21 @@ IndexError: string index out of range
 {: .challenge}
 
 > ## Stepping Through a List
->
+> 
 > What does the following program print?
->
+> 
 > ~~~
 > roi_label = 'hippocampus'
 > print(roi_label[::2])
 > print(roi_label[::-1])
 > ~~~
 > {: .python}
->
+> 
 > 1.  If we write a slice as `low:high:stride`, what does `stride` do?
 > 2.  What expression would select all of the even-numbered items from a collection?
->
+> 
 > > ## Solution
-> >
+> > 
 > > ~~~
 > > hpoaps
 > > supmacoppih
@@ -319,9 +370,9 @@ IndexError: string index out of range
 > > ~~~
 > > {: .output}
 > > 1: stride is the step to go through the list
-> >
+> > 
 > > The answer to question 2 is:
-> >
+> > 
 > > ~~~
 > > listobject[1::2]
 > > ~~~
@@ -330,18 +381,18 @@ IndexError: string index out of range
 {: .challenge}
 
 > ## Slice Bounds
->
+> 
 > What does the following program print?
->
+> 
 > ~~~
 > roi_label = 'hippocampus'
 > print(roi_label[0:20])
 > print(roi_label[-1:3])
 > ~~~
 > {: .python}
->
+> 
 > > ## Solution
-> >
+> > 
 > > ~~~
 > > hippocampus
 > >        
@@ -351,7 +402,7 @@ IndexError: string index out of range
 {: .challenge}
 
 > ## Sort and Sorted
->
+> 
 > ~~~
 > roi_label_as_list = list(roi_label)
 > ~~~
@@ -362,11 +413,11 @@ IndexError: string index out of range
 {: .challenge}
 
 > ## Copying (or Not)
->
+> 
 > What do these two programs print?
 > In simple terms, explain the difference between `new = old` and `new = old[:]`.
 > For more information read about [deep copy vs shallow copy](https://docs.python.org/3/library/copy.html) 
->
+> 
 > ~~~
 > # Program A
 > old = list('Brain')
@@ -375,7 +426,7 @@ IndexError: string index out of range
 > print('new is', new, 'and old is', old)
 > ~~~
 > {: .python}
->
+> 
 > ~~~
 > # Program B
 > old = list('Brain')
