@@ -24,13 +24,6 @@ keypoints:
 - "Python reports a runtime error when something goes wrong while a program is executing."
 - "Fix syntax errors by reading the source code, and runtime errors by tracing the program's execution."
 ---
-## Use comments to add documentation to programs.
-
-~~~
-# This sentence isn't executed by Python.
-adjustment = 0.5   # Neither is this - anything after '#' is ignored.
-~~~
-{: .python}
 
 ## A function may take zero or more arguments.
 
@@ -49,6 +42,7 @@ print()
 print('after')
 ~~~
 {: .python}
+
 ~~~
 before
 
@@ -64,13 +58,22 @@ after
     *   "Larger" and "smaller" use (0-9, A-Z, a-z) to compare letters.
 
 ~~~
-print(max(1, 2, 3))
-print(min('a', 'A', '0'))
+max(1, 2, 3)
 ~~~
 {: .python}
+
 ~~~
 3
-0
+~~~
+{: .output}
+
+~~~
+min('a', 'A', '0')
+~~~
+{: .python}
+
+~~~
+'0'
 ~~~
 {: .output}
 
@@ -81,9 +84,10 @@ print(min('a', 'A', '0'))
 *   And they must be given things that can meaningfully be compared.
 
 ~~~
-print(max(1, 'a'))
+max(1, 'a')
 ~~~
 {: .python}
+
 ~~~
 TypeError: unorderable types: str() > int()
 ~~~
@@ -98,6 +102,7 @@ TypeError: unorderable types: str() > int()
 round(3.712)
 ~~~
 {: .python}
+
 ~~~
 4
 ~~~
@@ -109,6 +114,7 @@ round(3.712)
 round(3.712, 1)
 ~~~
 {: .python}
+
 ~~~
 3.7
 ~~~
@@ -124,6 +130,7 @@ round(3.712, 1)
 help(round)
 ~~~
 {: .python}
+
 ~~~
 Help on built-in function round in module builtins:
 
@@ -147,6 +154,7 @@ includes what is displayed by the Python help function.
 print?
 ~~~
 {: .python}
+
 ~~~
 Docstring:
 print(value, ..., sep=' ', end='\n', file=sys.stdout, flush=False)
@@ -164,16 +172,14 @@ Additionally IPython provides a convenient manner to view the source code of
 functions. This help is available by using `??`. Most of the built-in functions
 are not written in Python. For performance reasons they are written in compiled
 languages like C. In these cases, the `??` help command will display the same
-content as the previously mentioned help command. Later on we will see how
-useful this help command can be though. It can often provide some extra insight
-and at the very least provides well written code that you can begin to model
-your own code on.
+content as the previously mentioned help command. 
 
 
 ~~~
 print??
 ~~~
 {: .python}
+
 ~~~
 Docstring:
 print(value, ..., sep=' ', end='\n', file=sys.stdout, flush=False)
@@ -198,6 +204,7 @@ Type:      builtin_function_or_method
 roi_label = 'hippocampus
 ~~~
 {: .python}
+
 ~~~
 ...
 SyntaxError: EOL while scanning string literal
@@ -209,6 +216,7 @@ SyntaxError: EOL while scanning string literal
 brain_volume = = 1302
 ~~~
 {: .python}
+
 ~~~
 ...
 SyntaxError: invalid syntax
@@ -224,6 +232,7 @@ print( brain_volume
 # execute the multiline expression using shift + enter
 ~~~
 {: .python}
+
 ~~~
   print( brain_volume # in ipython we must execute this command using shift + enter
 
@@ -237,8 +246,8 @@ SyntaxError: unexpected EOF while parsing
 *   The message indicates a problem on first line of the input ("line 2").
     *   In this case the "ipython-input" section of the file name tells us that
         we are working with input into IPython.
-*   Next is the problematic line of code,
-    indicating the problem with a `^` pointer.
+*   Next is the problematic line of code, indicating the problem with a `^`
+    pointer.
 
 ## Python reports a runtime error when something goes wrong while a program is executing.
 
@@ -248,6 +257,7 @@ grey_matter = 700
 csf_and_white_matter = brain_volume - grey_matters # mis-spelled 'grey_matter'
 ~~~
 {: .python}
+
 ~~~
 NameError: name 'grey_matters' is not defined
 ~~~
@@ -258,17 +268,26 @@ NameError: name 'grey_matters' is not defined
 ## Every function returns something.
 
 *   Every function call produces some result.
-*   If the function doesn't have a useful result to return,
-    it usually returns the special value `None`.
+*   If the function doesn't have a useful result to return, it usually returns
+    the special value `None`.
 
 ~~~
 result = print('hippocampus')
-print('The output of print is', result)
 ~~~
 {: .python}
+
 ~~~
 hippocampus
-The output of print is None
+~~~
+{: .output}
+
+~~~
+print(result)
+~~~
+{: .python}
+
+~~~
+None
 ~~~
 {: .output}
 
@@ -301,7 +320,7 @@ The output of print is None
 > {: .python}
 {: .challenge}
 
-> ## Why Not?
+> ## Working with None
 >
 > Why don't `max` and `min` return `None` when they are given no arguments?
 {: .challenge}
