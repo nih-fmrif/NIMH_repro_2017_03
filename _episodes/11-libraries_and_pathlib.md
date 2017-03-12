@@ -20,29 +20,46 @@ keypoints:
 
 ## Most of the power of a programming language is in its libraries.
 
-*   A *library* is a collection of functions that can be used by other programs.
+*   Although *library* has no rigorously defined meaning it can be used to
+    refer to is a bundle of software that can be re-used by others.
     *   May also contain data values (e.g., numerical constants).
     *   Library's contents are supposed to be related, but there's no way to enforce that.
 *   Python's [standard library][stdlib] is installed with it.
-*   Many additional libraries are available from [PyPI][pypi] (the Python Package Index).
-*   We will see later how to write new libraries.
+*   In Python, modules  are files containing code that we may want to reuse in
+    some way. A number of modules can be bundled together and form what is
+    called a package. 
+*   These packages can be managed by tools like conda and pip and repositories
+    from which anyone can download software exist at conda-forge and
+    [PyPI][pypi] respectively. (the Python Package Index).
+* We can easily create our own modules so that we can re- use our code in many
+  projects.
+    * This is especially useful for re-using functions, which we will learn about later.
 
-## A program must import a library in order to use it.
+## A program must import a module in order to use it.
 
-*   Use `import` to load a library into a program's memory.
-*   Then refer to things from the library as `library_name.thing_name`.
+*   Use `import` to load the contents of a package into a program's memory.
+*   Then refer to things from the package as `module_name.item_name`.
     *   Python uses `.` to mean "part of".
+    *   The item in the package may in turn be a sub pack
 
 ~~~
 import math
-
-print('pi is', math.pi)
-print('cos(pi) is', math.cos(math.pi))
+math.pi
 ~~~
 {: .python}
+
 ~~~
-pi is 3.141592653589793
-cos(pi) is -1.0
+3.141592653589793
+~~~
+{: .output}
+
+~~~
+math.cos(math.pi)
+~~~
+{: .python}
+
+~~~
+-1.0
 ~~~
 {: .output}
 
@@ -58,6 +75,7 @@ cos(pi) is -1.0
 help(math)
 ~~~
 {: .python}
+
 ~~~
 Help on module math:
 
@@ -93,12 +111,12 @@ FUNCTIONS
 
 ~~~
 from math import cos, pi
-
-print('cos(pi) is', cos(pi))
+cos(pi)
 ~~~
 {: .python}
+
 ~~~
-cos(pi) is -1.0
+-1.0
 ~~~
 {: .output}
 
@@ -109,12 +127,12 @@ cos(pi) is -1.0
 
 ~~~
 import math as m
-
-print('cos(pi) is', m.cos(m.pi))
+m.cos(m.pi)
 ~~~
 {: .python}
+
 ~~~
-cos(pi) is -1.0
+-1.0
 ~~~
 {: .output}
 
@@ -143,7 +161,7 @@ from pathlib import Path
 
 ~~~
 metasearch_dir = Path('metasearch')
-print(metasearch_dir)
+metasearch_dir
 ~~~
 {: .python}
 ~~~
@@ -155,11 +173,12 @@ metasearch
     absolute path:
 
 ~~~
-print(metasearch_dir.absolute())
+metasearch_dir.absolute()
 ~~~
 {: .python}
+
 ~~~
-/home/username/reproducibility_course/metasearch
+/home/this_user/reproducibility_course/metasearch
 ~~~
 {: .output}
 
@@ -174,9 +193,10 @@ the `parent` data descriptor:
 
 
 ~~~
-print(metasearch_dir.parent)        
+metasearch_dir.parent
 ~~~
 {: .python}
+
 ~~~
 PosixPath('.')
 ~~~
@@ -186,11 +206,12 @@ In this case the descriptor is not particularly useful because metasearch_dir
 is specified as a relative path. We can use the `absolute()` method to fix this:
 
 ~~~
-print(metasearch_dir.absolute().parent)
+metasearch_dir.absolute().parent
 ~~~
 {: .python}
+
 ~~~
-PosixPath('/home/rodgersleejg/reproducibility_course')
+PosixPath('/home/this_user/reproducibility_course')
 ~~~
 {: .output}
 
@@ -292,9 +313,10 @@ in the same directory by using the `with_name()` method.
 ~~~
 crawler_dir = metasearch_dir.joinpath('crawler')
 py = crawler_dir.with_name('transform.py')
-print(py)
+py
 ~~~
 {: .python}
+
 ~~~
 metasearch/transform.py
 ~~~
@@ -306,7 +328,7 @@ extension with that of a different filetype.
 
 ~~~
 ipynb = py.with_suffix('.ipynb')
-print(ipynb)
+ipynb
 ~~~
 {: .python}
 
@@ -323,12 +345,12 @@ metasearch/transform.ipynb
     path:
 
 ~~~
-print(metasearch_dir.resolve())
+metasearch_dir.resolve()
 ~~~
 {: .python}
 
 ~~~
-/home/username/reproducibility_course/metasearch
+/home/this_user/reproducibility_course/metasearch
 ~~~
 {: .output}
 
@@ -340,7 +362,7 @@ path segment as a separate argument:
 
 ~~~
 metadata_dir = metasearch_dir.joinpath('crawler', 'metadata')
-print(metadata_dir)
+metadata_dir
 ~~~
 {: .python}
 
@@ -351,12 +373,14 @@ metasearch/crawler/metadata
 
 A more convenient way of passing a list as multiple arguments to a function is
 to use the star operator to "unpack" them:
+
 ~~~
 subdirs = ['crawler', 'metadata']
 metadata_dir = metasearch_dir.joinpath(*subdirs)
-print(metadata_dir)
+metadata_dir
 ~~~
 {: .python}
+
 ~~~
 metasearch/crawler/metadata
 ~~~
@@ -367,9 +391,10 @@ necessarily know whether the path that we have created exists. In order to
 check this we can use the exists() method:
 
 ~~~
-print(metadata_dir.exists())
+metadata_dir.exists()
 ~~~
 {: .python}
+
 ~~~
 True
 ~~~
@@ -508,7 +533,7 @@ text_output[0:100]
 
 ~~~
 Length of output:  984535
-First 100 characters:  https://s3.amazonaws.com/fcp-indi/data/Projects/ABIDE_Initiative/Outputs/freesurfer/5.1/Pitt_0050002
+https://s3.amazonaws.com/fcp-indi/data/Projects/ABIDE_Initiative/Outputs/freesurfer/5.1/Pitt_0050002
 ~~~
 {: .output}
 
@@ -519,13 +544,13 @@ reading from or writing to the file:
 
 ~~~
 with test.open('r', encoding='utf-8') as file_handle:
-    print('read from file: {!s}'.format(file_handle.readlines(200)))
+    print(file_handle.readlines(200))
 ~~~
 {: .python}
 
 
 ~~~
-read from file: ['https://s3.amazonaws.com/fcp-indi/data/Projects/ABIDE_Initiative/Outputs/freesurfer/5.1/Pitt_0050002/mri/T1.mgz,50002,abide_initiative\n', 'https://s3.amazonaws.com/fcp-indi/data/Projects/ABIDE_Initiative/Outputs/freesurfer/5.1/Pitt_0050003/mri/T1.mgz,50003,abide_initiative\n']
+['https://s3.amazonaws.com/fcp-indi/data/Projects/ABIDE_Initiative/Outputs/freesurfer/5.1/Pitt_0050002/mri/T1.mgz,50002,abide_initiative\n', 'https://s3.amazonaws.com/fcp-indi/data/Projects/ABIDE_Initiative/Outputs/freesurfer/5.1/Pitt_0050003/mri/T1.mgz,50003,abide_initiative\n']
 ~~~
 {: .output}
 
@@ -543,7 +568,7 @@ We'll check that this worked by displaying the contents of all files with names
 starting with "ex" in the metasearch directory:
 
 ~~~
-%cat $metasearch_dir/ex*
+%cat {metasearch_dir}/ex*
 ~~~
 {: .python}
 
