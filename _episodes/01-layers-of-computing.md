@@ -43,7 +43,7 @@ We'll be conducting this course using a remote desktop utility called
 [NoMachine](http://www.nomachine.com). You should have already met with the DSST
 staff to configure and test it. Open the NoMachine App and connect to
 felix.nimh.nih.gov if you are an NIMH employee or helix.nih.gov if you work for
-another IC.
+another institute.
 * Open Terminal from the Application-> System Tools menu
 * We've setup a short script to get you started quickly in the NIH HPC (felix or helix). To run it, type:
 
@@ -84,19 +84,19 @@ For any computer you might be working with, there is a main kernel that is part 
 Bash vs. IPython
 We'll be working almost exclusively in the IPython shell in this course. IPython provides an easy way to explore and interact with your data that leverages the power of the Python programming language. The Bash shell is an extremely versatile tool designed to allow you to control and interact with files and your computer more generally. You've likely had exposure to Bash (or it's close cousin, tcsh) if you've used analysis packages like AFNI, FSL, and FreeSurfer. The Bash shell is a [great thing to learn](https://swcarpentry.github.io/shell-novice/), but we want to focus on teaching you reproducible computing concepts without getting bogged down in the syntax of too many different languages.
 
-# Exercise
-
-Draw a diagram to illustrate how the programs and computers listed below relate to one another.
-
-* Your laptop
-* Helix & Felix
-* The Biowulf cluster
-* NoMachine Remote Desktop
-* IPython Shell
-* Angry Birds on your phone
-
-Now get with your partner and compare your drawings. Discuss the difference and edit as needed.
-
+> # Draw your stack
+> 
+> Draw a diagram to illustrate how the programs and computers listed below relate to one another.
+> 
+> * Your laptop
+> * Helix & Felix
+> * The Biowulf cluster
+> * NoMachine Remote Desktop
+> * IPython Shell
+> * Angry Birds on your phone
+> 
+> Now get with your partner and compare your drawings. Discuss the difference and edit as needed.
+{: .challenge}
 
 
 ##  The file system
