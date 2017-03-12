@@ -32,7 +32,7 @@ each number by 1000.
 
 ~~~
 roi_volumes = [2.73,145.3,12.7,16.2, 27.6]
-print(len(roi_volumes * 1000))
+len(roi_volumes * 1000)
 ~~~
 {: .python}
 
@@ -46,7 +46,7 @@ instead replicated our list 1000 times. An attempt at division just fails
 outright:
 
 ~~~
-print(roi_volumes / 1000)
+roi_volumes / 1000
 ~~~
 {: .python}
 
@@ -54,7 +54,7 @@ print(roi_volumes / 1000)
 ---------------------------------------------------------------------------
 TypeError                                 Traceback (most recent call last)
 <ipython-input-5-c4ca083b5b87> in <module>()
-----> 1 print(roi_volumes/10)
+----> 1 roi_volumes/10
 
 TypeError: unsupported operand type(s) for /: 'list' and 'int'
 ~~~
@@ -95,7 +95,7 @@ list comprehension:
 
 ~~~
 converted_roi_volumes = [x * 1000 for x in roi_volumes]
-print(converted_roi_volumes)
+converted_roi_volumes
 ~~~
 {: .python}
 
@@ -108,7 +108,7 @@ This is a little messy because of the unnecessary precision after the
 decimal point. We'll use the built-in function `round` to fix that:
 ~~~
 converted_roi_volumes = [round(x * 1000) for x in roi_volumes]
-print(converted_roi_volumes)
+converted_roi_volumes
 ~~~
 {: .python}
 
@@ -136,23 +136,13 @@ Another type of iterable is the string type. So as an example
 
 ~~~
 roi_label = 'hippocampus'
-['Letter: ' + l for l in roi_label]
+[L for L in roi_label]
 ~~~
 {: .python}
 
 ~~~
-['Letter: h',
- 'Letter: i',
- 'Letter: p',
- 'Letter: p',
- 'Letter: o',
- 'Letter: c',
- 'Letter: a',
- 'Letter: m',
- 'Letter: p',
- 'Letter: u',
- 'Letter: s']
-~~~
+ ['h', 'i', 'p', 'p', 'o', 'c', 'a', 'm', 'p', 'u', 's']
+ ~~~
 {: .output}
 
 
@@ -167,15 +157,31 @@ roi_label = 'hippocampus'
 Some output generated using the `range()` function:
 
 ~~~
-print(range(5))
-print(range(0, 5))
-print(list(range(0, 5)))
+range(5)
 ~~~
 {: .python}
 
 ~~~
+range(0,5)
+~~~
+{: .output}
+
+~~~
 range(0, 5)
-range(0, 5)
+~~~
+{: .python}
+
+~~~
+range(0,5)
+~~~
+{: .output}
+
+~~~
+list(range(0, 5))
+~~~
+{: .python}
+
+~~~
 [0, 1, 2, 3, 4]
 ~~~
 {: .output}
@@ -191,21 +197,12 @@ iteration and never generate all of its contents at once.
 Here's an example of combining the range function, a useful type of iterable, with a list comprehension:
 
 ~~~
-[print('Element of range: ' + str(x) for x in range(10)]
+[str(x) for x in range(10)]
 ~~~
 {: .python}
 
 ~~~
-['Element of range: 0',
- 'Element of range: 1',
- 'Element of range: 2',
- 'Element of range: 3',
- 'Element of range: 4',
- 'Element of range: 5',
- 'Element of range: 6',
- 'Element of range: 7',
- 'Element of range: 8',
- 'Element of range: 9']
+['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 ~~~
 {: .output}
 
@@ -218,14 +215,22 @@ Later we will see that some of the functions in Python's standard library return
 
 
 ~~~
- a_generator = (x for x in roi_label)
-print(a_generator)
-print(list(a_generator))
+a_generator = (x for x in roi_label)
+a_generator
 ~~~
 {: .python}
 
 ~~~
 <generator object <genexpr> at 0x2ba6900a2888>
+~~~
+{: .output}
+
+~~~
+list(a_generator)
+~~~
+{: .python}
+
+~~~
 ['h', 'i', 'p', 'p', 'o', 'c', 'a', 'm', 'p', 'u', 's']
 ~~~
 {: .output}

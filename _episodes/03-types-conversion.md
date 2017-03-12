@@ -36,7 +36,7 @@ keypoints:
     *   But remember: the *value* has the type --- the *variable* is just a label.
 
 ~~~
-print(type(52))
+type(52)
 ~~~
 {: .python}
 ~~~
@@ -46,11 +46,11 @@ print(type(52))
 
 ~~~
 disease = 'schizophrenia'
-print(type(disease))
+type(disease)
 ~~~
 {: .python}
 ~~~
-<class 'str'>
+str
 ~~~
 {: .output}
 
@@ -59,7 +59,7 @@ print(type(disease))
 *   A value's type determines what the program can do to it.
 
 ~~~
-print(5 - 3)
+5 - 3
 ~~~
 {: .python}
 ~~~
@@ -68,7 +68,7 @@ print(5 - 3)
 {: .output}
 
 ~~~
-print('frontotemporal' - 'fronto')
+'frontotemporal' - 'fronto'
 ~~~
 {: .python}
 ~~~
@@ -86,8 +86,8 @@ TypeError: unsupported operand type(s) for -: 'str' and 'str'
 *   "Adding" character strings concatenates them.
 
 ~~~
-roi_label = 'fronto' + ' ' + 'temporal'
-print(roi_label)
+roi_label = 'fronto' + 'temporal'
+roi_label
 ~~~
 {: .python}
 ~~~
@@ -100,7 +100,7 @@ frontotemporal
 
 ~~~
 dna_repeat_sequence = 'CAG' * 10
-print(dna_repeat_sequence)
+dna_repeat_sequence
 ~~~
 {: .python}
 ~~~
@@ -113,7 +113,7 @@ CAGCAGCAGCAGCAGCAGCAGCAGCAGCAG
 *   The built-in function `len` counts the number of characters in a string.
 
 ~~~
-print(len(dna_repeat_sequence))
+len(dna_repeat_sequence)
 ~~~
 {: .python}
 ~~~
@@ -124,7 +124,7 @@ print(len(dna_repeat_sequence))
 *   But numbers don't have a length (not even zero).
 
 ~~~
-print(len(52))
+len(52)
 ~~~
 {: .python}
 ~~~
@@ -142,14 +142,15 @@ TypeError: object of type 'int' has no len()
 *   Cannot add numbers and strings.
 
 ~~~
-print(1 + '2')
+1 + '2'
 ~~~
 {: .python}
+
 ~~~
 ---------------------------------------------------------------------------
 TypeError                                 Traceback (most recent call last)
 <ipython-input-4-fe4f54a023c6> in <module>()
-----> 1 print(1 + '2')
+----> 1 1 + '2')
 
 TypeError: unsupported operand type(s) for +: 'int' and 'str'
 ~~~
@@ -159,12 +160,21 @@ TypeError: unsupported operand type(s) for +: 'int' and 'str'
 *   Some types can be converted to other types by using the type name as a function.
 
 ~~~
-print(1 + int('2'))
-print(str(1) + '2')
+1 + int('2')
 ~~~
 {: .python}
+
 ~~~
 3
+~~~
+{: .output}
+
+~~~
+str(1) + '2'
+~~~
+{: .python}
+
+~~~
 12
 ~~~
 {: .output}
@@ -175,13 +185,50 @@ print(str(1) + '2')
     *   Python automatically converts integers to floats as needed.
 
 ~~~
-print('half is', 1 / 2.0)
-print('three squared is', 3.0 ** 2)
+1 / 2.0
+~~~
+{: .python}
+
+~~~
+0.5
+~~~
+{: .output}
+
+> ## Division Types
+> 
+> The `//` operator calculates the whole-number result of division,
+> while the '%' operator calculates the remainder from division:
+> 
+> ~~~
+> 5 // 3
+> ~~~
+> {: .python}
+> 
+> ~~~
+> 1
+> ~~~
+> {: .output}
+> 
+> ~~~
+> 5 % 3
+> ~~~
+> {: .python}
+> 
+> ~~~
+> 2
+> ~~~
+> {: .output}
+> 
+{: .callout}
+
+~~~
+# three squared is:
+3.0 ** 2
 ~~~
 {: .python}
 ~~~
-half is 0.5
-three squared is 9.0
+# three squared is :
+9.0
 ~~~
 {: .output}
 
@@ -196,11 +243,22 @@ three squared is 9.0
 brain_volume = 1246
 brain_volume_corrected = brain_volume * 1.2
 brain_volume = 1400
-print('brain_volume is', brain_volume, 'and brain_volume_corrected is', brain_volume_corrected)
+brain_volume
 ~~~
 {: .python}
+
 ~~~
-brain_volume is 1400 and brain_volume_corrected is 1495.2
+1400
+~~~
+{: .output}
+
+~~~
+brain_volume_corrected
+~~~
+{: .python}
+
+~~~
+1495.2
 ~~~
 {: .output}
 
@@ -209,14 +267,14 @@ brain_volume is 1400 and brain_volume_corrected is 1495.2
 *   After that, `brain_volume_corrected` does not remember where it came from.
 
 > ## Fractions
->
+> 
 > What type of value is 3.4?
 > How can you find out?
->
+> 
 > > ## Solution
-> >
+> > 
 > > It is a floating-point number (often abbreviated "float").
-> >
+> > 
 > > ~~~
 > > print(type(3.4))
 > > ~~~
@@ -229,14 +287,14 @@ brain_volume is 1400 and brain_volume_corrected is 1495.2
 {: .challenge}
 
 > ## Automatic Type Conversion
->
+> 
 > What type of value is 3.25 + 4?
->
+> 
 > > ## Solution
-> >
+> > 
 > > It is a float:
 > > integers are automatically converted to floats as necessary.
-> >
+> > 
 > > ~~~
 > > result = 3.25 + 4
 > > print(result, 'is', type(result))
@@ -250,10 +308,10 @@ brain_volume is 1400 and brain_volume_corrected is 1495.2
 {: .challenge}
 
 > ## Choose a Type
->
+> 
 > What type of value (integer, floating point number, or character string)
 > would you use to represent each of the following?
->
+> 
 > 1. Number of days since the start of the year.
 > 2. Time elapsed since the start of the year.
 > 3. Brain volume.
@@ -262,66 +320,54 @@ brain_volume is 1400 and brain_volume_corrected is 1495.2
 > 6. Scan sequence name.
 {: .challenge}
 
-> ## Division Types
->
-> The `//` operator calculates the whole-number result of division,
-> while the '%' operator calculates the remainder from division:
->
-> ~~~
-> print('5 // 3:', 5//3)
-> print('5 % 3:', 5%3)
-> ~~~
-> {: .python}
->
-> ~~~
-> 5 // 3: 1
-> 5 % 3: 2
-> ~~~
-> {: .output}
->
-{: .challenge}
-
 > ## Type Conversions with Numbers
->
+> 
 > `float` will convert a string to a floating point number,
 > and `int` will convert a floating point number to an integer:
->
+> 
 > ~~~
-> print("string to float:", float("3.4"))
-> print("float to int:", int(3.4))
+> float("3.4")
 > ~~~
 > {: .python}
->
+> 
 > ~~~
-> string to float: 3.4
-> float to int: 3
+> 3.4
 > ~~~
 > {: .output}
->
+> 
+> ~~~
+> int(3.4)
+> ~~~
+> {: .python}
+> 
+> ~~~
+> 3
+> ~~~
+> {: .output}
+> 
 > Given that,
 > what do you expect this program to do?
 > What does it actually do?
 > Why do you think it does that?
->
+> 
 > ~~~
-> print("fractional string to int:", int("3.4"))
+> int("3.4")
 > ~~~
 > {: .python}
->
 > > ## Solution
 > > ~~~
 > > We would expect to return an integer value of 3.
 > > However, it returns the error:
-> >
+> > 
 > > ~~~
 > > {: .output}
-> >
+> > 
 > > ~~~
-> > ---------------------------------------------------------------------------
-> > ValueError                                Traceback (most recent call last)
-> >  <ipython-input-18-f025fc4d9856> in <module>()
-> > ----> 1 print("fractional string to int:", int("3.4"))
-> >
+> > ----------------------------------------------------------
+> > ValueError               Traceback (most recent call last)
+> > <ipython-input-92-ec6729dfccdc> in <module>()
+> > ----> 1 int("3.4")
+> > 
 > > ValueError: invalid literal for int() with base 10: '3.4'
 > > ~~~
 > > {: .error}

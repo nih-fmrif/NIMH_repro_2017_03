@@ -42,24 +42,28 @@ roi_label = 'hippocampus'
 *   Underscores at the start like `__roi_vol` have a special meaning
     so we won't do that until we understand the convention.
 
-## Use `print` to display values.
+## Variables can be displayed by simply executing them as an expression
 
-*   Python has a built-in function called `print` that prints things as text.
-*   Call the function (i.e., tell Python to run it) by using its name.
-*   Provide values to the function (i.e., the things to print) in parentheses.
-*   The values passed to the function are called 'arguments'
 
 ~~~
-print('The', roi_label , 'is', roi_vol, 'cubic mm')
+roi_vol
 ~~~
 {: .python}
+
 ~~~
-The hippocampus is 130 cubic mm
+130
 ~~~
 {: .output}
 
-*   `print` automatically puts a single space between items to separate them.
-*   And wraps around to a new line at the end.
+~~~
+roi_label
+~~~
+{: .python}
+
+~~~
+'hippocampus'
+~~~
+{: .output}
 
 ## Variables must be created before they are used.
 
@@ -68,14 +72,14 @@ The hippocampus is 130 cubic mm
     *   Unlike some languages, which "guess" a default value.
 
 ~~~
-print(brain_volume)
+brain_volume
 ~~~
 {: .python}
 ~~~
----------------------------------------------------------------------------
-NameError                                 Traceback (most recent call last)
-<ipython-input-1-c1fbb4e96102> in <module>()
-----> 1 print(brain_volume)
+----------------------------------------------------------
+NameError                Traceback (most recent call last)
+<ipython-input-12-dec7c88e2504> in <module>()
+----> 1 brain_volume
 
 NameError: name 'brain_volume' is not defined
 ~~~
@@ -83,6 +87,16 @@ NameError: name 'brain_volume' is not defined
 
 *   The last line of an error message is usually the most informative.
 <!-- *   We will look at error messages in detail [later]({{ page.root }}/05-error-messages/). -->
+
+## Use comments to add documentation to programs.
+
+~~~
+# This sentence isn't executed by Python.
+# print(brain_volume)
+brain_volume = 1351   # Neither is this - anything after '#' is ignored.
+~~~
+{: .python}
+
 
 ## Variables can be used in calculations.
 
@@ -96,7 +110,7 @@ corrected_roi_vol
 ~~~
 {: .python}
 ~~~
-Volume with a correction for a systematic bias: 133
+133
 ~~~
 {: .output}
 
@@ -109,7 +123,7 @@ Volume with a correction for a systematic bias: 133
 
 ~~~
 roi_label = 'hippocampus'
-print(roi_label[0])
+roi_label[0]
 ~~~
 {: .python}
 ~~~
@@ -125,7 +139,7 @@ h
 *   So the difference between stop and start is the slice's length.
 
 ~~~
-print(roi_label[0:5])
+roi_label[0:5]
 ~~~
 {: .python}
 ~~~
@@ -138,7 +152,7 @@ hippo
 the step  by which we take elements from the string.
 
 ~~~
-print(roi_label[0:5:2])
+roi_label[0:5:2]
 ~~~
 {: .python}
 ~~~
@@ -150,7 +164,7 @@ hpo
 ## Use the built-in function `len` to find the length of a string.
 
 ~~~
-print(len(roi_label))
+len(roi_label)
 ~~~
 {: .python}
 ~~~
@@ -170,6 +184,37 @@ print(len(roi_label))
 *   There are conventions for using upper-case letters at the start of variable names
     so we will use lower-case letters for now.
 
+## Use `print` to display values.
+
+*   Python has a built-in function called `print` that prints things as text.
+*   Call the function (i.e., tell Python to run it) by using its name.
+*   Provide values to the function (i.e., the things to print) in parentheses.
+*   The values passed to the function are called 'arguments'
+
+
+~~~
+print(roi_label)
+~~~
+{: .python}
+
+~~~
+hippocampus
+~~~
+{: .output}
+
+~~~
+print('The', roi_label, 'is', roi_vol, 'cubic mm')
+~~~
+{: .python}
+~~~
+The hippocampus is 130 cubic mm
+~~~
+{: .output}
+
+*   `print` automatically puts a single space between items to separate them.
+*   And wraps around to a new line at the end.
+
+
 ## Use meaningful variable names.
 
 *   Python doesn't care what you call variables as long as they obey the rules
@@ -185,6 +230,12 @@ print('The',ewr_422_yY, 'is', flabadab, 'cubic mm')
 ~~~
 {: .python}
 
+~~~
+Ahmed is 42 years old
+The frontal cortex is 700 cubic mm
+~~~
+{: .output}
+
 *   Use meaningful variable names to help other people understand what the program does.
 *   The most important "other person" is your future self.
 
@@ -196,14 +247,18 @@ by executing the IPython magic `%whos`:
 ~~~
 {: .python}
 
-These variables do not exist on the hard disk of the computer. They will not
-continue to exist if we stop our current IPython kernel (by executing `exit`).
-Ideally, in any time in our analysis we should be able to remove these variables
-and regenerate them  again by running a script file containing all  of the
-commands we used to get to our current state. Later on we will learn the tools
-that IPython provides to do this. For now we will simply learn how to delete all
-of the variables in the current environment. This is done using the `%reset`
-IPython magic and typing `y` and enter to confirm:
+* These variables do not exist on the hard disk of the computer. They will not
+  continue to exist if we stop our current IPython kernel (by executing
+  `exit`). Ideally, in any time in our analysis we should be able to remove
+  these variables and regenerate them  again by running a script file
+  containing all of the commands we used to get to our current state.
+
+* We will learn the tools that IPython provides to do this.
+
+* For now we will simply learn how to delete all of the variables in the
+  current environment. This is done using the `%reset` IPython magic and typing
+  `y` and enter to confirm:
+
 ~~~
 %reset
 ~~~

@@ -1,7 +1,7 @@
 ---
 title: "Working with the command history and script-files"
-teaching: 15
-exercises: 15
+teaching: 20
+exercises: 5
 questions:
 - "How can I save and edit my previous input commands conveniently?"
 objectives:
