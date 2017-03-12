@@ -252,7 +252,7 @@ IndexError: string index out of range
 > Fill in the blanks so that the program below produces the output shown.
 > 
 > ~~~
-> values = ____
+> values = []
 > values.____(1)
 > values.____(3)
 > values.____(5)
@@ -359,7 +359,7 @@ IndexError: string index out of range
 > {: .python}
 > 
 > 1.  If we write a slice as `low:high:stride`, what does `stride` do?
-> 2.  What expression would select all of the even-numbered items from a collection?
+> 2.  What expression would select every other element, starting from the second?
 > 
 > > ## Solution
 > > 

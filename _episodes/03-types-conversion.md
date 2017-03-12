@@ -91,7 +91,7 @@ roi_label
 ~~~
 {: .python}
 ~~~
-frontotemporal
+fronto temporal
 ~~~
 {: .output}
 

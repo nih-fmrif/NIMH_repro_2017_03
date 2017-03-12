@@ -15,7 +15,7 @@ objectives:
 keypoints:
 - "Use comments to add documentation to programs."
 - "A function may take zero or more arguments."
-- "Commonly-used built-in functions include `max`, `min`, and `round`."
+- "Commonly-used built-in functions include `max`, `min`, and `print`."
 - "Functions may only work for certain (combinations of) arguments."
 - "Functions may have default values for some arguments."
 - "Use the built-in function `help` to get help for a function in python or '?' after the function in IPython."
