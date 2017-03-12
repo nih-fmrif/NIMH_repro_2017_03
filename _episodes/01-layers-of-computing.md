@@ -126,7 +126,6 @@ learn](https://swcarpentry.github.io/shell-novice/), but we want to focus on
 teaching you reproducible computing concepts without getting bogged down in the
 syntax of too many different languages.
 
-<<<<<<< HEAD
 > # Draw your stack
 > 
 > Draw a diagram to illustrate how the programs and computers listed below relate to one another.
@@ -140,23 +139,6 @@ syntax of too many different languages.
 > 
 > Now get with your partner and compare your drawings. Discuss the difference and edit as needed.
 {: .challenge}
-=======
-# Exercise
-
-Draw a diagram to illustrate how the programs and computers listed below relate
-to one another.
-
-* Your laptop
-* Helix & Felix
-* The Biowulf cluster
-* NoMachine Remote Desktop
-* IPython Shell
-* Angry Birds on your phone
-
-Now get with your partner and compare your drawings. Discuss the difference and
-edit as needed.
-
->>>>>>> c5fa6c033d1928b561d2526645a56a01757c0d03
 
 
 ##  The file system
