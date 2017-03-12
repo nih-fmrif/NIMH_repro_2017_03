@@ -112,7 +112,11 @@ of the "operating system" at the heart of it.  On top of that kernel there are
 many other programs running, some of them are designed to provide you with an
 easy way to interact.
 
+
 > ## Bash and tcsh shell vs. IPython 
+> 
+>_This is the first of many expandable boxes you'll see in these lesson. They provide a bit more 
+> info that are not essential to the flow of the course. Only read them if you're interested._
 > 
 > We'll be working almost exclusively in the IPython shell in this course.
 > IPython provides an easy way to explore and interact with your data that
@@ -124,8 +128,12 @@ easy way to interact.
 > learn](https://swcarpentry.github.io/shell-novice/), but we want to focus on
 > teaching you reproducible computing concepts without getting bogged down in the
 > syntax of too many different languages.
+{: .solution}
 
-> ## Draw your stack
+
+> ## Challenge: Draw your stack
+> 
+> This 
 > 
 > Draw a diagram to illustrate how the programs and computers listed below relate to one another.
 > 
@@ -138,13 +146,6 @@ easy way to interact.
 > 
 > Now get with your partner and compare your drawings. Discuss the difference and edit as needed.
 {: .challenge}
-
-
-##  The file system
-Talk about what a path is etc. using the following figures:
-![image_of_shell](../fig/file_system_1.png)
-![image_of_shell](../fig/file_system_2.png)
-![image_of_shell](../fig/file_system_3.png)
 
 
 ## The Jupyter qtconsole
@@ -268,6 +269,18 @@ we use the IPython magic `%cd` we get the behavior we want.
 *  As we work through the course we will continue to learn some convenient
 shortcuts available to use in the IPython shell; however, most of the time we
 will be writing commands that are in the Python language.
+
+> ##  Understanding the file folder metaphor
+> 
+> Working on the command line requires a fluid understanding of how a file system is organized. 
+> Most file systems use [file folder metaphor](https://en.wikipedia.org/wiki/Directory_(computing)#Folder_metaphor) to provide a system that would be familar to most computer users. 
+> This is also sometimes referred to an (inverted) directory "tree". When someone asks you 
+> to "change up one directory" they are referencing this metaphor.
+> 
+> If you'd like a bit more practice understanding and navigating a directory tree, check out [this lesson](http://swcarpentry.github.io/shell-novice/02-filedir/) at Software Carpentry. There are also some exercises available at [Code Academy](https://www.codecademy.com/learn/learn-the-command-line).
+> 
+> 
+{: .solution}
 
 ## Convenient commands to remember
 
