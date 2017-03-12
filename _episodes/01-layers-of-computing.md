@@ -112,21 +112,20 @@ of the "operating system" at the heart of it.  On top of that kernel there are
 many other programs running, some of them are designed to provide you with an
 easy way to interact.
 
-# Boxed Text
-Bash vs. IPython 
+> ## Bash and tcsh shell vs. IPython 
+> 
+> We'll be working almost exclusively in the IPython shell in this course.
+> IPython provides an easy way to explore and interact with your data that
+> leverages the power of the Python programming language. The Bash shell is an
+> extremely versatile tool designed to allow you to control and interact with
+> files and your computer more generally. You've likely had exposure to Bash (or
+> it's close cousin, tcsh) if you've used analysis packages like AFNI, FSL, and
+> FreeSurfer. The Bash shell is a [great thing to
+> learn](https://swcarpentry.github.io/shell-novice/), but we want to focus on
+> teaching you reproducible computing concepts without getting bogged down in the
+> syntax of too many different languages.
 
-We'll be working almost exclusively in the IPython shell in this course.
-IPython provides an easy way to explore and interact with your data that
-leverages the power of the Python programming language. The Bash shell is an
-extremely versatile tool designed to allow you to control and interact with
-files and your computer more generally. You've likely had exposure to Bash (or
-it's close cousin, tcsh) if you've used analysis packages like AFNI, FSL, and
-FreeSurfer. The Bash shell is a [great thing to
-learn](https://swcarpentry.github.io/shell-novice/), but we want to focus on
-teaching you reproducible computing concepts without getting bogged down in the
-syntax of too many different languages.
-
-> # Draw your stack
+> ## Draw your stack
 > 
 > Draw a diagram to illustrate how the programs and computers listed below relate to one another.
 > 
