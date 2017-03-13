@@ -16,9 +16,9 @@ keypoints:
 - "View previous commits using the `git log` command."
 ---
 
-We can check the contents of the file that we previously saved in our project directory using the `%cat` magic:
+We can check the contents of the file that we previously saved in our project directory using the `%less` magic:
 ~~~
-%cat metasearch_analysis.py
+%less metasearch_analysis.py
 ~~~
 {: .source}
 
@@ -230,7 +230,7 @@ Figure from git-scm.com
 Once we have finished editing our script we should observe something like the following:
 
 ~~~
-%cat metasearch_analysis.py
+%less metasearch_analysis.py
 ~~~
 {: .source}
 
