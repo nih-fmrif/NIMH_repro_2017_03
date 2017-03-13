@@ -8,14 +8,14 @@ questions:
 - "How can I find out what that software does?"
 objectives:
 - "Explain what software libraries are and why programmers create and use them."
-- "Write programs that import and use libraries from Python's standard library."
+- "Write programs that import and use libraries from Python's standard package."
 - "Find and read documentation for standard libraries interactively (in the interpreter) and online."
 keypoints:
 - "Most of the power of a programming language is in its libraries."
-- "A program must import a library in order to use it."
-- "Use `help` to find out more about a library's contents."
-- "Import specific items from a library to shorten programs."
-- "Create an alias for a library when importing it to shorten programs."
+- "A program must import a package in order to use it."
+- "Use `help` to find out more about a package's contents."
+- "Import specific items from a package to shorten programs."
+- "Create an alias for a package when importing it to shorten programs."
 ---
 
 ## Most of the power of a programming language is in its libraries.
@@ -38,9 +38,9 @@ keypoints:
 ## A program must import a module in order to use it.
 
 *   Use `import` to load the contents of a package into a program's memory.
-*   Then refer to things from the package as `module_name.item_name`.
+*   Then refer to things from the package as `package_name.sub_module_name`.
     *   Python uses `.` to mean "part of".
-    *   The item in the package may in turn be a sub pack
+    *   The item in the package may in turn be a sub package
 
 ~~~
 import math
@@ -63,11 +63,11 @@ math.cos(math.pi)
 ~~~
 {: .output}
 
-*   Have to refer to each item with the library's name.
+*   Have to refer to each item with the package's name.
     *   `math.cos(pi)` won't work: the reference to `pi`
         doesn't somehow "inherit" the function's reference to `math`.
 
-## Use `help` to find out more about a library's contents.
+## Use `help` to find out more about a package's contents.
 
 *   Works just like help for a function.
 
@@ -104,10 +104,10 @@ FUNCTIONS
 ~~~
 {: .output}
 
-## Import specific items from a library to shorten programs.
+## Import specific items from a package to shorten programs.
 
-*   Use `from...import...` to load only specific items from a library.
-*   Then refer to them directly without library name as prefix.
+*   Use `from...import...` to load only specific items from a package.
+*   Then refer to them directly without package name as prefix.
 
 ~~~
 from math import cos, pi
@@ -120,10 +120,10 @@ cos(pi)
 ~~~
 {: .output}
 
-## Create an alias for a library when importing it to shorten programs.
+## Create an alias for a package when importing it to shorten programs.
 
-*   Use `import...as...` to give a library a short *alias* while importing it.
-*   Then refer to items in the library using that shortened name.
+*   Use `import...as...` to give a package a short *alias* while importing it.
+*   Then refer to items in the package using that shortened name.
 
 ~~~
 import math as m
@@ -137,16 +137,16 @@ m.cos(m.pi)
 {: .output}
 
 *   Commonly used for libraries that are frequently used or have long names.
-    *   E.g., Numpy numeric analysis library is often aliased to np. The pandas
-        library for dataframes is often aliased to pd.
+    *   E.g., Numpy numeric analysis package is often aliased to np. The pandas
+        package for dataframes is often aliased to pd.
 *   But can make programs harder to understand, since readers must learn your
     program's aliases.
 
 
-## Working with the pathlib library
+## Working with the pathlib package
 Since we have downloaded a lot of files as part of the metasearch repository we
-would like to use a library that will allow us to work with these files more
-efficiently. The pathlib library is ideal for this. Let's import from this to
+would like to use a package that will allow us to work with these files more
+efficiently. The pathlib package is ideal for this. Let's import from this to
 start working with paths:
 
 ~~~
@@ -154,7 +154,7 @@ from pathlib import Path
 ~~~
 {: .python}
 
-*   We use the Path class in the pathlib library to create Path objects, which
+*   We use the Path class in the pathlib package to create Path objects, which
     we can then use for subsequent processing. To create a new path object we
     provide a name as the first argument. This name is a string representation of a
     path. We will create a Path object that represents the directory we downloaded:
@@ -257,7 +257,7 @@ TypeError: 'str' object is not callable
 
 If we keep track of what is a method and what is a data-descriptor it helps us
 to avoid these mistakes. We can view the data-descriptors at the end of the
-help for the Path class from the pathlib library:
+help for the Path class from the pathlib package:
 
 ~~~
 help(Path)
@@ -579,7 +579,7 @@ This is the content
 
 > ## Getting help when using file IO operations
 > 
-> The pathlib library provides convenient access to some of python's built-in
+> The pathlib package provides convenient access to some of python's built-in
 > functions for reading and writing files. There is lots of useful help for
 > these functions. 
 > 
@@ -635,7 +635,7 @@ f.exists()
 
 
 
-> ## Locating the Right Library
+> ## Locating the Right Package
 >
 > You want to select a random character from a string:
 > ~~~
