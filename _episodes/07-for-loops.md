@@ -17,7 +17,7 @@ keypoints:
 - "Loop variables can be called anything (but it is strongly advised to have a meaningful name to the looping variable)."
 - "Use `range` to iterate over a sequence of numbers."
 - "Generator and dictionary comprehensions are similar to list comprehensions but their output is slightly different."
-- "A `for` loop is made up of a collection, a loop variable, and a body."
+- "A `for` loop is made up of a loop variable, a collection, and a body."
 - "The first line of the `for` loop must end with a colon, and the body must be indented."
 - "Indentation is always meaningful in Python."
 - "The body of a for loop can contain many statements."
@@ -401,9 +401,16 @@ sum(range(1,11))
 
 > ## Cumulative Sum
 > 
-> Reorder and properly indent the lines of code below
+> ~~~
+> data = [1,2,2,5]
+> ~~~
+> {: .python}
+> 
+> Given the above list, reorder and properly indent the lines of code below
 > so that they print an array with the cumulative sum of data.
 > The result should be `[1, 3, 5, 10]`.
+> 
+> 
 > 
 > ~~~
 > cumulative += [sum]
@@ -411,7 +418,7 @@ sum(range(1,11))
 > cumulative = []
 > sum += number
 > print(cumulative)
-> data = [1,2,2,5]
+> 
 > sum=0
 > ~~~
 > {: .python}
@@ -421,7 +428,6 @@ sum(range(1,11))
 > > ~~~
 > > sum=0
 > > cumulative = []
-> > data = [1,2,2,5]
 > > for number in data:
 > >     sum += number
 > >     cumulative += [sum]
