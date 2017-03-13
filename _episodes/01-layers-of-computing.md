@@ -33,7 +33,7 @@ interface using NoMachine."
 - "We will learn basic commands for working with the computer file system:
 `pwd`, `ls`, `mkdir` and `cd`."
 -  "Understand the difference between alias, system commands, and IPython magics"
-- "Show how `cd`  behaves differently because each system call is a subprocess"
+- "Show how `cd` behaves differently because each system call is a subprocess"
 ---
 
 ## Getting started
@@ -42,8 +42,8 @@ interface using NoMachine."
 We'll be conducting this course using a remote desktop utility called
 [NoMachine](http://www.nomachine.com). You should have already met with the DSST
 staff to configure and test it. Open the NoMachine App and connect to
-felix.nimh.nih.gov if you are an NIMH employee or helix.nih.gov if you work for
-another institute.
+felix.nimh.nih.gov if you are an NIMH employee or have a temporary course account. If you work for
+another institute you can use helix.nih.gov.
 * Open Terminal from the Application-> System Tools menu
 * We've setup a short script to get you started quickly in the NIH HPC (felix or helix). To run it, type:
 
@@ -84,7 +84,7 @@ Automagic is OFF, % prefix IS needed for line magics.
 It's easy and common to click on an icon, open and window and typing, clicking,
 and analyzing in that window without much thought about how or where those
 commands are being executed and where the data is being stored. It's worth the
-effort to take some time and understand exactly what your computing (stack)[]
+effort to take some time and understand exactly what your computing (stack)[https://en.wikipedia.org/wiki/Solution_stack]
 looks like and exactly where everything is happening. Understanding this stack
 can help you make your analysis more efficient and secure.
 
@@ -93,24 +93,16 @@ can help you make your analysis more efficient and secure.
 The desktop you're looking at inside the NoMachine window is from a computer
 that lives over in building 13 at NIH's high performance computing (HPC)
 center. This computer (helix or felix) is separate from but closely affiliated
-with the large cluster of computers known as the Biowulf.
+with the large cluster of computers known as the (Biowulf)[https://hpc.nih.gov/systems/].
 
 NoMachine is a remote desktop program. It allows your to interact with the
 remote computer (helix/felix) almost as if you were sitting right in front of
-it. (VNC is another common remote desktop program).
+it. ((VNC)[https://en.wikipedia.org/wiki/Virtual_Network_Computing] is another common remote desktop program).
 
 The window on the left of your NX desktop is running an IPython shell. On the
-right side, there is a window running a (Bash) shell. A shell refers to a
-program that wraps around another program that is usually more complicated and
-less user-friendly. That program inside the shell is often referred to as a
-kernel.
+right side, there is a window running a (Bash) shell. A (shell)[https://en.wikipedia.org/wiki/Shell_(computing)] refer to a user interface. It is designed to allow the user, you, to interact with the computer in an efficient and convenient way. It's named a shell because it stands between the user and the "guts" of the computer system, which is called the kernel.
 
-![image_of_shell](../fig/layers_of_computing.png)
-
-For any computer you might be working with, there is a main kernel that is part
-of the "operating system" at the heart of it.  On top of that kernel there are
-many other programs running, some of them are designed to provide you with an
-easy way to interact.
+<img src="../fig/layers_of_computing.png" alt="The shell kernel metaphor" style="width: 600px;"/>
 
 
 > ## Bash and tcsh shell vs. IPython 
@@ -133,7 +125,7 @@ easy way to interact.
 
 > ## Challenge: Draw your stack
 > 
-> This 
+> _Expandable orange boxes like this one contain challenges for you to try._
 > 
 > Draw a diagram to illustrate how the programs and computers listed below relate to one another.
 > 
@@ -165,8 +157,8 @@ easy way to interact.
 The [Jupyter qtconsole](https://jupyter.readthedocs.io/en/latest/index.html) is
 a developing environment that is optimized for interactive computing typical of
 scientific analyses. It provides lots of convenient commands and shortcuts for
-this. Different languages can used with this interface. In our case we will be
-using IPython. It provides us with  a convenient interface to the system shell
+this. Different languages can be used with this interface. In our case we will be
+using IPython. It provides us with a convenient interface to the system shell
 and the Python interpreter. We will start by typing in the IPython command:
 
 ~~~
@@ -186,7 +178,7 @@ their names. We can list these files by using the next command:
 ~~~
 {: .source}
 
-The `'%ls` command returns all the files in the present working directory. When
+The `%ls` command returns all the files in the present working directory. When
 we wish to perform actions on these files we can refer to them directly by
 their names and the shell will understand which files we are referring to.
 Later we will talk about how to add new files to the current directory but for
@@ -218,9 +210,9 @@ mkdir: cannot create directory `repro_course': File exists
 ~~~
 {: .output}
 
-When we use the "%" sign it denotes that the command is an IPython magic. These
+When we use the "%" sign it denotes that the command is an "IPython magic". These
 are special commands available in IPython that make doing some common tasks
-easier on the command line. The "!" instead sends the command to the system
+easier on the command line. The "!" instead evalutate the command with the system
 shell. On a Linux or Mac OSX operating system this will likely be the Bash
 shell. All of these commands exist in Bash; however, on a Windows operating
 system the pwd system command does not exist. You can see we have to be careful
@@ -248,7 +240,6 @@ be seen very easily when we use the "!cd" system command to change directories.
 
 This would not be the behavior we would wish from a command that changes our
 present working directory. This occurs because the changes made to the
-
 environment in the sub-process are not propagated back to the IPython shell. If
 we use the IPython magic `%cd` we get the behavior we want.
 
@@ -273,7 +264,7 @@ will be writing commands that are in the Python language.
 > ##  Understanding the file folder metaphor
 > 
 > Working on the command line requires a fluid understanding of how a file system is organized. 
-> Most file systems use [file folder metaphor](https://en.wikipedia.org/wiki/Directory_(computing)#Folder_metaphor) to provide a system that would be familar to most computer users. 
+> Most file systems use the [file folder metaphor](https://en.wikipedia.org/wiki/Directory_(computing)#Folder_metaphor) to provide a system that would be familar to most computer users. 
 > This is also sometimes referred to an (inverted) directory "tree". When someone asks you 
 > to "change up one directory" they are referencing this metaphor.
 > 
