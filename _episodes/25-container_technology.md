@@ -216,6 +216,8 @@ If the default directories don't suit your needs, you can customize which direct
 # Creating your own Singularity containers
 As noted in the introduction, you must have root (administrative) rights on a Linux system to create build and manage Singularity containers.  Once your container is built, you can move it to an environment where you don't have root access (like an HPC system) and run it there.  
 
+## The basics of building containers
+
 Creating a Singularity container is a two-step process.  First, you must create an empty container image with the `singularity create` command.  Then you must install an operating system and any apps you want to run with the `singularity bootstrap` command.
 
 Let's create an empty container and install Ubuntu.
@@ -288,7 +290,175 @@ MirrorURL: http://us.archive.ubuntu.com/ubuntu/
 {: .output}
 
 Beneath the copyright information there are several sections.  The first section, the Header, has several keywords (`Bootstrap`, `OSVersion`, and `MirrorURL`) which give Singularity information about how to create the OS, which version to use, and from where to download it.  The `%runscript` section tells Singularity what this container should do when it is called without any other input.  In this case it will just echo a short message to standard output.  The `%post` section is used to customize your container.  It tells Singularity what commands should run in the container after the OS is installed.  In this case Singularity will echo a "Hello" message, use use the stream editor `sed` to edit a configuration file, and then use the `apt` package manager to install a text editor (`vim`).
-* Basics
-* Advanced techniques
+
+Let's use the `bootstrap` command to install an OS into our container using this definition file as a set of blueprints.
+
+~~~
+$ sudo singularity bootstrap ubuntu.img ubuntu.def 
+~~~
+{: .bash}
+
+~~~
+: Retrieving InRelease 
+I: Failed to retrieve InRelease
+I: Retrieving Release 
+I: Retrieving Release.gpg 
+I: Checking Release signature
+I: Valid Release signature (key id 790BC7277767219C42C86F933B4FE6ACC0B21F32)
+I: Retrieving Packages 
+I: Validating Packages
+[...snip ...]
+~~~
+{: .output}
+
+Messages like this will continue for several minutes as Singularity downloads, unpacks, and assembles all of the components for an operating system. When bootstrapping finishes, we can use the `shell` command again to start an interactive shell inside the container. 
+
+~~~
+$ sudo singularity shell --writable ubuntu.img 
+~~~
+{: .bash}
+
+~~~
+Singularity: Invoking an interactive shell within container...
+~~~
+{: .output}
+
+~~~
+Singularity.ubuntu.img> # bash
+~~~
+{: .bash}
+
+~~~
+root@ip-172-31-18-4:/root# 
+~~~
+{: .output}
+
+These commands are different than the `shell` command we issued in the previous section.  First, notice that we used the `sudo` program to start a shell in our Singularity container as the root user.  Second, note the `--writable` option to the `shell` command.  Normally, Singularity containers are *read only* meaning they can't be altered.  But the `--writable` option means we can alter the container when we enter it.  Finally, notice the `bash` command that we executed after initiating a shell within the container.  The Boure again shell (`bash`) is more convenient to work with than the Bourne shell (`sh`).
+
+Let's make a few changes to our container.
+
+~~~
+root@ip-172-31-18-4:/root# apt-get update
+~~~
+{: .bash}
+
+~~~
+Ign http://us.archive.ubuntu.com trusty InRelease
+Hit http://us.archive.ubuntu.com trusty Release.gpg
+Hit http://us.archive.ubuntu.com trusty Release
+Hit http://us.archive.ubuntu.com trusty/main amd64 Packages
+Get:1 http://us.archive.ubuntu.com trusty/universe amd64 Packages [5859 kB]
+Get:2 http://us.archive.ubuntu.com trusty/main Translation-en [762 kB]
+Get:3 http://us.archive.ubuntu.com trusty/universe Translation-en [4089 kB]
+Fetched 10.7 MB in 6s (1559 kB/s)
+Reading package lists... Done
+~~~
+{: .output}
+
+~~~
+root@ip-172-31-18-4:/root# locale-gen en_US.UTF-8
+~~~
+{: .bash}
+
+~~~
+Generating locales...
+  en_US.UTF-8... done
+Generation complete.
+~~~
+{: .output}
+
+~~~
+root@ip-172-31-18-4:/root# apt-get -y install cowsay
+~~~
+{: .bash}
+
+~~~
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+The following extra packages will be installed:
+  libarchive-extract-perl libgdbm3 liblog-message-simple-perl libmodule-pluggable-perl libpod-latex-perl libterm-ui-perl libtext-soundex-perl netbase perl perl-modules
+[...snip...]
+~~~
+{: .output}
+
+~~~
+root@ip-172-31-18-4:/root# /usr/games/cowsay 'Cows are crazy for containers!!'
+~~~
+{: .bash}
+
+~~~
+ _________________________________
+< Cows are crazy for containers!! >
+ ---------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+~~~
+{: .output}
+
+To summarize the commands above, first we used the package manager `apt` to install updates to our container's operating system.  Then we used the `locale-gen` command generate a locale instructing software in the container to use the United States dialect of the English language encoded in the UTF-8 character set.  (This is conceptually similar to selecting the language when you install a new operating system.)  After that, we used the `apt` package manager to install an "important scientific analysis" progam (`cowsay`).  Finally, we ran our important scientific program (`cowsay`) with some standard input and it produced some standard output.  
+
+This silly example is useful for illustration.  `cowsay` accepts input and produces output.  We will modify our `cowsay` usage below so that it accepts a file as input and produces another file as output.  So if you have a program that you want to run in a container that accepts input and produces output, this example will show you how.
+
+To prepare for the next section, let's exit the container and return to our host system.
+
+~~~
+root@ip-172-31-18-4:/root# exit
+Singularity.ubuntu.img> exit
+$ 
+~~~
+{: .bash}
+
+## Making containers easier to run
+Using the `shell` command to enter a container every time we want to run it is cumbersome.  It would be much better if we could execute a command within a container from the host system command prompt. That is the purpose of the `exec` command.
+
+~~~
+$ singularity exec ubuntu.img /usr/games/cowsay "Hey how did you get out of the container?? Let me out too!"
+~~~
+{: .bash}
+
+~~~
+ ________________________________
+/ Hey how did you get out of the \
+\ container?? Let me out too!    /
+ --------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+~~~
+{: .output}
+
+The `exec` command instructs Singularity to enter a specified container, look for a specified command, and execute it with the specified input.  
+
+In the Introduction above, we created a file called `~/bar`.  Let's use that file as input to cowsay. 
+
+~~~
+$ singularity exec ubuntu.img /usr/games/cowsay $(cat ~/bar)
+~~~
+{: .bash}
+
+~~~
+ _____
+< foo >
+ -----
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+~~~
+{: .output}
+
+The `$(cmd)` is `bash` syntax for "substitute the standard output of this command here".  As you can see, this caused the containerized `cowsay` program use the contents of `~/bar` as input.  
+
+In addition to using a file as input, let's create another file as output.
+
+## Fostering reproducibility 
+
 
 # Using pre-built containers from [Docker Hub](https://hub.docker.com/) and [Singularity Hub](https://singularity-hub.org/)
