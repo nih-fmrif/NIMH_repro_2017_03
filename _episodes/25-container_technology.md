@@ -458,7 +458,165 @@ The `$(cmd)` is `bash` syntax for "substitute the standard output of this comman
 
 In addition to using a file as input, let's create another file as output.
 
+~~~
+$ singularity exec ubuntu.img /usr/games/cowsay $(cat ~/bar) > output.0
+$ ls
+~~~
+{: .bash}
+
+~~~
+bar   centos.img    singularity     output.0
+~~~
+{: .output}
+
+~~~
+$ cat output.0
+~~~
+{: .bash}
+
+~~~
+ _____
+< foo >
+ -----
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+~~~
+{: .output}
+
+To summarize, we now have a containerized "analysis program" (`cowsay`) that accepts a file as input, works on it, and produces a file as output.  Although this is a silly example the general pattern is very useful.
+
+The syntax to run the cowsay container is still quite messy.  It would be nice if there were a cleaner way to run our program.  This is where a runscript comes in handy.  A runscript is a script saved inside of a Singularity container that is executed when the container is called without any other input.  We actually already have a runscript.  Our definion file created one for us.  
+
+~~~
+$ ./ubuntu.img
+~~~
+{: .bash}
+
+~~~
+This is what happens when you run the container...
+~~~
+{: .output}
+
+Let's edit our runscript to produce something more useful. First we will write a script that will take 2 arguments, an input file and an output file, run cowsay on the input, and then write the output.
+
+~~~
+$ nano new-runscript
+~~~
+{: .bash}
+
+In the newly opened nano text editor window, we will write the following:
+
+~~~
+#!/bin/bash                       
+if [ "$#" -ne 2 ]; then               
+    echo "Please supply 2 filenames (input and output)"
+    exit 1                                
+fi                                    
+input=$1                              
+output=$2                             
+/usr/games/cowsay $(cat ${input}) > ${output}
+~~~
+{: .bash}
+
+In addition to running cowsay on the input and producing output, this script will check that two arguments were supplied and exit early with an error message if that is not the case.  
+
+Now let's copy this new runscript to the appropriate location inside the container with the `singularity copy` command.
+
+~~~
+$ sudo singularity copy ubuntu.img new-runscript /singularity
+~~~
+{: .bash}
+
+Great.  Now let's run it!
+
+~~~
+$ ./ubuntu.img 
+~~~
+{: .bash}
+
+~~~
+Please supply 2 filenames (input and output)
+~~~
+{: .output}
+
+~~~
+$ ./ubuntu.img ~/bar output.1
+$ cat output.1
+~~~
+{: .bash}
+
+~~~
+ _____
+< foo >
+ -----
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+~~~
+{: .output}
+
+~~~
+$ ./ubuntu.img output.1 meta.cow
+$ cat meta.cow
+~~~
+{: .bash}
+
+~~~
+ _________________________________________
+/ _____ < foo > ----- \ ^__^ \            \
+\ (oo)\_______ (__)\ )\/\ ||----w | || || /
+ -----------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+~~~
+{: .output}
+
+At this point, it might be useful to change the name of `ubuntu.img` to something more fitting (like `cowsay-io` perhaps).  You could even add this container's location to your path, and then the command would be accessible from anywhere on your system.  Using tricks like these it's possible to install containerized apps that behave as though they were just regular old apps running directly on the host system. But behind the scenes these apps run in a completely different environment and can be copied from one computer to another with ease!
+
 ## Fostering reproducibility 
+In the previous section, we created a basic image and then used the `shell --writable` command to enter the container as root.  Then we updated the software and installed a new app.  Finally we exited the container, wrote a runscript and copied it into the container.  What if we needed to recreate exactly the same container?  Clearly this method is not very reproducable.  
+
+All of the steps to build this container could be easily encapselated in a defintion file. Here is an exmple of that that would look like:
+
+
+As a rule, you should try to build your containers using definition files.  One common workflow is to bootstrap a basic container and then edit the container as we did above during testing and debugging.  As you are deciding what needs to be installed in your container, you can make notes in a definition file.  Once you are happy that your container behaves as you like, delete it and build it using the defintion file.  This ensures that you can reproduce your container again in the future.  
 
 
 # Using pre-built containers from [Docker Hub](https://hub.docker.com/) and [Singularity Hub](https://singularity-hub.org/)
+Singularity can download and run containers directly from Docker Hub and Singularity Hub. Try running the following command.
+
+~~~
+$ singularity run docker://godlovedc/lolcow
+~~~
+{: .bash}
+
+~~~
+
+~~~
+{: .output}
+
+If you ran this command, your cow probably said something different and looked different too. This container was built using Docker and uploaded to [Docker Hub](https://hub.docker.com/).  If you wanted to download and save this container for later use, you could do so with a definition file.  (We'll call it `lolcow.def`)
+
+~~~
+# call this file lolcow.def
+Bootstrap: docker
+From: godlovedc/lolcow
+~~~
+{: .bash}
+
+Then create and bootstrap the container as in the example above.
+
+~~~
+$ sudo singularity create lolcow.img
+$ sudo singularity bootstrap lolcow.img lolcow.def
+~~~
+{: .bash}
+
