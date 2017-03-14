@@ -22,7 +22,8 @@ keypoints:
 ## Comparisons in Python
 
 Python allows us to test the truth of statements using certain functions as
-well as by using what are called comparison operators. These include `>`, '<', `>=`, `<=`, `==`, `!=`, `is`, `is not`
+well as by using what are called comparison operators. These include `>`, '<',
+`>=`, `<=`, `==`, `!=`, `is`, `is not`
 
 Some examples of using these operators:
 
@@ -60,12 +61,12 @@ False
 
 
 ~~~
- 5 is 5.0
+ 5 is not 5.0
 ~~~
 {: .python}
 
 ~~~
-False
+True
 ~~~
 {: .output}
 
@@ -245,8 +246,14 @@ We will now change back to our repro_course directory to continue with our analy
 ~~~
 {: .output}
 
-*  It is important to be aware of all of the different cases that can arise from our conditional testing. In our example with testing for certain conditions on our file system we tested two statements using two outcomes. This yields 4 unique states that our program could theoretically encounter. Have we written our code to account for each of these situations?
-*  A useful set of tools are provided by the itertools package. In our current situation the `product` function can quickly show us all of the test cases that we should consider:
+*  It is important to be aware of all of the different cases that can arise
+   from our conditional testing. In our example with testing for certain
+   conditions on our file system we tested two statements using two outcomes.
+   This yields 4 unique states that our program could theoretically encounter.
+   Have we written our code to account for each of these situations?
+*  A useful set of tools are provided by the itertools package. In our current
+   situation the `product` function can quickly show us all of the test cases
+   that we should consider:
 
 
 ~~~
@@ -268,7 +275,8 @@ list(itertools.product(meta_exist, repro_as_pwd))
 
 ## Saving our work.
 
-First we should search for our command where we used an else statement (`%hist -n -g else`) then we should append this command to our script.
+First we should search for our command where we used an else statement (`%hist
+-n -g else`) then we should append this command to our script.
 
 ~~~
 %save -a metasearch_analysis.py 42 # enter the number of the multi-line if-else statement
