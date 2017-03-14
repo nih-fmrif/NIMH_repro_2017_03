@@ -1,20 +1,84 @@
 ---
-title: "Conditionals (template lesson)"
+title: "Conditionals"
 teaching: 15
-exercises: 15
+exercises: 5
 questions:
 - "How can programs do different things for different data?"
 objectives:
 - "Correctly write programs that use if and else statements and simple Boolean expressions (without logical operators)."
 - "Trace the execution of unnested conditionals and conditionals inside loops."
 keypoints:
+- "Boolean values, either True or False, represent the truth of a statement in Python"
+- "As well as functions that specifically return values of type bool,
+  statements about truth use what are called comparative operators."
 - "Use `if` statements to control whether or not a block of code is executed."
-- "Conditionals are often used inside loops."
+- "Conditionals are often used with iteration."
 - "Use `else` to execute a block of code when an `if` condition is *not* true."
 - "Use `elif` to specify additional tests."
 - "Conditions are tested once, in order."
 - "Create a table showing variables' values to trace a program's execution."
 ---
+
+## Comparisons in Python
+
+Python allows us to test the truth of statements using certain functions as
+well as by using what are called comparison operators. These include `>`, '<', `>=`, `<=`, `==`, `!=`, `is`, `is not`
+
+Some examples of using these operators:
+
+
+~~~
+5 > 4
+~~~
+{: .python}
+
+~~~
+True
+~~~
+{: .output}
+
+~~~
+5 == 5
+~~~
+{: .python}
+
+~~~
+True
+~~~
+{: .output}
+
+~~~
+5 != 5
+~~~
+{: .python}
+
+~~~
+False
+~~~
+{: .output}
+
+
+
+~~~
+ 5 is 5.0
+~~~
+{: .python}
+
+~~~
+False
+~~~
+{: .output}
+
+## The assert statement
+
+The `assert` statement is an important tool available to us to make sure our
+programs behave as we intend. We follow the assert command by an expression
+that it will assess for truth. If the expression `False` is returned our
+program will not execute. This is far better than continuing further to produce
+an obscure runtime error. Worse still if our program is executed with some of
+our assumptions not mess it may generate some content in error and we would
+have no idea this has happened.
+
 ## Use `if` statements to control whether or not a block of code is executed.
 
 *   An `if` statement (more properly called a *conditional* statement)
@@ -25,7 +89,8 @@ keypoints:
 
 ~~~
 metasearch_dir = Path('data_not_in_repo/metasearch')
-if metasearch_dir.exists():
+data_exists = metasearch_dir.exists()
+if data_exists:
     print('Data directory has been downloaded')
 ~~~
 {: .python}
@@ -44,6 +109,17 @@ if fake_dir.exists():
     print('Directory exists!')
 ~~~
 {: .python}
+
+## Recording changes to our analysis.
+
+We should edit our script at this point to tidy it up. What changes can we make
+that will best promote reproducibility? Ideally we would have written a
+conditional statement at the beginning of our analysis so that we are certain
+that both conditions of our if/else code block evaluated. In reality we will
+always have bits of code that we have to add to our code in retrospect. Ideally
+at this point we would delete our data directory to check that every condition
+runs.
+
 
 ## Use `else` to execute a block of code when an `if` condition is *not* true.
 
@@ -72,199 +148,151 @@ There is no directory with the path: metasearch/fast_cars
 *   Must come before the `else` (which is the "catch all").
 
 ~~~
-masses = [3.54, 2.07, 9.22, 1.86, 1.71]
-for m in masses:
-    if m > 9.0:
-        print(m, 'is HUGE')
-    elif m > 3.0:
-        print(m, 'is large')
-    else:
-        print(m, 'is small')
+from pathlib import Path
+metasearch_dir = Path('data_not_in_repo/metasearch')
+data_exists = metasearch_dir.exists()
+in_repro_course = Path.cwd().name == 'repro_course'
+if data_exists and in_repro_course:
+    print('Data directory has been downloaded')
+elif in_repro_course:
+    !git clone https://github.com/OpenNeuroLab/metasearch.git {metasearch_dir}
+else:
+    assert(False)
 ~~~
 {: .python}
 
 ~~~
-3.54 is large
-2.07 is small
-9.22 is HUGE
-1.86 is small
-1.71 is small
+Data directory has been downloaded
 ~~~
 {: .output}
 
-## Conditions are tested once, in order.
+We can see that at this point if we change to another directory our script will
+no longer display text as expected when we execute it:
+
+~~~
+%cd .. # to change into the parent directory
+%run repro_course/metasearch_analysis.py
+~~~
+{: .python}
+
+If we run our file in debug mode and then press `c` for continue we can see the
+exception we raised with our `assert` statement.
+
+~~~
+%run -d repro_course/metasearch_analysis.py
+~~~
+{: .python}
+
+~~~
+---------------------------------------------------------------------------
+AssertionError                            Traceback (most recent call last)
+/usr/local/Anaconda/envs/py3.5/lib/python3.5/site-packages/IPython/core/interactiveshell.py in safe_execfile(self, fname, *where, **kw)
+   2479                 py3compat.execfile(
+   2480                     fname, glob, loc,
+-> 2481                     self.compile if kw['shell_futures'] else None)
+   2482             except SystemExit as status:
+   2483                 # If the call was made with 0 or None exit status (sys.exit(0)
+
+/usr/local/Anaconda/envs/py3.5/lib/python3.5/site-packages/IPython/utils/py3compat.py in execfile(fname, glob, loc, compiler)
+    184         with open(fname, 'rb') as f:
+    185             compiler = compiler or compile
+--> 186             exec(compiler(f.read(), fname, 'exec'), glob, loc)
+    187 
+    188     # Refactor print statements in doctests.
+
+/home/rodgersleejg/repro_course/metasearch_analysis.py in <module>()
+      1 # coding: utf-8
+----> 2 from pathlib import Path
+      3 metasearch_dir = Path('data_not_in_repo/metasearch')
+      4 data_exists = metasearch_dir.exists()
+      5 in_repro_course = Path.cwd().name == 'repro_course'
+
+AssertionError: 
+~~~
+{: .output}
+
+
+We will now change back to our repro_course directory to continue with our analysis.
+
+~~~
+%cd repro_course
+~~~
+{: .python}
+
+~~~
+/home/this_user/repro_course
+~~~
+{: .output}
+
+
+## Final points on conditionals
 
 *   Python steps through the branches of the conditional in order, testing each in turn.
 *   So ordering matters.
 
-~~~
-grade = 85
-if grade >= 70:
-    print('grade is C')
-elif grade >= 80:
-    print('grade is B')
-elif grade >= 90:
-    print('grade is A')
-~~~
-{: .python}
-
-~~~
-grade is C
-~~~
-{: .output}
-
-*   Does *not* automatically go back and re-evaluate if values change.
-
-~~~
-velocity = 10.0
-if velocity > 20.0:
-    print('moving too fast')
-else:
-    print('adjusting velocity')
-    velocity = 50.0
-~~~
-{: .python}
-
-~~~
-adjusting velocity
-~~~
-{: .output}
-
 *   Often use conditionals in a loop to "evolve" the values of variables.
+*   Conditionals are often used inside loops.
+*   Conditional statements can be incorporated into list comprehensions:
+
 
 ~~~
-velocity = 10.0
-for i in range(5): # execute the loop 5 times
-    print(i, ':', velocity)
-    if velocity > 20.0:
-        print('moving too fast')
-        velocity = velocity - 5.0
-    else:
-        print('moving too slow')
-        velocity = velocity + 10.0
-# final velocity: 
-velocity
+[ x for x in range(10) if x > 4]
 ~~~
 {: .python}
 
 ~~~
-0 : 10.0
-moving too slow
-1 : 20.0
-moving too slow
-2 : 30.0
-moving too fast
-3 : 25.0
-moving too fast
-4 : 20.0
-moving too slow
-final velocity: 30.0
+[5, 6, 7, 8, 9]
 ~~~
 {: .output}
 
+*  It is important to be aware of all of the different cases that can arise from our conditional testing. In our example with testing for certain conditions on our file system we tested two statements using two outcomes. This yields 4 unique states that our program could theoretically encounter. Have we written our code to account for each of these situations?
+*  A useful set of tools are provided by the itertools package. In our current situation the `product` function can quickly show us all of the test cases that we should consider:
 
-
-## Changing the flow of our analysis
-
-At this point we can control the flow of execution in our
-metasearch_analysis.py script to the extent that we can conditionally download
-our dataset. If it already exists we certainly don't want to download it again:
 
 ~~~
-metasearch_dir = Path('data_not_in_repo/metasearch')
-if metasearch_dir.exists():
-    print('Data directory has already been downloaded')
-else:
-    !git clone https://github.com/OpenNeuroLab/metasearch.git data_not_in_repo    
+import itertools
+meta_exist = ['metasearch in pwd', 'metasearch not in pwd']
+repro_as_pwd = ['repro_course is pwd', 'repro_course not pwd']
+list(itertools.product(meta_exist, repro_as_pwd))
 ~~~
 {: .python}
 
 ~~~
-Data directory has already been downloaded
+[('metasearch in pwd', 'repro_course is pwd'),
+ ('metasearch in pwd', 'repro_course not pwd'),
+ ('metasearch not in pwd', 'repro_course is pwd'),
+ ('metasearch not in pwd', 'repro_course not pwd')]
 ~~~
 {: .output}
 
 
+## Saving our work.
+
+First we should search for our command where we used an else statement (`%hist -n -g else`) then we should append this command to our script.
+
 ~~~
-%save -a metasearch_analysis.py 42 # enter the number of the last command executed
+%save -a metasearch_analysis.py 42 # enter the number of the multi-line if-else statement
 ~~~
 {: .python}
 
 ~~~
 The following commands were written to file `metasearch_analysis.py`:
-if metasearch_dir.exists():
-    print('Data directory has already been downloaded')
+from pathlib import Path
+metasearch_dir = Path('data_not_in_repo/metasearch')
+data_exists = metasearch_dir.exists()
+in_repro_course = Path.cwd().name == 'repro_course'
+if data_exists and in_repro_course:
+    print('Data directory has been downloaded')
+elif in_repro_course:
+    get_ipython().system('git clone https://github.com/OpenNeuroLab/metasearch.git {metasearch_dir}')
 else:
-    get_ipython().system('git clone https://github.com/OpenNeuroLab/metasearch.git data_not_in_repo')
+    assert(False)
 ~~~
 {: .output}
-
-
-We should edit our script at this point to tidy it up. What changes can we make
-that will best promote reproducibility? Ideally we would have written a
-conditional statement at the beginning of our analysis so that we are certain
-that both conditions of our if/else code block evaluated. In reality we will
-always have bits of code that we have to add to our code in retrospect. Ideally
-at this point we would delete our data directory
-
-## Conditionals are often used inside loops.
-
-*   Not much point using a conditional when we know the value (as above).
-*   But useful when we have a collection to process.
-
-~~~
-masses = [3.54, 2.07, 9.22, 1.86, 1.71]
-for m in masses:
-    if m > 3.0:
-        print(m, 'is large')
-~~~
-{: .python}
-
-~~~
-3.54 is large
-9.22 is large
-~~~
-{: .output}
-
-
-## Create a table showing variables' values to trace a program's execution.
-
-<table>
-  <tr>
-    <td><strong>i</strong></td>
-    <td>0</td>
-    <td>.</td>
-    <td>1</td>
-    <td>.</td>
-    <td>2</td>
-    <td>.</td>
-    <td>3</td>
-    <td>.</td>
-    <td>4</td>
-    <td>.</td>
-  </tr>
-  <tr>
-    <td><strong>velocity</strong></td>
-    <td>10.0</td>
-    <td>20.0</td>
-    <td>.</td>
-    <td>30.0</td>
-    <td>.</td>
-    <td>25.0</td>
-    <td>.</td>
-    <td>20.0</td>
-    <td>.</td>
-    <td>30.0</td>
-  </tr>
-</table>
-
-*   The program must have a `print` statement *outside* the body of the loop
-    to show the final value of `velocity`,
-    since its value is updated by the last iteration of the loop.
 
 
 > ## Identifying Variable Name Errors
->
+> 
 > 1. Read the code below and try to identify what the errors are
 >    *without* running it.
 > 2. Run the code and read the error message.
@@ -273,7 +301,7 @@ for m in masses:
 >    variable that should have been defined but was not?
 > 3. Fix the error.
 > 4. Repeat steps 2 and 3, until you have fixed all the errors.
->
+> 
 > ~~~
 > for number in range(10):
 >     # use a if the number is a multiple of 3, otherwise use b
@@ -288,15 +316,15 @@ for m in masses:
 
 
 > ## Compound Relations Using `and`, `or`, and Parentheses
->
+> 
 > Often, you want some combination of things to be true.  You can combine
 > relations within a conditional using `and` and `or`.  Continuing the example
 > above, suppose you have
->
+> 
 > ~~~
 > mass     = [ 3.54,  2.07,  9.22,  1.86,  1.71]
 > velocity = [10.00, 20.00, 30.00, 25.00, 20.00]
->
+> 
 > i = 0
 > for i in range(5):
 >     if mass[i] > 5 and velocity[i] > 20:
@@ -309,31 +337,31 @@ for m in masses:
 >         print "Whoa!  Something is up with the data.  Check it"
 > ~~~
 > {: .python}
->
+> 
 > Just like with arithmetic, you can and should use parentheses whenever there
 > is possible ambiguity.  A good general rule is to *always* use parentheses
 > when mixing `and` and `or` in the same condition.  That is, instead of:
->
+> 
 > ~~~
 > if mass[i] <= 2 or mass[i] >= 5 and velocity[i] > 20:
 > ~~~
 > {: .python}
->
+> 
 > write one of these:
->
+> 
 > ~~~
 > if (mass[i] <= 2 or mass[i] >= 5) and velocity[i] > 20:
 > if mass[i] <= 2 or (mass[i] >= 5 and velocity[i] > 20):
 > ~~~
 > {: .python}
->
+> 
 > so it is perfectly clear to a reader (and to Python) what you really mean.
 {: .callout}
 
 > ## Tracing Execution
->
+> 
 > What does this program print?
->
+> 
 > ~~~
 > pressure = 71.9
 > if pressure 50.0:
@@ -345,114 +373,3 @@ for m in masses:
 > {: .python}
 {: .challenge}
 
-> ## Trimming Values
->
-> Fill in the blanks so that this program creates a new list
-> containing zeroes where the original list's values were negative
-> and ones where the origina list's values were positive.
->
-> ~~~
-> original = [-1.5, 0.2, 0.4, 0.0, -1.3, 0.4]
-> result = ____
-> for value in original:
->     if ____:
->         result.append(0)
->     else:
->         ____
-> print(result)
-> ~~~
-> {: .python}
->
-> ~~~
-> [0, 1, 1, 1, 0, 1]
-> ~~~
-> {: .output}
-{: .challenge}
-
-> ## Processing Small Files
->
-> Modify this program so that it only processes files with fewer than 50 records.
->
-> ~~~
-> import glob
-> import pandas
-> for filename in glob.glob('data/*.csv'):
->     contents = pandas.read_csv(filename)
->     ____:
->         print(filename, len(contents))
-> ~~~
-> {: .python}
-{: .challenge}
-
-> ## Initializing
->
-> Modify this program so that it finds the largest and smallest values in the list
-> no matter what the range of values originally is.
->
-> ~~~
-> values = [...some test data...]
-> smallest, largest = None, None
-> for v in values:
->     if ____:
->         smallest, largest = v, v
->     ____:
->         smallest = min(____, v)
->         largest = max(____, v)
-> print(smallest, largest)
-> ~~~
-> {: .python}
->
-> What are the advantages and disadvantages of using this method
-> to find the range of the data?
-{: .challenge}
-
-> ## Using Functions With Conditionals in Pandas
->
-> Functions will often contain conditionals.  Here is a short example that
-> will indicate which quartile the argument is in based on hand-coded values
-> for the quartile cut points.
->
-> ~~~
-> def calculate_life_quartile(exp):
->     if exp < 58.41:
->         # This observation is in the first quartile
->         return 1
->     elif exp >= 58.41 and exp < 67.05:
->         # This observation is in the second quartile
->        return 2
->     elif exp >= 67.05 and exp < 71.70:
->         # This observation is in the third quartile
->        return 3
->     elif exp >= 71.70:
->         # This observation is in the fourth quartile
->        return 4
->     else:
->         # This observation has bad data
->        return None
->
-> calculate_life_quartile(62.5)
-> ~~~
-> {: .python}
->
-> ~~~
-> 2
-> ~~~
-> {: .output}
->
-> That function would typically be used within a `for` loop, but Pandas has
-> a different, more efficient way of doing the same thing, and that is by
-> *applying* a function to a dataframe or a portion of a dataframe.  Here
-> is an example, using the definition above.
->
-> ~~~
-> data = pd.read_csv('Americas-data.csv')
-> data['life_qrtl'] = data['lifeExp'].apply(calculate_life_quartile)
-> ~~~
-> {: .python}
->
-> There is a lot in that second line, so let's take it piece by piece.
-> On the right side of the `=` we start with `data['lifeExp']`, which is the
-> column in the dataframe called `data` labeled `lifExp`.  We use the
-> `apply()` to do what it says, apply the `calculate_life_quartile` to the
-> value of this column for every row in the dataframe.
-{: .callout}
