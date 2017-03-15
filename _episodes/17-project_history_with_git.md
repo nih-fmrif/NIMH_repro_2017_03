@@ -16,246 +16,181 @@ keypoints:
 - "`git checkout` recovers old versions of files."
 ---
 
-As we saw in the previous lesson, we can refer to commits by their
-identifiers.  You can refer to the _most recent commit_ of the working
-directory by using the identifier `HEAD`.
+*   As we saw in the previous lesson, we can refer to commits by their
+identifiers.
+*  The most recent commit of the working directory can also be referred to by using the identifier
+   `HEAD`.
+* Every previous commit can in turn be referenced by adding the `~` symbol and incrementing the number
+    * So the most recent commit is HEAD, the previous one is HEAD~1 (pronounced HEAD minus 1), and so on.
+* The diff command allows us to observe differences between difference versions of our working directory
 
-We've been adding one line at a time to `mars.txt`, so it's easy to track our
-progress by looking, so let's do that using our `HEAD`s.  Before we start,
-let's make a change to `mars.txt`.
+## View differences between files
+
+To see the difference between our modified files and our last commit we can use
 
 ~~~
-$ nano mars.txt
-$ cat mars.txt
+!git diff HEAD 
 ~~~
 {: .bash}
 
 ~~~
-Cold and dry, but everything is my favorite color
-The two moons may be a problem for Wolfman
-But the Mummy will appreciate the lack of humidity
-An ill-considered change
+output
 ~~~
 {: .output}
 
-Now, let's see what we get.
+We can specify a specific file for this:
 
 ~~~
-$ git diff HEAD mars.txt
+!git diff HEAD metasearch_analysis.py
 ~~~
-{: .bash}
+{: .python}
 
 ~~~
-diff --git a/mars.txt b/mars.txt
-index b36abfd..0848c8d 100644
---- a/mars.txt
-+++ b/mars.txt
-@@ -1,3 +1,4 @@
- Cold and dry, but everything is my favorite color
- The two moons may be a problem for Wolfman
- But the Mummy will appreciate the lack of humidity
-+An ill-considered change.
+output
 ~~~
 {: .output}
 
-which is the same as what you would get if you leave out `HEAD` (try it).  The
-real goodness in all this is when you can refer to previous commits.  We do
-that by adding `~1` to refer to the commit one before `HEAD`.
+We can look for difference between to previous revisions too:
 
 ~~~
-$ git diff HEAD~1 mars.txt
+!git diff HEAD~3 HEAD~2 metasearch_analysis.py
 ~~~
-{: .bash}
-
-If we want to see what we changed at different steps, we can use `git diff`
-again, but with the notation `HEAD~1`, `HEAD~2`, and so on, to refer to old
-commits:
+{: .python}
 
 ~~~
-$ git diff HEAD~1 mars.txt
-~~~
-{: .bash}
-
-~~~
-diff --git a/mars.txt b/mars.txt
-index 315bf3a..b36abfd 100644
---- a/mars.txt
-+++ b/mars.txt
-@@ -1,2 +1,3 @@
- Cold and dry, but everything is my favorite color
- The two moons may be a problem for Wolfman
-+But the Mummy will appreciate the lack of humidity
+output
 ~~~
 {: .output}
 
+
+We can also refer to commits using those long strings of digits and letters
+that `git log` displays. These are unique IDs for the changes, and "unique"
+really does mean unique: every change to any set of files on any computer has a
+unique 40-character identifier. Our first commit was given the ID
+XXX, so let's try this:
+
 ~~~
-$ git diff HEAD~2 mars.txt
+!git diff XXX 
+~~~
+{: .python}
+
+~~~
+output
+~~~
+{: .output}
+
+That's the right answer, but typing out random 40-character strings is
+annoying, so Git lets us use just the first few characters:
+
+~~~
+!git diff X
 ~~~
 {: .bash}
 
 ~~~
-diff --git a/mars.txt b/mars.txt
-index df0654a..b36abfd 100644
---- a/mars.txt
-+++ b/mars.txt
-@@ -1 +1,3 @@
- Cold and dry, but everything is my favorite color
-+The two moons may be a problem for Wolfman
-+But the Mummy will appreciate the lack of humidity
+output
 ~~~
 {: .output}
 
-In this way,
-we can build up a chain of commits.
-The most recent end of the chain is referred to as `HEAD`;
-we can refer to previous commits using the `~` notation,
-so `HEAD~1` (pronounced "head minus one")
-means "the previous commit",
-while `HEAD~123` goes back 123 commits from where we are now.
-
-We can also refer to commits using
-those long strings of digits and letters
-that `git log` displays.
-These are unique IDs for the changes,
-and "unique" really does mean unique:
-every change to any set of files on any computer
-has a unique 40-character identifier.
-Our first commit was given the ID
-f22b25e3233b4645dabd0d81e651fe074bd8e73b,
-so let's try this:
+Finally, a convenient way to search all versions of a file at once for a particular string is to use the `-p` flag for the `git log` command:
 
 ~~~
-$ git diff f22b25e3233b4645dabd0d81e651fe074bd8e73b mars.txt
+log = !git log -p
+[x for x in log if 'clone' in x]
 ~~~
-{: .bash}
+{: .python}
 
 ~~~
-diff --git a/mars.txt b/mars.txt
-index df0654a..b36abfd 100644
---- a/mars.txt
-+++ b/mars.txt
-@@ -1 +1,3 @@
- Cold and dry, but everything is my favorite color
-+The two moons may be a problem for Wolfman
-+But the Mummy will appreciate the lack of humidity
+output
 ~~~
 {: .output}
 
-That's the right answer,
-but typing out random 40-character strings is annoying,
-so Git lets us use just the first few characters:
+
+## Working with the history
+
+All right! So we can save changes to files and see what we've changed—now how
+can we restore older versions of things? Let's suppose we accidentally
+delete our file:
 
 ~~~
-$ git diff f22b25e mars.txt
+%save metasearch_analysis 15 # Type Y to confirm
 ~~~
-{: .bash}
-
-~~~
-diff --git a/mars.txt b/mars.txt
-index df0654a..b36abfd 100644
---- a/mars.txt
-+++ b/mars.txt
-@@ -1 +1,3 @@
- Cold and dry, but everything is my favorite color
-+The two moons may be a problem for Wolfman
-+But the Mummy will appreciate the lack of humidity
-~~~
-{: .output}
-
-All right! So
-we can save changes to files and see what we've changed—now how
-can we restore older versions of things?
-Let's suppose we accidentally overwrite our file:
-
-~~~
-$ nano mars.txt
-$ cat mars.txt
-~~~
-{: .bash}
-
-~~~
-We will need to manufacture our own oxygen
-~~~
-{: .output}
+{: .python}
 
 `git status` now tells us that the file has been changed,
 but those changes haven't been staged:
 
 ~~~
-$ git status
+!git status
 ~~~
-{: .bash}
+{: .python}
 
 ~~~
-On branch master
-Changes not staged for commit:
-  (use "git add <file>..." to update what will be committed)
-  (use "git checkout -- <file>..." to discard changes in working directory)
-
-	modified:   mars.txt
-
-no changes added to commit (use "git add" and/or "git commit -a")
+output
 ~~~
 {: .output}
 
-We can put things back the way they were
-by using `git checkout`:
+We can put things back the way they were by using `git checkout`:
 
 ~~~
-$ git checkout HEAD mars.txt
-$ cat mars.txt
+!git checkout HEAD metasearch_analysis.py
 ~~~
-{: .bash}
+{: .python}
+
+As you might guess from its name, `git checkout` checks out (i.e., restores) an
+old version of a file. In this case, we're telling Git that we want to recover
+the version of the file recorded in `HEAD`, which is the last saved commit. If
+we want to go back even further, we can use a commit identifier instead:
 
 ~~~
-Cold and dry, but everything is my favorite color
-The two moons may be a problem for Wolfman
-But the Mummy will appreciate the lack of humidity
+$ git checkout HEAD~3 metasearch_analysis.py
 ~~~
-{: .output}
-
-As you might guess from its name,
-`git checkout` checks out (i.e., restores) an old version of a file.
-In this case,
-we're telling Git that we want to recover the version of the file recorded in `HEAD`,
-which is the last saved commit.
-If we want to go back even further,
-we can use a commit identifier instead:
-
-~~~
-$ git checkout f22b25e mars.txt
-~~~
-{: .bash}
+{: .python}
 
 > ## Don't Lose Your HEAD
->
+> 
 > Above we used
->
+> 
 > ~~~
-> $ git checkout f22b25e mars.txt
+> $ git checkout HEAD~3 metasearch_analysis.py
 > ~~~
-> {: .bash}
->
-> to revert mars.txt to its state after the commit f22b25e.
-> If you forget `mars.txt` in that command, Git will tell you that "You are in
-> 'detached HEAD' state." In this state, you shouldn't make any changes.
-> You can fix this by reattaching your head using ``git checkout master``
+> {: .python}
+> 
+> to revert metasearch_analysis.py to its previous state. If you forget to
+> specify the file in that command, Git will tell you that "You are in
+> 'detached HEAD' state." In this state, you shouldn't make any changes. You
+> can fix this by reattaching your head using ``git checkout master``
 {: .callout}
 
-It's important to remember that
-we must use the commit number that identifies the state of the repository
-*before* the change we're trying to undo.
-A common mistake is to use the number of
-the commit in which we made the change we're trying to get rid of.
-In the example below, we want to retrieve the state from before the most
-recent commit (`HEAD~1`), which is commit `f22b25e`:
+It's important to remember that we must use the commit number that identifies
+the state of the repository *before* the change we're trying to undo. A common
+mistake is to use the number of the commit in which we made the change we're
+trying to get rid of. Git messages written in the imperative help with this. 
 
-![Git Checkout](../fig/fig/git-checkout.svg)
+If we want to go back to a version of our file before we started working on a
+new feature that has not worked out and caused lots of bugs the commit message
+"Start adding excellent new feature" is probably the first one to avoid and we
+should jump one step further back in our history.
 
-So, to put it all together,
-here's how Git works in cartoon form:
+
+So, to put it all together, here's how Git works in cartoon form:
 
 ![http://figshare.com/articles/How_Git_works_a_cartoon/1328266](../fig/fig/git_staging.svg)
+
+## Other useful points to note
+
+* Remember to keep building up history's with the git lifecycle. When you
+  finally decide you really need to use git to recover some code of many months
+  ago you'll be grateful for your diligence then.
+* [Learngitbranching](http://learngitbranching.js.org) is a great place to learn more advanced manipulation in git.
+* Many editors have plugins to extend the functionality. Once you are
+  comfortable with the basics of Git, they can really improve the experience of
+  using git. Frequently the best way to use the more obscure commands is to go
+  back to the command line though. Many times the only straight-forward
+  solution is to a problem you are having is to type an incantation to Git at
+  the command line.
+
+
 
 > ## Simplifying the Common Case
 >
