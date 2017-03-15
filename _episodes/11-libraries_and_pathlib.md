@@ -560,7 +560,7 @@ with test.open('r', encoding='utf-8') as file_handle:
 
 ~~~
 f = metasearch_dir.joinpath('example.txt')
-f.write_text('This is the content'.encode('utf-8'))
+f.write_text('This is the content')
 ~~~
 {: .python}
  
