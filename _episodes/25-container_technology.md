@@ -18,8 +18,8 @@ objectives:
 - "Know where to go to get more information."
 keypoints:
 - "Containers allow applications to run in a self-contained, reproducible environment."
-- "Containers can be copied and shared allowing you to replicate your results on a new machine, or colleagues to replicate your results in a different environment."
-- "Individuals and organizations distribute software in containers on Docker Hub and Singularity Hub."
+- "Containers can be copied and shared allowing you to replicate your results on a new machine, or allowing colleagues to replicate your results in a different environment."
+- "Individuals and organizations distribute software in containers on [Docker Hub](https://hub.docker.com/) and [Singularity Hub](https://singularity-hub.org/)"
 - "You can learn more about containers at [Docker Home](https://docs.docker.com/), [Singularity Home](http://singularity.lbl.gov/), and [Singularity at the NIH HPC](https://hpc.nih.gov/apps/singularity.html)."
 ---
 
@@ -32,7 +32,11 @@ Containers allow you to do things like:
 * Install and run an application that requires a complicated software stack on a new computer with a few keystrokes.
 
 ## Containers vs. Virtual Machines
-Containers are a type of virtualization and they are related to virtual machines (VMs). But there are a few important differences between the two. A VM has it's own kernel.  This allows the VM to directly access to the hardware and it allows for more flexibility. For instance, you can run a Linux VM on Windows or on a Mac. In contrast containers share a kernel with the host system.  This makes containers less flexible (a Linux host can typically only support Linux containers), but it also makes them *much* faster.  Because of these differences, VMs and containers are useful in different scenarios. If want to interact with your computer using a different operating system, you should usually install a VM.  But if you just need to run one or two apps in a different environment containers are a better choice. 
+Containers are a type of virtualization and they are related to virtual machines (VMs). But there are a few important differences between the two. A VM has it's own kernel.  This allows the VM to directly access the hardware which allows for more flexibility. For instance, you can run a Linux VM on Windows or on a Mac.  
+
+In contrast, containers share a kernel with the host system.  This makes containers less flexible (a Linux host can typically only support Linux containers), but it also makes them run *much* faster.  
+
+Because of these differences, VMs and containers are useful in different scenarios. If want to interact with your computer using a different operating system, you should usually install a VM.  But if you just need to run one or two apps in a different environment containers are a better choice. 
 
 ## Docker   
 The most popular and widely used container software is [Docker](https://docs.docker.com/).  Docker is a very mature program with a large user community.  [Docker Hub](https://hub.docker.com/) gives Docker users a place to build and host their containers.  It's fully integrated into the core Docker program, allowing you to download any of over 100,000 pre-built containers from the command prompt.  This arrangement produces a ecosystem in which containers can be easily orchestrated.
@@ -42,18 +46,18 @@ Docker is extremely powerful, but it is also a bit difficult to learn.  At first
 ## Singularity
 Singularity is a very new program that is still under active development. It is relative easy to use, and it is well-suited for HPC environments. Docker containers can be converted for use with Singularity and current versions of Singularity can import containers directly from Docker Hub. Containers can also be imported from [Singularity Hub](https://singularity-hub.org/).
 
-The philosophy of Singularity differs somewhat from that of Docker.  Docker basically assumes that you will build (or download) and run your containers on the same system, and that you will be a root (administrative) user on that system.  Singularity assumes that you will build your containers on a system where you have root access, run your containers may run in an environment where you are an unprivileged user. So the singularity philosophy assumes you will have a *build system* (a Linux laptop, VM, or cloud instance) where you have root access, but this may differ from your *production system* where you run your containers and may or may not have root privileges.   
+The philosophy of Singularity differs somewhat from that of Docker.  Docker basically assumes that you will build (or download) and run your containers on the same system, and that you will be a root (administrative) user on that system.  Singularity assumes that you will build your containers on a system where you have root access, but your containers may run in an environment where you are an unprivileged user. In other words, the singularity philosophy assumes you will have a *build system* (a Linux laptop, VM, or cloud instance) where you have root access, and a *production system* where you run your containers (and may or may not have root privileges).   
 
-We will use Singularity for the demonstration below.  
+We will use Singularity for the demonstration below, because it is a little more transparent and easier to learn than Docker.  
 
 ## Getting more information about containers
-This demo will only give you a brief taste of software containers. If you want to learn more, the following websites will give you a good place to start:
+This demo will give you a tiny taste of software containers. If you want more, the following websites are a good place to start:
 * [Docker Home](https://docs.docker.com/)
 * [Singularity Home](http://singularity.lbl.gov/)
 * [Singularity at the NIH HPC](https://hpc.nih.gov/apps/singularity.html)
 
 # Introduction to Singularity
-To start with, let's say that you are using a Linux computer with Ubuntu 16.04.
+To begin, let's say that you are using a Linux computer with Ubuntu 16.04.
 
 ~~~
 $ cat /etc/os-release
@@ -97,7 +101,7 @@ centos.img  singularity
 ~~~
 {: .output}
 
-You can see that I also have a directory called `singularity`.  That contains the source code for Singularity that I downloaded from github.  More on that later.  
+You can see that I also have a directory called `singularity`.  It contains Singularity source code that I downloaded from github.  More on that later.  
 
 The simplest way to use this container would be to just start an interactive shell inside.  Singularity allows you to do this with the `shell` command.
 
@@ -170,7 +174,7 @@ Singularity.centos.img> ls
 {: .bash}
 
 ~~~
-bar   centos.img
+bar  centos.img  singularity
 ~~~
 {: .output}
 
@@ -193,7 +197,7 @@ $ ls
 {: .bash}
 
 ~~~
-bar   centos.img    singularity
+bar  centos.img  singularity
 ~~~
 {: .output}
 
@@ -207,9 +211,7 @@ foo
 ~~~
 {: .output}
 
-You may have expected `bar` to disappear once we exited the container, but you can see that it remained.
-
-So in summary, we were able to write the text `foo` to a file `bar` in our home directory from within the container and these changes persisted on the host system even after we exited the container.  This is because Singularity *binds* a user's home directory into the container when it is initiated.  Singularity blurs the lines between a container and the host system by binding several directories to a container when it initiated.  These include `/home/$USER`, `$PWD`, `/tmp`, `/proc`, `/sys` and a few others.  This convenient feature allows you to install a program to perform some analysis within a container, and then use it to read, analyze, and write data to the host system.  
+You may have expected `bar` to disappear once we exited the container, but you can see that it remained. This is because Singularity *binds* a user's home directory into the container when it is initiated.  Singularity blurs the lines between a container and the host system by binding several directories to containers by default.  These include `/home/$USER`, `$PWD`, `/tmp`, `/proc`, `/sys` and a few others.  This convenient feature allows you to install a program to perform some analysis within a container, while reading, analyzing, and writing data to the host system.  
 
 If the default directories don't suit your needs, you can customize which directories Singularity binds into you container.  For instance, if you wanted to read from and write to a directory called `/data` you could bind that directory to your container using the `--bind` argument.  See the documentation at [Singularity Home](http://singularity.lbl.gov/), or [Singularity at the NIH HPC](https://hpc.nih.gov/apps/singularity.html) for more details on this procedure.
 
@@ -241,7 +243,7 @@ $ ls
 {: .bash}
 
 ~~~
-bar     centos.img  ubuntu.img  singularity
+bar  centos.img  singularity  ubuntu.img  
 ~~~
 {: .output}
 
@@ -289,7 +291,11 @@ MirrorURL: http://us.archive.ubuntu.com/ubuntu/
 ~~~
 {: .output}
 
-Beneath the copyright information there are several sections.  The first section, the Header, has several keywords (`Bootstrap`, `OSVersion`, and `MirrorURL`) which give Singularity information about how to create the OS, which version to use, and from where to download it.  The `%runscript` section tells Singularity what this container should do when it is called without any other input.  In this case it will just echo a short message to standard output.  The `%post` section is used to customize your container.  It tells Singularity what commands should run in the container after the OS is installed.  In this case Singularity will echo a "Hello" message, use use the stream editor `sed` to edit a configuration file, and then use the `apt` package manager to install a text editor (`vim`).
+Beneath the copyright information there are several sections.  The first section, the Header, has several keywords (`Bootstrap`, `OSVersion`, and `MirrorURL`) which give Singularity information about how to create the OS, which version to use, and from where to download it.  
+
+The `%runscript` section tells Singularity what this container should do when it is called without any other input.  In this case it will just echo a short message to standard output.  
+
+The `%post` section is used to customize your container.  It tells Singularity what commands should run in the container after the OS is installed.  In this case Singularity will echo a "Hello" message, use use the stream editor `sed` to edit a configuration file, and then use the `apt` package manager to install a text editor (`vim`).
 
 Let's use the `bootstrap` command to install an OS into our container using this definition file as a set of blueprints.
 
@@ -333,7 +339,11 @@ root@ip-172-31-18-4:/root#
 ~~~
 {: .output}
 
-These commands are different than the `shell` command we issued in the previous section.  First, notice that we used the `sudo` program to start a shell in our Singularity container as the root user.  Second, note the `--writable` option to the `shell` command.  Normally, Singularity containers are *read only* meaning they can't be altered.  But the `--writable` option means we can alter the container when we enter it.  Finally, notice the `bash` command that we executed after initiating a shell within the container.  The Boure again shell (`bash`) is more convenient to work with than the Bourne shell (`sh`).
+These commands are different than the `shell` command we issued in the previous section.  First, notice that we used the `sudo` program to start a shell in our Singularity container as the root user.  
+
+Second, note the `--writable` option to the `shell` command.  Normally, Singularity containers are *read only* meaning they can't be altered.  But the `--writable` option means we can alter the container when we enter it.  
+
+Finally, notice the `bash` command that we executed after initiating a shell within the container.  The Boure again shell (`bash`) is more convenient to work with than the Bourne shell (`sh`).
 
 Let's make a few changes to our container.
 
@@ -399,7 +409,15 @@ root@ip-172-31-18-4:/root# /usr/games/cowsay 'Cows are crazy for containers!!'
 ~~~
 {: .output}
 
-To summarize the commands above, first we used the package manager `apt` to install updates to our container's operating system.  Then we used the `locale-gen` command generate a locale instructing software in the container to use the United States dialect of the English language encoded in the UTF-8 character set.  (This is conceptually similar to selecting the language when you install a new operating system.)  After that, we used the `apt` package manager to install an "important scientific analysis" progam (`cowsay`).  Finally, we ran our important scientific program (`cowsay`) with some standard input and it produced some standard output.  
+To summarize the commands above: 
+
+First we used the package manager `apt` to install updates to our container's operating system.  
+
+Then we used the `locale-gen` command generate a locale instructing software in the container to use the United States dialect of the English language encoded in the UTF-8 character set.  (This is conceptually similar to selecting the language when you install a new operating system.)  
+
+After that, we used the `apt` package manager to install an "important scientific analysis" progam (`cowsay`).  
+
+Finally, we ran our important scientific program (`cowsay`) with some standard input and it produced some standard output.  
 
 This silly example is useful for illustration.  `cowsay` accepts input and produces output.  We will modify our `cowsay` usage below so that it accepts a file as input and produces another file as output.  So if you have a program that you want to run in a container that accepts input and produces output, this example will show you how.
 
@@ -454,7 +472,7 @@ $ singularity exec ubuntu.img /usr/games/cowsay $(cat ~/bar)
 ~~~
 {: .output}
 
-The `$(cmd)` is `bash` syntax for "substitute the standard output of this command here".  As you can see, this caused the containerized `cowsay` program use the contents of `~/bar` as input.  
+The expression `$(cat ~/bar)` is bash syntax for "substitute the standard output of this command here".  As you can see, this caused the containerized `cowsay` program use the contents of `~/bar` as input.  
 
 In addition to using a file as input, let's create another file as output.
 
@@ -465,7 +483,7 @@ $ ls
 {: .bash}
 
 ~~~
-bar   centos.img    singularity     output.0
+bar  centos.img  output.0  singularity  ubuntu.img 
 ~~~
 {: .output}
 
@@ -500,7 +518,7 @@ This is what happens when you run the container...
 ~~~
 {: .output}
 
-Let's edit our runscript to produce something more useful. First we will write a script that will take 2 arguments, an input file and an output file, run cowsay on the input, and then write the output.
+Let's edit our runscript to produce something more useful. First we will write a script that will take 2 arguments, an input file and an output file, runs cowsay on the input, and then writes the output.
 
 ~~~
 $ nano new-runscript
@@ -521,7 +539,7 @@ output=$2
 ~~~
 {: .bash}
 
-In addition to running cowsay on the input and producing output, this script will check that two arguments were supplied and exit early with an error message if that is not the case.  
+In addition to running cowsay on the input and producing output, this script checks that two arguments were supplied and exits early with an error message if that is not the case.  
 
 Now let's copy this new runscript to the appropriate location inside the container with the `singularity copy` command.
 
@@ -579,19 +597,43 @@ $ cat meta.cow
 ~~~
 {: .output}
 
-At this point, it might be useful to change the name of `ubuntu.img` to something more fitting (like `cowsay-io` perhaps).  You could even add this container's location to your path, and then the command would be accessible from anywhere on your system.  Using tricks like these it's possible to install containerized apps that behave as though they were just regular old apps running directly on the host system. But behind the scenes these apps run in a completely different environment and can be copied from one computer to another with ease!
+At this point, it might be useful to change the name of `ubuntu.img` to something more fitting (like `cowsay-io` perhaps).  You could even add this container's location to your path, and then the command would be accessible from anywhere on your system.  
+
+Using tricks like these it's possible to install containerized apps that behave as though they were just regular old apps running directly on the host system. But behind the scenes these apps run in a completely different environment and can be copied from one computer to another with ease!
 
 ## Fostering reproducibility 
 In the previous section, we created a basic image and then used the `shell --writable` command to enter the container as root.  Then we updated the software and installed a new app.  Finally we exited the container, wrote a runscript and copied it into the container.  What if we needed to recreate exactly the same container?  Clearly this method is not very reproducable.  
 
 All of the steps to build this container could be easily encapselated in a defintion file. Here is an exmple of that that would look like:
 
+~~~
+BootStrap: debootstrap
+OSVersion: trusty
+MirrorURL: http://us.archive.ubuntu.com/ubuntu/
+
+%runscript
+#!/bin/bash
+    if [ "$#" -ne 2 ]; then
+    echo "Please supply 2 filenames (input and output)"
+    exit 1
+fi
+input=$1
+output=$2
+/usr/games/cowsay $(cat ${input}) > ${output}
+
+%post
+    locale-gen en_US.UTF-8
+    sed -i 's/$/ universe/' /etc/apt/sources.list
+    apt-get -y update
+    apt-get -y install vim cowsay
+~~~
+{: .bash}
 
 As a rule, you should try to build your containers using definition files.  One common workflow is to bootstrap a basic container and then edit the container as we did above during testing and debugging.  As you are deciding what needs to be installed in your container, you can make notes in a definition file.  Once you are happy that your container behaves as you like, delete it and build it using the defintion file.  This ensures that you can reproduce your container again in the future.  
 
 
 # Using pre-built containers from [Docker Hub](https://hub.docker.com/) and [Singularity Hub](https://singularity-hub.org/)
-Singularity can download and run containers directly from Docker Hub and Singularity Hub. Try running the following command.
+Singularity can download and run containers directly from [Docker Hub](https://hub.docker.com/) and [Singularity Hub](https://singularity-hub.org/). Try running the following command.
 
 ~~~
 $ singularity run docker://godlovedc/lolcow
@@ -599,11 +641,36 @@ $ singularity run docker://godlovedc/lolcow
 {: .bash}
 
 ~~~
-
+Cache folder set to /home/ubuntu/.singularity/docker
+Downloading layer sha256:a3ed95caeb02ffe68cdd9fd84406680ae93d633cb16422d00e8a7c22955b46d4
+Extracting /home/ubuntu/.singularity/docker/sha256:a3ed95caeb02ffe68cdd9fd84406680ae93d633cb16422d00e8a7c22955b46d4.tar.gz
+Downloading layer sha256:339106cb47ef6d14118d525cd927f3ac8bc1b7249a2a19d9b3ca92e069d9ac9e
+Extracting /home/ubuntu/.singularity/docker/sha256:339106cb47ef6d14118d525cd927f3ac8bc1b7249a2a19d9b3ca92e069d9ac9e.tar.gz
+Downloading layer sha256:6d9ef359eaaa311860550b478790123c4b22a2eaede8f8f46691b0b4433c08cf
+Extracting /home/ubuntu/.singularity/docker/sha256:6d9ef359eaaa311860550b478790123c4b22a2eaede8f8f46691b0b4433c08cf.tar.gz
+Downloading layer sha256:9654c40e9079e3d5b271ec71f6d83f8ce80cfa6f09d9737fc6bfd4d2456fed3f
+Extracting /home/ubuntu/.singularity/docker/sha256:9654c40e9079e3d5b271ec71f6d83f8ce80cfa6f09d9737fc6bfd4d2456fed3f.tar.gz
+Downloading layer sha256:e8db7bf7c39fab6fec91b1b61e3914f21e60233c9823dd57c60bc360191aaf0d
+Extracting /home/ubuntu/.singularity/docker/sha256:e8db7bf7c39fab6fec91b1b61e3914f21e60233c9823dd57c60bc360191aaf0d.tar.gz
+Downloading layer sha256:f8b845f45a87dc7c095b15f3d9661e640ebc86f42cd8e8ab36674846472027f7
+Extracting /home/ubuntu/.singularity/docker/sha256:f8b845f45a87dc7c095b15f3d9661e640ebc86f42cd8e8ab36674846472027f7.tar.gz
+Downloading layer sha256:d54efb8db41d4ac23d29469940ec92da94c9a6c2d9e26ec060bebad1d1b0e48d
+Extracting /home/ubuntu/.singularity/docker/sha256:d54efb8db41d4ac23d29469940ec92da94c9a6c2d9e26ec060bebad1d1b0e48d.tar.gz
+ _________________________________________
+/ The abuse of greatness is when it       \
+| disjoins remorse from power.            |
+|                                         |
+\ -- William Shakespeare, "Julius Caesar" /
+ -----------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
 ~~~
 {: .output}
 
-If you ran this command, your cow probably said something different and looked different too. This container was built using Docker and uploaded to [Docker Hub](https://hub.docker.com/).  If you wanted to download and save this container for later use, you could do so with a definition file.  (We'll call it `lolcow.def`)
+If you run this command, your cow will probably say something different and will look different too. This container was built using Docker and uploaded to [Docker Hub](https://hub.docker.com/).  If you wanted to download and save this container for later use, you could do so with a definition file.  (We'll call it `lolcow.def`)
 
 ~~~
 # call this file lolcow.def
@@ -619,4 +686,22 @@ $ sudo singularity create lolcow.img
 $ sudo singularity bootstrap lolcow.img lolcow.def
 ~~~
 {: .bash}
+
+Now you can generate as many quotes as you want by executing `./lolcat.img`!
+
+Once again, this is a trivial example.  But there are over 100,000 pre-built containers already on Docker Hub.  And in addition to individual developers, companies (like Canonical, Anaconda, and NVIDIA to name a few) are also distributing software in ready-to-run containers on Docker Hub. 
+
+For instance, if you wanted to try TensorFlow (the Deep Learning framework used by Google) but you don't want to install a bunch of dependancies on your computer, you could be up and running in a few minutes with this simple definition file.
+
+~~~
+BootStrap: docker
+From: tensorflow/tensorflow:latest
+
+%runscript
+    python "$@"
+~~~
+{: .bash}
+
+[Singularity Hub](https://singularity-hub.org/) is the Singularity analog to Docker Hub. Singularity Hub is very new and does not yet have the massive community that has been attracted to Docker Hub.  But it has the distict advantage of working natively with Singularity definition files. Like Docker Hub, it integrates with GitHub to build your containers automatically when you push a new definition file to a linked repository.  (See the website for more details.)  This provides a great solution for building and sharing your own containers with others. 
+
 
