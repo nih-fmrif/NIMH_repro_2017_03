@@ -91,7 +91,7 @@ can help you make your analysis more efficient and secure.
 ## Where am I?
 
 The desktop you're looking at inside the NoMachine window is from a computer
-that lives over in building 13 at NIH's high performance computing (HPC)
+that lives over in building 12B at NIH's high performance computing (HPC)
 center. This computer (helix or felix) is separate from but closely affiliated
 with the large cluster of computers known as the (Biowulf)[https://hpc.nih.gov/systems/].
 
