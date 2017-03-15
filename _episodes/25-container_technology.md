@@ -101,7 +101,7 @@ centos.img  singularity
 ~~~
 {: .output}
 
-You can see that I also have a directory called `singularity`.  It contains Singularity source code that I downloaded from github.  More on that later.  
+You can see that I also have a directory called `singularity`.  It contains Singularity source code that I downloaded from GitHub.  More on that later.  
 
 The simplest way to use this container would be to just start an interactive shell inside.  Singularity allows you to do this with the `shell` command.
 
@@ -117,7 +117,7 @@ Singularity.centos.img>
 ~~~
 {: .output}
 
-Notice that the command prompt changed from a dollar sign to a longer string.  This is because the default shell in ubuntu is `/bin/bash`, but the default shell in a Singularity container is `/bin/sh`.  (Some containers may not have `/bin/bash` installed.)  Anyway, let's check the information about our operating system again.
+Notice that the command prompt changed from a dollar sign to a longer string.  This is because the default shell in Ubuntu is `/bin/bash`, but the default shell in a Singularity container is `/bin/sh`.  (Some containers may not have `/bin/bash` installed.)  Anyway, let's check the information about our operating system again.
 
 ~~~
 Singularity.centos.img> cat /etc/os-release
@@ -343,7 +343,7 @@ These commands are different than the `shell` command we issued in the previous 
 
 Second, note the `--writable` option to the `shell` command.  Normally, Singularity containers are *read only* meaning they can't be altered.  But the `--writable` option means we can alter the container when we enter it.  
 
-Finally, notice the `bash` command that we executed after initiating a shell within the container.  The Boure again shell (`bash`) is more convenient to work with than the Bourne shell (`sh`).
+Finally, notice the `bash` command that we executed after initiating a shell within the container.  The Bourne again shell (`bash`) is more convenient to work with than the Bourne shell (`sh`).
 
 Let's make a few changes to our container.
 
@@ -413,13 +413,13 @@ To summarize the commands above:
 
 First we used the package manager `apt` to install updates to our container's operating system.  
 
-Then we used the `locale-gen` command generate a locale instructing software in the container to use the United States dialect of the English language encoded in the UTF-8 character set.  (This is conceptually similar to selecting the language when you install a new operating system.)  
+Then we used the `locale-gen` command to generate a locale.  This instructs software in the container to use the United States dialect of the English language encoded in the UTF-8 character set.  (This is conceptually similar to selecting the language when you install a new operating system.)  
 
 After that, we used the `apt` package manager to install an "important scientific analysis" progam (`cowsay`).  
 
 Finally, we ran our important scientific program (`cowsay`) with some standard input and it produced some standard output.  
 
-This silly example is useful for illustration.  `cowsay` accepts input and produces output.  We will modify our `cowsay` usage below so that it accepts a file as input and produces another file as output.  So if you have a program that you want to run in a container that accepts input and produces output, this example will show you how.
+This silly example is useful for illustration.  `cowsay` accepts input and produces output.  We will modify our `cowsay` usage below so that it accepts a <b>file</b> as input and produces another <b>file</b> as output.  So if you have a program that you want to run in a container that accepts input and produces output, this example will show you how.
 
 To prepare for the next section, let's exit the container and return to our host system.
 
@@ -506,7 +506,7 @@ $ cat output.0
 
 To summarize, we now have a containerized "analysis program" (`cowsay`) that accepts a file as input, works on it, and produces a file as output.  Although this is a silly example the general pattern is very useful.
 
-The syntax to run the cowsay container is still quite messy.  It would be nice if there were a cleaner way to run our program.  This is where a runscript comes in handy.  A runscript is a script saved inside of a Singularity container that is executed when the container is called without any other input.  We actually already have a runscript.  Our definion file created one for us.  
+The syntax to run the cowsay container is still quite messy.  It would be nice if there was a cleaner way to run our program.  This is where a runscript comes in handy.  A runscript is a script saved inside of a Singularity container that is executed when the container is called without any other input.  We actually already have a runscript.  Our definion file created one for us.  
 
 ~~~
 $ ./ubuntu.img
@@ -518,7 +518,7 @@ This is what happens when you run the container...
 ~~~
 {: .output}
 
-Let's edit our runscript to produce something more useful. First we will write a script that will take 2 arguments, an input file and an output file, runs cowsay on the input, and then writes the output.
+Let's edit our runscript to produce something more useful. First we will write a script that takes 2 arguments, an input file and an output file, runs cowsay on the input, and then writes the output.
 
 ~~~
 $ nano new-runscript
@@ -602,9 +602,9 @@ At this point, it might be useful to change the name of `ubuntu.img` to somethin
 Using tricks like these it's possible to install containerized apps that behave as though they were just regular old apps running directly on the host system. But behind the scenes these apps run in a completely different environment and can be copied from one computer to another with ease!
 
 ## Fostering reproducibility 
-In the previous section, we created a basic image and then used the `shell --writable` command to enter the container as root.  Then we updated the software and installed a new app.  Finally we exited the container, wrote a runscript and copied it into the container.  What if we needed to recreate exactly the same container?  Clearly this method is not very reproducable.  
+In the previous section, we created a basic image and then used the `shell --writable` command to enter the container as root.  Then we updated the software and installed a new app.  Finally we exited the container, wrote a runscript and copied it into the container.  What if we needed to recreate exactly the same container?  Clearly this method is not very reproducible.  
 
-All of the steps to build this container could be easily encapselated in a defintion file. Here is an exmple of that that would look like:
+All of the steps to build this container could be easily encapsulated in a definition file. Here is an example of that that would look like:
 
 ~~~
 BootStrap: debootstrap
@@ -629,7 +629,7 @@ output=$2
 ~~~
 {: .bash}
 
-As a rule, you should try to build your containers using definition files.  One common workflow is to bootstrap a basic container and then edit the container as we did above during testing and debugging.  As you are deciding what needs to be installed in your container, you can make notes in a definition file.  Once you are happy that your container behaves as you like, delete it and build it using the defintion file.  This ensures that you can reproduce your container again in the future.  
+As a rule, you should try to build your containers using definition files.  One common workflow is to bootstrap a basic container and then edit the container as we did above during testing and debugging.  As you are deciding what needs to be installed in your container, you can make notes in a definition file.  Once you are happy that your container behaves as you like, delete it and build it using the definition file.  This ensures that you can reproduce your container again in the future.  
 
 
 # Using pre-built containers from [Docker Hub](https://hub.docker.com/) and [Singularity Hub](https://singularity-hub.org/)
@@ -691,7 +691,7 @@ Now you can generate as many quotes as you want by executing `./lolcat.img`!
 
 Once again, this is a trivial example.  But there are over 100,000 pre-built containers already on Docker Hub.  And in addition to individual developers, companies (like Canonical, Anaconda, and NVIDIA to name a few) are also distributing software in ready-to-run containers on Docker Hub. 
 
-For instance, if you wanted to try TensorFlow (the Deep Learning framework used by Google) but you don't want to install a bunch of dependancies on your computer, you could be up and running in a few minutes with this simple definition file.
+For instance, if you wanted to try TensorFlow (the Deep Learning framework used by Google) but you don't want to install a bunch of dependencies on your computer, you could be up and running in a few minutes with this simple definition file.
 
 ~~~
 BootStrap: docker
@@ -702,6 +702,6 @@ From: tensorflow/tensorflow:latest
 ~~~
 {: .bash}
 
-[Singularity Hub](https://singularity-hub.org/) is the Singularity analog to Docker Hub. Singularity Hub is very new and does not yet have the massive community that has been attracted to Docker Hub.  But it has the distict advantage of working natively with Singularity definition files. Like Docker Hub, it integrates with GitHub to build your containers automatically when you push a new definition file to a linked repository.  (See the website for more details.)  This provides a great solution for building and sharing your own containers with others. 
+[Singularity Hub](https://singularity-hub.org/) is the Singularity analog to Docker Hub. Singularity Hub is very new and does not yet have the massive community that has been attracted to Docker Hub.  But it has the distinct advantage of working natively with Singularity definition files. Like Docker Hub, it integrates with GitHub to build your containers automatically when you push a new definition file to a linked repository.  (See the website for more details.)  This provides a great solution for building and sharing your own containers with others. 
 
 

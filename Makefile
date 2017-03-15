@@ -17,7 +17,7 @@ commands :
 
 ## serve            : run a local server.
 serve : lesson-rmd
-	${JEKYLL} serve --port 4005
+	${JEKYLL} serve 
 
 ## site             : build files but do not run a server.
 site : lesson-rmd
