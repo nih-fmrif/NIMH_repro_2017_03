@@ -1,10 +1,11 @@
 ---
-title: "Pandas intro and functions (template lesson)"
+title: "Modular programming"
 teaching: 15
 exercises: 15
 questions:
 - "How can I create my own functions?"
 objectives:
+- "Learn about the advantages of modular programming"
 - "Explain and identify the difference between function definition and function call."
 - "Write a function that takes a small, fixed number of arguments and produces a single result."
 keypoints:
@@ -15,154 +16,13 @@ keypoints:
 - "Functions may return a result to their caller using `return`."
 ---
 
-
-~~~
-import pandas as pd
-~~~
-{: .python}
-
-
-One can access the values stored in a dataframe in many ways.
-
-Three import components of the dataframe are the raw values, the column labels,
-and the row labels. This can be accessed using the following attributes
-respectively:
-~~~
-df_male_adult.values
-df_male_adult.columns
-df_male_adult.index
-~~~
-{: .python}
-~~~
-no output for now
-~~~
-{: .output}
-
-To obtain subsets of these values we will look at four approaches. Integer based indexing, label based indexing, attribute based indexing, and dictionary based indexing. Using the iloc  for the
-implicit indices of the dataframe include referring to the columns (as attributes of the
-dataframe), loc for the explicit indices of the dataframe, and .
-
-
-The columns can be accessed and used conveniently through the attributes of the dataframe:
-~~~
-df_male_adult.age
-df_male_adult.age>50 # returns a pandas series object containing boolean values
-~~~
-{: .python}
-~~~
-no output for now
-~~~
-{: .output}
-
-
-An equivalent syntax is to index the columns in the same way as a dictionary.
-This takes more typing and impedes autocompletion:
-~~~
-df_male_adult['age']
-df_male_adult['age']>50
-~~~
-{: .python}
-~~~
-no output for now
-~~~
-{: .output}
-
-This alternative syntax has the advantage of not causing subtle bugs occurring
-due to the fact that an attribute may have the same name as a method. This is
-should be used for assigning values to new columns.
-~~~
-df_male_adult['age_in_ten_years'] = df_male_adult.age + 10
-~~~
-{: .python}
-~~~
-no output for now
-~~~
-{: .output}
-
-
-
-
-`loc` is an indexer attribute. Like other attributes it is not a method so does
-not use parentheses; however, it is different in that uses square brackets for
-index in a similar manner to lists. Specifically the `loc` indexing attribute
-allows us to access the explicitly defined labels for all columns and rows of
-the dataframe.
-~~~
-# Selecting individual elements
-df_male_adult.loc[8,'project']
-
-# Specifying ranges 
-df_male_adult.loc[0:8, 'project':'occupation']
-
-# Selecting multiple rows using a list
-df_male_adult.loc[[1,8,35],'project':'occupation']
-
-# Using masking to select rows
-df_male_adult.loc[[True,False,True,True,False],'age']
-
-df_male_adult.loc[df_male_adult.loc[:,'age']>50, 'age']
-~~~
-{: .python}
-~~~
-no output for now
-~~~
-{: .output}
-
-This seems awfully complicated to just get the rows where age is greater than 50. It is! We can do this far more easily by accessing the values in the age column by using the age attribute of the dataframe. Yes the column labels are stored as attributes.
-~~~
-df_male_adult.age
-df_male_adult.age>50 # returns a pandas series object containing boolean values
-~~~
-{: .python}
-~~~
-no output for now
-~~~
-{: .output}
-
-This results in a far more pleasant way to get all the rows are greater than 50:
-~~~
-df_male_adult.loc[df_male_adult.age>50, : ]
-~~~
-{: .python}
-~~~
-no output for now
-~~~
-{: .output}
-
-
-Using the attributes to refer to columns comes with a caveat though. What
-happens if we want to create a column called "shape". We already have an
-attribute called shape. So we definitely don't want to use this approach when
-assigning values for new columns. Instead we should take advantage of the
-dictionary indexing approach. This approach treats a dataframe as a set of key
-value pairs where each value is actually a column of values. So to create a new column called shape we would type:
-~~~
-df_male_adult.loc[df_male_adult.age>50, : ]
-~~~
-{: .python}
-~~~
-no output for now
-~~~
-{: .output}
-
-
-Finally we may want to slice the rows by means other than comparison. We can
-look through the methods to explore the various means of doing this
-~~~
-df_male_adult.loc[df_male_adult.age>50, : ]
-~~~
-{: .python}
-~~~
-no output for now
-~~~
-{: .output}
-
 ## Break programs down into functions to make them easier to understand.
 
 *   Human beings can only keep a few items in working memory at a time.
 *   Understand larger/more complicated ideas by understanding and combining pieces.
     *   Components in a machine.
     *   Lemmas when proving theorems.
+
 *   Functions serve the same purpose in programs.
     *   *Encapsulate* complexity so that we can treat it as a single "thing".
 *   Also enables *re-use*.
@@ -181,6 +41,7 @@ no output for now
 
 ~~~
 def print_greeting():
+    """Print hello"""
     print('Hello!')
 ~~~
 {: .python}
@@ -200,241 +61,296 @@ Hello!
 ~~~
 {: .output}
 
-## Arguments in call are matched to parameters in definition.
 
-*   Functions are most useful when they can operate on different data.
-*   Specify *parameters* when defining a function.
-    *   These become variables when the function is executed.
-    *   Are assigned the arguments in the call (i.e., the values passed to the function).
+## Functions with arguments
+
+* Functions are more useful than this if they take arguments.
+* You can specify default values for these arguments
+* Use the return function to provide output from a function (that isn't of type NoneType)
 
 ~~~
-def print_date(year, month, day):
-    joined = str(year) + '/' + str(month) + '/' + str(day)
-    print(joined)
+def increase_magnitude(x=5,i=2):
+    """This increases the magnitude of a number by by 10 to the power of i"""
+    x = x * (10 ** i)
+    return x
 
-print_date(1871, 3, 19)
+increase_magnitude(50, 3)
 ~~~
 {: .python}
+
 ~~~
-1871/3/19
+50000
 ~~~
 {: .output}
 
-*   Via [Twitter](https://twitter.com/minisciencegirl/status/693486088963272705):
-    `()` contains the ingredients for the function
-    while the body contains the recipe.
 
-## Functions may return a result to their caller using `return`.
+## Return statements
 
-*   Use `return ...` to give a value back to the caller.
 *   May occur anywhere in the function.
 *   But functions are easier to understand if `return` occurs:
     *   At the start to handle special cases.
     *   At the very end, with a final result.
 
+## Reading the head of a file
+
+We wish to determine the appropriate files to work with for our analysis. We
+could write a for loop and perform the appropriate operations within the body
+of the loop. Let's write some basic functions for this instead. We'll start by working on
+the console interactively on the console to figure out what it is that we want
+to do. 
+
 ~~~
-def average(values):
-    if len(values) == 0:
-        return None
-    return sum(values) / len(values)
+filepath = csvs[0]
+with filepath.open('r') as f:
+    output = []
+    for line in range(2):
+        output.append(f.readline())
+output
 ~~~
 {: .python}
 
 ~~~
-a = average([1, 3, 4])
-# average of actual values: 
-a
+['https://s3.amazonaws.com/fcp-indi/data/Projects/ABIDE_Initiative/Outputs/freesurfer/5.1/Pitt_0050002/mri/T1.mgz,50002,abide_initiative\n',
+ 'https://s3.amazonaws.com/fcp-indi/data/Projects/ABIDE_Initiative/Outputs/freesurfer/5.1/Pitt_0050003/mri/T1.mgz,50003,abide_initiative\n']
+~~~
+{: .output}
+
+We'll now encapsulate that in a function. In addition we wish to:
+*    specify the number of lines returned programmatically.
+*    document what our function does.
+*    explicitly define the dependency on pathlib before we define our function.
+     This helps when we save our function to a file.
+
+~~~
+from pathlib import Path
+def get_lines(filepath,nlines=2):
+    """Return a list of length nlines, for as many lines of the file"""
+    with filepath.open('r') as f:
+        output = []
+        for line in range(nlines):
+            output.append(f.readline())
+    return output
 ~~~
 {: .python}
+
+Let's save this function to a file so that we can maintain a module of functions that are useful for reuse:
+
 ~~~
-2.6666666666666665
+%save my_funcs N # enter the last line number
+~~~
+{: .python}
+
+~~~
+The following commands were written to file `my_funcs.py`:
+from pathlib import Path
+def get_lines(filepath,nlines=2):
+    """Return a list of length nlines, for as many lines of the file"""
+    with filepath.open('r') as f:
+        output = []
+        for line in range(nlines):
+            output.append(f.readline())
+    return output
+~~~
+{: .output}
+
+## Counting the number of lines in a file
+
+Another useful operation we would like is to count the number of lines in the
+file:
+
+~~~
+ def count_lines(filepath):
+    """Count the number of lines in a text file"""
+    if filepath.stat().st_size == 0:
+        return 0
+    else:
+        with filepath.open('r') as f:
+            for i, _ in enumerate(f):
+                pass
+        
+        return i+1 # because enumerate starts counting at 0    
+~~~
+{: .python}
+
+
+~~~
+count_lines(file_path)
+~~~
+{: .python}
+
+~~~
+8060
 ~~~
 {: .output}
 
 ~~~
-# average of empty list: 
-average([])
+%save my_funcs N # the line number of the function definition
 ~~~
 {: .python}
+
 ~~~
-None
+The following commands were written to file `my_funcs.py`:
+def count_lines(filepath):
+    """Count the number of lines in a text file"""
+    if filepath.stat().st_size == 0:
+        return 0
+    else:
+        with filepath.open('r') as f:
+            for i, _ in enumerate(f):
+                pass
+        
+        return i+1 # because enumerate starts counting at 0
 ~~~
 {: .output}
 
-*   Remember: [every function returns something]({{ page.root }}/04-built-in/).
-*   A function that doesn't explicitly `return` a value automatically returns `None`.
+## Another layer of encapsulation
+
+Finally we'll write a function that encapsulates the functionality of our previous functions:
 
 ~~~
-result = print_date(1871, 3, 19)
-# result of call is: 
-result
+def get_file_info(filepath,nlines=2):
+    """"
+    get_file_info(filepath[, nlines]) -> list
+
+    Return a line count and the first few lines of  a file as a string"""
+    
+    output = filepath.name + ': Num lines: ' + str(count_lines(filepath)) + '\n\n'
+    output += ''.join(get_lines(filepath, nlines))
+    return output
 ~~~
 {: .python}
+
+
 ~~~
-1871/3/19
-result of call is: None
+%save -a my_funcs N # the number of the last command
+~~~
+{: .python}
+
+~~~
+The following commands were written to file `my_funcs.py`:
+def get_file_info(filepath,nlines=2):
+    """"
+    get_file_info(filepath[, nlines]) -> list
+
+    Return a line count and the first few lines of  a file as a string"""
+    
+    output = filepath.name + ': Num lines: ' + str(count_lines(filepath)) + '\n\n'
+    output += ''.join(get_lines(filepath, nlines))
+    return output
 ~~~
 {: .output}
 
-> ## Definition and Use
->
-> What does the following program print?
->
-> ~~~
-> def report(pressure):
->     print('pressure is', pressure)
->
-> print('calling', report, 22.5)
-{: .challenge}
+Now we can look through the csv files in metasearch to see if they contain
+useful data for our analysis:
+
+~~~
+for f in csvs:
+    print(get_file_info(f))
+~~~
+{: .python}
+
+~~~
+...
+
+
+ngl_wyoming.csv: Num lines: 8267
+
+d_first_name,d_mid_name,d_last_name,d_suffix,d_birth_date,d_death_date,section_id,row_num,site_num,cem_name,cem_addr_one,cem_addr_two,city,state,zip,cem_url,cem_phone,relationship,v_first_name,v_mid_name,v_last_name,v_suffix,branch,rank,war
+"Paul","Frederick","Kratzer","","05/12/1924","04/28/2007","C","","764","OREGON TRAIL STATE VETERANS CEMETERY","80 VETERANS ROAD","BOX 669","EVANSVILLE","WY","82636","","307-235-6673","Veteran (Self)","Paul","Frederick","Kratzer","","US NAVY","GM2","WORLD WAR II",
+
+nutrients.csv: Num lines: 7638
+
+name,group,"protein (g)","calcium (g)","sodium (g)","fiber (g)","vitaminc (g)","potassium (g)","carbohydrate (g)","sugars (g)","fat (g)","water (g)",calories,"saturated (g)","monounsat (g)","polyunsat (g)"
+"Beverage, instant breakfast powder, chocolate, not reconstituted","Dairy and Egg Products",19.9,0.285,0.385,0.4,0.0769,0.947,66.2,65.8,1.4,7.4,357,0.56,0.314,0.278
+~~~
+{: .output}
+
+We probably don't want all this output permanently although it can be useful
+now. For now let's save the list of csv files along with how many lines they
+have:
+
+~~~
+for f in csvs:
+    print(f, 0)
+~~~
+{: .python}
+
+
+~~~
+%save -a metasearch_analysis.py N # the line number of the above command
+~~~
+{: .python}
+
+~~~
+The following commands were written to file `metasearch_analysis.py`:
+for f in csvs:
+    print(f, 0)
+~~~
+{: .output}
+
+> ## Running scripts in debugger mode
+> 
+> Now is a good time to try using the ipdb debugger to see how one can observe
+> what is happening as the flow of execution through the file occurs..
+{: .callout}
+
 
 > ## Order of Operations
->
+> 
 > The example above:
->
+> 
 > ~~~
 > result = print_date(1871, 3, 19)
 > print('result of call is:', result)
 > ~~~
 > {: .python}
->
+> 
 > printed:
 > ~~~
 > 1871/3/19
 > result of call is: None
 > ~~~
 > {: .output}
->
+> 
 > Explain why the two lines of output appeared in the order they did.
 {: .challenge}
 
-> ## Encapsulation
->
-> Fill in the blanks to create a function that takes a single filename as an argument,
-> loads the data in the file named by the argument,
-> and returns the minimum value in that data.
->
-> ~~~
-> import pandas
->
-> def min_in_data(____):
->     data = ____
->     return ____
-> ~~~
-> {: .python}
-{: .challenge}
 
-> ## Find the First
->
-> Fill in the blanks to create a function that takes a list of numbers as an argument
-> and returns the first negative value in the list.
-> What does your function do if the list is empty?
->
-> ~~~
-> def first_negative(values):
->     for v in ____:
->         if ____:
->             return ____
-> ~~~
-> {: .python}
-{: .challenge}
-
-> ## Calling by Name
->
-> What does this short program print?
->
-> ~~~
-> def print_date(year, month, day):
->     joined = str(year) + '/' + str(month) + '/' + str(day)
->     print(joined)
->
-> print_date(day=1, month=2, year=2003)
-> ~~~
-> {: .python}
->
-> 1.  When have you seen a function call like this before?
-> 2.  When and why is it useful to call functions this way?
-> {: .python}
-{: .challenge}
-
-> ## Encapsulating Data Analysis
->
-> Assume that the following code has been executed:
->
-> ~~~ 
-> import pandas
->
-> df = pandas.read_csv('gapminder_gdp_asia.csv', index_col=0)
-> japan = df.ix['Japan']
-> ~~~
-> {: .python}
->
-> 1. Complete the statements below to obtain the average GDP for Japan
->    across the years reported for the 1980s.
->
-> ~~~ 
-> year = 1983
-> gdp_decade = 'gdpPercap_' + str(year // ____)
-> avg = (japan.ix[gdp_decade + ___] + japan.ix[gdp_decade + ___]) / 2
-> ~~~
-> {: .python}
->
-> 2. Abstract the code above into a single function.
->
-> ~~~
-> def avg_gdp_in_decade(country, continent, year):
->     df = pd.read_csv('gapminder_gdp_'+___+'.csv',delimiter=',',index_col=0)
->     ____
->     ____
->     ____
->     return avg
-> ~~~
-> {: .python}
->
-> 3. How would you generalize this function
->    if you did not know beforehand which specific years occurred as columns in the data?
->    For instance, what if we also had data from years ending in 1 and 9 for each decade?
->    (Hint: use the columns to filter out the ones that correspond to the decade,
->    instead of enumerating them in the code.) 
->
-> > ## Solution
-> >
-> > 1. 
-> >
-> > ~~~ 
-> > year = 1983
-> > gdp_decade = 'gdpPercap_' + str(year // 10)
-> > avg = (japan.ix[gdp_decade + '2'] + japan.ix[gdp_decade + '7']) / 2
-> > ~~~
-> > {: .python}
-> >
-> > 2.
-> >
-> > ~~~
-> > def avg_gdp_in_decade(country, continent, year):
-> >     df = pd.read_csv('gapminder_gdp_' + continent + '.csv', index_col=0)
-> >     c = df.ix[country]
-> >     gdp_decade = 'gdpPercap_' + str(year // 10)
-> >     avg = (c.ix[gdp_decade + '2'] + c.ix[gdp_decade + '7'])/2
-> >     return avg
-> > ~~~
-> > {: .python}
-> >
-> > 3. We need to loop over the reported years
-> >    to obtain the average for the relevant ones in the data.
-> >
-> > ~~~
-> > def avg_gdp_in_decade(country, continent, year):
-> >     df = pd.read_csv('gapminder_gdp_' + continent + '.csv', index_col=0)
-> >     c = df.ix[country] 
-> >     gdp_decade = 'gdpPercap_' + str(year // 10)
-> >     total = 0.0
-> >     num_years = 0
-> >     for yr_header in c.index: # c's index contains reported years
-> >         if yr_header.startswith(gdp_decade):
-> >             total = total + c.ix[yr_header]
-> >             num_years = num_years + 1
-> >     return total/num_years
-> > ~~~
-> > {: .python}
+> ## Find the python scripts
+> 
+> Write a function that calls at least one of the functions developed in the
+> lesson. When given a directory as input the function should return a list
+> with as many elements as there are python files (.py) in the directory. Each
+> element should contain the name and the number of lines for a specific python
+> file (.py).
+> 
+> 
+>> ## Solution
+>> 
+>> ~~~
+>> def get_py_files(dir_path,nlines=0):
+>>    """Returns a list of the python files in the dir_path
+>>    dir_path should be a Path object from pathlib with
+>>    a name of a directory""""
+>>    
+>>    py_files = dir_path.glob('**/*.py')
+>>    output = []
+>>    for f in py_files:
+>>        output.append(get_file_info(f,nlines))
+>>     return output
+>>     
+>> print(*get_py_files(metasearch_dir))
+>> ~~~
+>> {: .python}
+>> 
+>> ~~~
+>> data_not_in_repo/metasearch/crawler/brain-development/extract.py:
+>> Num lines: 12
+>> 
+>> data_not_in_repo/metasearch/docs/data/merge_csv.py:
+>> Num lines: 25
+>> ~~~
+>> {: .output}
+>> 
 > {: .solution}
 {: .challenge}
