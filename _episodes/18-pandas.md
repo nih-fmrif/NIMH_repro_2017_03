@@ -15,16 +15,43 @@ keypoints:
 - ""
 ---
 
+We'll start out with the same git repository for now. 
 ~~~
-import pandas as pd
+%reset -f
+%cd
+!git clone https://github.com/leej3/repro_course_example.git
+%cd repro_course_example
 ~~~
 {: .python}
 
+~~~
+Cloning into 'repro_course_example'...
+remote: Counting objects: 18, done.
+remote: Compressing objects: 100% (16/16), done.
+remote: Total 18 (delta 1), reused 18 (delta 1), pack-reused 0
+Unpacking objects: 100% (18/18), done.
+Checking connectivity... done.
+~~~
+{: .output}
+
+We can check what has happened with `%ls`, `!git status` and `!git log`. To all use the same data for this class run the metasearch_analysis.py script.
 
 ~~~
- pheno_csv= metasearchdir.joinpath("docs/data/phenotype_mri.csv")
+%run metasearch_analysis.py
 ~~~
 {: .python}
+
+We can confirm that the script ran successfully by checking our environment: 
+
+~~~
+Variable   Type         Data/Info
+---------------------------------
+df_pheno   DataFrame                    project s<...>[11045 rows x 20 columns]
+pd         module       <module 'pandas' from '/u<...>ages/pandas/__init__.py'>
+~~~
+{: .output}
+
+
 
 We can get a quick summary of the data object using one of its data descriptors, `dtypes`:
 
