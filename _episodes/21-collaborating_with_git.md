@@ -183,7 +183,7 @@ We can pull changes from the remote repository to the local one as well:
 {: .python}
 
 ~~~
-From https://github.com/vlad/repro_course
+From https://github.com/username/repro_course
  * branch            master     -> FETCH_HEAD
 Already up-to-date.
 ~~~
@@ -280,7 +280,7 @@ remote: Counting objects: 4, done.
 remote: Compressing objects: 100% (2/2), done.
 remote: Total 3 (delta 0), reused 3 (delta 0)
 Unpacking objects: 100% (3/3), done.
-From https://github.com/vlad/repro_course
+From https://github.com/username/repro_course
  * branch            master     -> FETCH_HEAD
 Updating 9272da5..29aba7c
 Fast-forward
@@ -320,41 +320,27 @@ different changes to each copy.  Version control helps us manage these
 [resolve]({{ page.root }}/reference/#resolve) overlapping changes.
 
 To see how we can resolve conflicts, we must first create one.  The file
-`mars.txt` currently looks like this in both partners' copies of our `repro_course`
+`metasearch_analysis.py` currently looks like this in both partners' copies of our `repro_course`
 repository:
 
 ~~~
-!cat mars.txt
+%less metasearch_analysis.py
 ~~~
 {: .python}
 
-~~~
-Cold and dry, but everything is my favorite color
-The two moons may be a problem for Wolfman
-But the Mummy will appreciate the lack of humidity
-~~~
-{: .output}
 
-Let's add a line to one partner's copy only:
+* Let's add a line to one partner's copy only:
 
 ~~~
-!nano mars.txt
-!cat mars.txt
+%edit metasearch_analysis.py
+%less metasearch_analysis.py
 ~~~
 {: .python}
-
-~~~
-Cold and dry, but everything is my favorite color
-The two moons may be a problem for Wolfman
-But the Mummy will appreciate the lack of humidity
-This line added to Wolfman's copy
-~~~
-{: .output}
 
 and then push the change to GitHub:
 
 ~~~
-!git add mars.txt
+!git add metasearch_analysis.py
 !git commit -m "Adding a line in our home copy"
 ~~~
 {: .python}
@@ -376,7 +362,7 @@ Delta compression using up to 4 threads.
 Compressing objects: 100% (3/3), done.
 Writing objects: 100% (3/3), 352 bytes, done.
 Total 3 (delta 1), reused 0 (delta 0)
-To https://github.com/vlad/repro_course
+To https://github.com/username/repro_course
    29aba7c..dabb4c8  master -> master
 ~~~
 {: .output}
@@ -386,24 +372,16 @@ make a different change to their copy
 *without* updating from GitHub:
 
 ~~~
-!nano mars.txt
-!cat mars.txt
+%edit metasearch_analysis.py
+%less metasearch_analysis.py
 ~~~
 {: .python}
-
-~~~
-Cold and dry, but everything is my favorite color
-The two moons may be a problem for Wolfman
-But the Mummy will appreciate the lack of humidity
-We added a different line in the other copy
-~~~
-{: .output}
 
 We can commit the change locally:
 
 ~~~
-!git add mars.txt
-!git commit -m "Adding a line in my copy"
+!git add metasearch_analysis.py
+!git commit -m "Adding a line in the second local copy"
 ~~~
 {: .python}
 
@@ -421,9 +399,9 @@ but Git won't let us push it to GitHub:
 {: .python}
 
 ~~~
-To https://github.com/vlad/repro_course.git
+To https://github.com/username/repro_course.git
  ! [rejected]        master -> master (non-fast-forward)
-error: failed to push some refs to 'https://github.com/vlad/repro_course.git'
+error: failed to push some refs to 'https://github.com/username/repro_course.git'
 hint: Updates were rejected because the tip of your current branch is behind
 hint: its remote counterpart. Merge the remote changes (e.g. 'git pull')
 hint: before pushing again.
@@ -433,12 +411,11 @@ hint: See the 'Note about fast-forwards' in 'git push --help' for details.
 
 ![The Conflicting Changes](../fig/fig/conflict.svg)
 
-Git detects that the changes made in one copy overlap with those made in the other
-and stops us from trampling on our previous work.
-What we have to do is pull the changes from GitHub,
-[merge]({{ page.root }}/reference/#merge) them into the copy we're currently working in,
-and then push that.
-Let's start by pulling:
+Git detects that the changes made in one copy overlap with those made in the
+other and stops us from trampling on our previous work. What we have to do is
+pull the changes from GitHub, [merge]({{ page.root }}/reference/#merge) them
+into the copy we're currently working in, and then push that. Let's start by
+pulling:
 
 ~~~
 !git pull origin master
@@ -450,66 +427,39 @@ remote: Counting objects: 5, done.
 remote: Compressing objects: 100% (2/2), done.
 remote: Total 3 (delta 1), reused 3 (delta 1)
 Unpacking objects: 100% (3/3), done.
-From https://github.com/vlad/repro_course
+From https://github.com/username/repro_course
  * branch            master     -> FETCH_HEAD
-Auto-merging mars.txt
-CONFLICT (content): Merge conflict in mars.txt
+Auto-merging metasearch_analysis.py
+CONFLICT (content): Merge conflict in metasearch_analysis.py
 Automatic merge failed; fix conflicts and then commit the result.
 ~~~
 {: .output}
 
-`git pull` tells us there's a conflict,
-and marks that conflict in the affected file:
+`git pull` tells us there's a conflict, and marks that conflict in the affected
+file.
+
+Our change—the one in `HEAD`—is preceded by `<<<<<<<`. Git has then inserted
+`=======` as a separator between the conflicting changes and marked the end of
+the content downloaded from GitHub with `>>>>>>>`. (The string of letters and
+digits after that marker identifies the commit we've just downloaded.)
+
+It is now up to us to edit this file to remove these markers and reconcile the
+changes. We can do anything we want: keep the change made in the local
+repository, keep the change made in the remote repository, write something new
+to replace both, or get rid of the change entirely. Let's replace both with a
+comment stating that we resolved our first of many git conflicts.
 
 ~~~
-!cat mars.txt
+%less metasearch_analysis.py
 ~~~
 {: .python}
 
-~~~
-Cold and dry, but everything is my favorite color
-The two moons may be a problem for Wolfman
-But the Mummy will appreciate the lack of humidity
-<<<<<<< HEAD
-We added a different line in the other copy
-=======
-This line added to Wolfman's copy
->>>>>>> dabb4c8c450e8475aee9b14b4383acc99f42af1d
-~~~
-{: .output}
 
-Our change—the one in `HEAD`—is preceded by `<<<<<<<`.
-Git has then inserted `=======` as a separator between the conflicting changes
-and marked the end of the content downloaded from GitHub with `>>>>>>>`.
-(The string of letters and digits after that marker
-identifies the commit we've just downloaded.)
-
-It is now up to us to edit this file to remove these markers
-and reconcile the changes.
-We can do anything we want: keep the change made in the local repository, keep
-the change made in the remote repository, write something new to replace both,
-or get rid of the change entirely.
-Let's replace both so that the file looks like this:
+To finish merging, we add `metasearch_analysis.py` to the changes being made by
+the merge and then commit:
 
 ~~~
-!cat mars.txt
-~~~
-{: .python}
-
-~~~
-Cold and dry, but everything is my favorite color
-The two moons may be a problem for Wolfman
-But the Mummy will appreciate the lack of humidity
-We removed the conflict on this line
-~~~
-{: .output}
-
-To finish merging,
-we add `mars.txt` to the changes being made by the merge
-and then commit:
-
-~~~
-!git add mars.txt
+!git add metasearch_analysis.py
 !git status
 ~~~
 {: .python}
@@ -521,7 +471,7 @@ All conflicts fixed but you are still merging.
 
 Changes to be committed:
 
-    modified:   mars.txt
+    modified:   metasearch_analysis.py
 
 ~~~
 {: .output}
@@ -549,14 +499,13 @@ Delta compression using up to 4 threads.
 Compressing objects: 100% (6/6), done.
 Writing objects: 100% (6/6), 697 bytes, done.
 Total 6 (delta 2), reused 0 (delta 0)
-To https://github.com/vlad/repro_course.git
+To https://github.com/username/repro_course.git
    dabb4c8..2abf2b1  master -> master
 ~~~
 {: .output}
 
-Git keeps track of what we've merged with what,
-so we don't have to fix things by hand again
-when the collaborator who made the first change pulls again:
+Git keeps track of what we've merged with what, so we don't have to fix things
+by hand again when the collaborator who made the first change pulls again:
 
 ~~~
 !git pull origin master
@@ -568,11 +517,11 @@ remote: Counting objects: 10, done.
 remote: Compressing objects: 100% (4/4), done.
 remote: Total 6 (delta 2), reused 6 (delta 2)
 Unpacking objects: 100% (6/6), done.
-From https://github.com/vlad/repro_course
+From https://github.com/username/repro_course
  * branch            master     -> FETCH_HEAD
 Updating dabb4c8..2abf2b1
 Fast-forward
- mars.txt | 2 +-
+ metasearch_analysis.py | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 ~~~
 {: .output}
@@ -580,28 +529,18 @@ Fast-forward
 We get the merged file:
 
 ~~~
-!cat mars.txt
+%less metasearch_analysis.py
 ~~~
 {: .python}
 
-~~~
-Cold and dry, but everything is my favorite color
-The two moons may be a problem for Wolfman
-But the Mummy will appreciate the lack of humidity
-We removed the conflict on this line
-~~~
-{: .output}
-
 We don't need to merge again because Git knows someone has already done that.
 
-Version control's ability to merge conflicting changes
-is another reason users tend to divide their programs and papers into multiple files
-instead of storing everything in one large file.
-There's another benefit too:
-whenever there are repeated conflicts in a particular file,
-the version control system is essentially trying to tell its users
-that they ought to clarify who's responsible for what,
-or find a way to divide the work up differently.
+Version control's ability to merge conflicting changes is another reason users
+tend to divide their programs and papers into multiple files instead of storing
+everything in one large file. There's another benefit too: whenever there are
+repeated conflicts in a particular file, the version control system is
+essentially trying to tell its users that they ought to clarify who's
+responsible for what, or find a way to divide the work up differently.
 
 
 > ## GitHub GUI
