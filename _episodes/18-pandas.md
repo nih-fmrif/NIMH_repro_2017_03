@@ -139,7 +139,6 @@ parentheses.
 * loc uses square brackets so that we can index into a dataframe using the
   explicit labels of the dataframe.
 
-
 * Selecting individual elements
 
 ~~~
@@ -179,16 +178,29 @@ output
 {: .output}
 
 
-* Using masking to select rows
-Masking for a dataframe might look something like:
-    
-    df_pheno.loc[[True,False,True,True,False],'age']
+* We can select certain rows from a dataframe using a list of boolean values
+  that correspond to each row of the dataframe. For a small this might look
+  something like this :
+
+~~~
+df_pheno.head().loc[[True,False,True,True,True], 'age'] # type is changed from dataframe to Series
+~~~
+{: .python}
+
+~~~
+0    16.77
+2    19.09
+3    13.73
+4    13.37
+Name: age, dtype: float64
+~~~
+{: .output}
 
 This would be laborious for more than a few rows. We instead use what is called
 masking to create a boolean array for indexing the values
 
 ~~~
-over_50s = df_pheno.loc[df_pheno.age>50, 'age'] # type changed
+over_50s = df_pheno.loc[df_pheno.age>50, 'age'] 
 ~~~
 {: .python}
 
@@ -244,51 +256,13 @@ The following demonstrates split-apply-combine and joins:
 
 ~~~
 df_id = df_pheno.groupby(df_pheno['participant_id'], as_index = False).count()
-df_id = df_id.assign(id = range(1, 1 + len(df_id))).loc[:,['id','participant_id']]
+df_id = df_id.assign(id = range(1, 1 + len(df_id))).loc[:, ['id', 'participant_id']]
 df_id
 df_pheno.merge(df_id, how = 'left', on = 'participant_id')
 ~~~
 {: .python}
 
 
-
-> ## Change me to a pandas exercise
->
-> You want to select a random character from a string:
-> ~~~
-> bases = 'ACTTGCTTGAC'
-> ~~~
->
-> 1. What [standard library][stdlib] would you most expect to help?
-> 2. Which function would you select from that library? Are there alternatives?
-{: .challenge}
-
-> ## Change me to a pandas exercise
->
-> When a colleague of yours types `help(math)`,
-> Python reports an error:
->
-> ~~~
-> NameError: name 'math' is not defined
-> ~~~
-> {: .error}
->
-> What has your colleague forgotten to do?
-{: .challenge}
-
-> ## Change me to a pandas exercise
->
-> 1. Fill in the blanks so that the program below prints `90.0`.
-> 2. Rewrite the program so that it uses `import` *without* `as`.
-> 3. Which form do you find easier to read?
->
-> ~~~
-> import math as m
-> angle = ___.degrees(___.pi / 2)
-> print(___)
-> ~~~
-> {: .python}
-{: .challenge}
 
 
 > ## Encapsulating Data Analysis
