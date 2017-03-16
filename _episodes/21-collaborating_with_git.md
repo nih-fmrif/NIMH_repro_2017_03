@@ -36,39 +36,29 @@ and cons of this in the final section of this lesson.
 
 Let's start by sharing the changes we've made to our current project with the
 world.  Log in to GitHub, then click on the icon in the top right corner to
-create a new repository called `planets`:
+create a new repository called `repro_course`:
 
-![Creating a Repository on GitHub (Step 1)](../fig/fig/github-create-repo-01.png)
 
-Name your repository "planets" and then click "Create Repository":
+* Name your repository "repro_course" and then click "Create Repository":
 
-![Creating a Repository on GitHub (Step 2)](../fig/fig/github-create-repo-02.png)
+* This effectively makes a directory with a `.git` repository in it.
 
-As soon as the repository is created, GitHub displays a page with a URL and some
+* As soon as the repository is created, GitHub displays a page with a URL and some
 information on how to configure your local repository:
 
-![Creating a Repository on GitHub (Step 3)](../fig/fig/github-create-repo-03.png)
 
-This effectively does the following on GitHub's servers:
-
-~~~
-$ mkdir planets
-$ cd planets
-$ git init
-~~~
-{: .bash}
-
-Our local repository still contains our earlier work on `mars.txt`, but the
+Our local repository still contains our earlier work on `metasearch_analysis.py`, but the
 remote repository on GitHub doesn't contain any files yet:
-
-![Freshly-Made GitHub Repository](../fig/fig/git-freshly-made-github-repo.svg)
 
 The next step is to connect the two repositories.  We do this by making the
 GitHub repository a [remote]({{ page.root }}/reference/#remote) for the local repository.
 The home page of the repository on GitHub includes the string we need to
-identify it:
+identify it.
 
-![Where to Find Repository URL on GitHub](../fig/fig/github-find-repo-string.png)
+
+
+
+
 
 Click on the 'HTTPS' link to change the [protocol]({{ page.root }}/reference/#protocol) from
 SSH to HTTPS.
@@ -84,29 +74,28 @@ SSH to HTTPS.
 > (this one has a screencast).
 {: .callout}
 
-![Changing the Repository URL on GitHub](../fig/fig/github-change-repo-string.png)
 
-Copy that URL from the browser, go into the local `planets` repository, and run
+Copy that URL from the browser, go into the local `repro_course` repository, and run
 this command:
 
 ~~~
-$ git remote add origin https://github.com/vlad/planets.git
+!git remote add origin https://github.com/github-name/repro_course.git
 ~~~
-{: .bash}
+{: .python}
 
-Make sure to use the URL for your repository rather than Vlad's: the only
-difference should be your username instead of `vlad`.
+Make sure to use the URL for your repository i.e. the only
+difference should be your username instead of `github-name`.
 
 We can check that the command has worked by running `git remote -v`:
 
 ~~~
-$ git remote -v
+!git remote -v
 ~~~
-{: .bash}
+{: .python}
 
 ~~~
-origin   https://github.com/vlad/planets.git (push)
-origin   https://github.com/vlad/planets.git (fetch)
+origin   https://github.com/github-name/repro_course.git (push)
+origin   https://github.com/github-name/repro_course.git (fetch)
 ~~~
 {: .output}
 
@@ -117,9 +106,9 @@ Once the nickname `origin` is set up, this command will push the changes from
 our local repository to the repository on GitHub:
 
 ~~~
-$ git push origin master
+!git push origin master
 ~~~
-{: .bash}
+{: .python}
 
 ~~~
 Counting objects: 9, done.
@@ -127,7 +116,7 @@ Delta compression using up to 4 threads.
 Compressing objects: 100% (6/6), done.
 Writing objects: 100% (9/9), 821 bytes, done.
 Total 9 (delta 2), reused 0 (delta 0)
-To https://github.com/vlad/planets
+To https://github.com/github-name/repro_course.git
  * [new branch]      master -> master
 Branch master set up to track remote branch master from origin.
 ~~~
@@ -140,19 +129,19 @@ Branch master set up to track remote branch master from origin.
 > solve this issue you need to tell Git about the proxy:
 > 
 > ~~~
-> $ git config --global http.proxy http://user:password@proxy.url
-> $ git config --global https.proxy http://user:password@proxy.url
+> !git config --global http.proxy http://user:password@proxy.url
+> !git config --global https.proxy http://user:password@proxy.url
 > ~~~
-> {: .bash}
+> {: .python}
 > 
 > When you connect to another network that doesn't use a proxy you will need to
 > tell Git to disable the proxy using:
 > 
 > ~~~
-> $ git config --global --unset http.proxy
-> $ git config --global --unset https.proxy
+> !git config --global --unset http.proxy
+> !git config --global --unset https.proxy
 > ~~~
-> {: .bash}
+> {: .python}
 {: .callout}
 
 > ## Password Managers
@@ -164,9 +153,9 @@ Branch master set up to track remote branch master from origin.
 > type:
 > 
 > ~~~
-> $ unset SSH_ASKPASS
+> !unset SSH_ASKPASS
 > ~~~
-> {: .bash}
+> {: .python}
 > 
 > in the terminal, before you run `git push`.  Despite the name, [git uses
 > `SSH_ASKPASS` for all credential
@@ -178,9 +167,6 @@ Branch master set up to track remote branch master from origin.
 > to make git default to using the terminal for usernames and passwords.
 {: .callout}
 
-Our local and remote repositories are now in this state:
-
-![GitHub Repository After First Push](../fig/fig/github-repo-after-first-push.svg)
 
 > ## The '-u' Flag
 > 
@@ -192,12 +178,12 @@ Our local and remote repositories are now in this state:
 We can pull changes from the remote repository to the local one as well:
 
 ~~~
-$ git pull origin master
+!git pull origin master
 ~~~
-{: .bash}
+{: .python}
 
 ~~~
-From https://github.com/vlad/planets
+From https://github.com/vlad/repro_course
  * branch            master     -> FETCH_HEAD
 Already up-to-date.
 ~~~
@@ -233,52 +219,35 @@ To accept access to the Owner's repo, the Collaborator
 needs to go to [https://github.com/notifications](https://github.com/notifications).
 Once there she can accept access to the Owner's repo.
 
-Next, the Collaborator needs to download a copy of the Owner's repository to her
- machine. This is called "cloning a repo". To clone the Owner's repo into
-her `Desktop` folder, the Collaborator enters:
+Next, the Collaborator needs to download a copy of the Owner's repository to
+ her machine. This is called "cloning a repo". We'll clone it to a directory
+ called github_collaboration in our home directory (replacing 'username' with
+ the Owner's username):
 
 ~~~
-$ git clone https://github.com/vlad/planets.git ~/Desktop/vlad-planets
+%cd
+%mkdir github_collaboration
+!git clone https://github.com/username/repro_course.git ~/github_collaboration
+%cd github_collaboration
 ~~~
-{: .bash}
+{: .python}
 
-Replace 'vlad' with the Owner's username.
+Open metasearch_analysis.py in an editor and add a comment. Stage and commit
+the comment.
 
-![After Creating Clone of Repository](../fig/fig/github-collaboration.svg)
-
-The Collaborator can now make a change in her clone of the Owner's repository,
-exactly the same way as we've been doing before:
-
-~~~
-$ cd ~/Desktop/vlad-planets
-$ nano pluto.txt
-$ cat pluto.txt
-~~~
-{: .bash}
 
 ~~~
-It is so a planet!
+!git add metasearch_analysis.py
+!git commit -m "test the powers of collaboration"
 ~~~
-{: .output}
-
-~~~
-$ git add pluto.txt
-$ git commit -m "Some notes about Pluto"
-~~~
-{: .bash}
-
-~~~
- 1 file changed, 1 insertion(+)
- create mode 100644 pluto.txt
-~~~
-{: .output}
+{: .python}
 
 Then push the change to the *Owner's repository* on GitHub:
 
 ~~~
-$ git push origin master
+!git push origin master
 ~~~
-{: .bash}
+{: .python}
 
 ~~~
 Counting objects: 4, done.
@@ -286,7 +255,7 @@ Delta compression using up to 4 threads.
 Compressing objects: 100% (2/2), done.
 Writing objects: 100% (3/3), 306 bytes, done.
 Total 3 (delta 0), reused 0 (delta 0)
-To https://github.com/vlad/planets.git
+To https://github.com/username/repro_course.git
    9272da5..29aba7c  master -> master
 ~~~
 {: .output}
@@ -302,16 +271,16 @@ Collaborator.
 To download the Collaborator's changes from GitHub, the Owner now enters:
 
 ~~~
-$ git pull origin master
+!git pull origin master
 ~~~
-{: .bash}
+{: .python}
 
 ~~~
 remote: Counting objects: 4, done.
 remote: Compressing objects: 100% (2/2), done.
 remote: Total 3 (delta 0), reused 3 (delta 0)
 Unpacking objects: 100% (3/3), done.
-From https://github.com/vlad/planets
+From https://github.com/vlad/repro_course
  * branch            master     -> FETCH_HEAD
 Updating 9272da5..29aba7c
 Fast-forward
@@ -351,13 +320,13 @@ different changes to each copy.  Version control helps us manage these
 [resolve]({{ page.root }}/reference/#resolve) overlapping changes.
 
 To see how we can resolve conflicts, we must first create one.  The file
-`mars.txt` currently looks like this in both partners' copies of our `planets`
+`mars.txt` currently looks like this in both partners' copies of our `repro_course`
 repository:
 
 ~~~
-$ cat mars.txt
+!cat mars.txt
 ~~~
-{: .bash}
+{: .python}
 
 ~~~
 Cold and dry, but everything is my favorite color
@@ -369,10 +338,10 @@ But the Mummy will appreciate the lack of humidity
 Let's add a line to one partner's copy only:
 
 ~~~
-$ nano mars.txt
-$ cat mars.txt
+!nano mars.txt
+!cat mars.txt
 ~~~
-{: .bash}
+{: .python}
 
 ~~~
 Cold and dry, but everything is my favorite color
@@ -385,10 +354,10 @@ This line added to Wolfman's copy
 and then push the change to GitHub:
 
 ~~~
-$ git add mars.txt
-$ git commit -m "Adding a line in our home copy"
+!git add mars.txt
+!git commit -m "Adding a line in our home copy"
 ~~~
-{: .bash}
+{: .python}
 
 ~~~
 [master 5ae9631] Adding a line in our home copy
@@ -397,9 +366,9 @@ $ git commit -m "Adding a line in our home copy"
 {: .output}
 
 ~~~
-$ git push origin master
+!git push origin master
 ~~~
-{: .bash}
+{: .python}
 
 ~~~
 Counting objects: 5, done.
@@ -407,7 +376,7 @@ Delta compression using up to 4 threads.
 Compressing objects: 100% (3/3), done.
 Writing objects: 100% (3/3), 352 bytes, done.
 Total 3 (delta 1), reused 0 (delta 0)
-To https://github.com/vlad/planets
+To https://github.com/vlad/repro_course
    29aba7c..dabb4c8  master -> master
 ~~~
 {: .output}
@@ -417,10 +386,10 @@ make a different change to their copy
 *without* updating from GitHub:
 
 ~~~
-$ nano mars.txt
-$ cat mars.txt
+!nano mars.txt
+!cat mars.txt
 ~~~
-{: .bash}
+{: .python}
 
 ~~~
 Cold and dry, but everything is my favorite color
@@ -433,10 +402,10 @@ We added a different line in the other copy
 We can commit the change locally:
 
 ~~~
-$ git add mars.txt
-$ git commit -m "Adding a line in my copy"
+!git add mars.txt
+!git commit -m "Adding a line in my copy"
 ~~~
-{: .bash}
+{: .python}
 
 ~~~
 [master 07ebc69] Adding a line in my copy
@@ -447,14 +416,14 @@ $ git commit -m "Adding a line in my copy"
 but Git won't let us push it to GitHub:
 
 ~~~
-$ git push origin master
+!git push origin master
 ~~~
-{: .bash}
+{: .python}
 
 ~~~
-To https://github.com/vlad/planets.git
+To https://github.com/vlad/repro_course.git
  ! [rejected]        master -> master (non-fast-forward)
-error: failed to push some refs to 'https://github.com/vlad/planets.git'
+error: failed to push some refs to 'https://github.com/vlad/repro_course.git'
 hint: Updates were rejected because the tip of your current branch is behind
 hint: its remote counterpart. Merge the remote changes (e.g. 'git pull')
 hint: before pushing again.
@@ -472,16 +441,16 @@ and then push that.
 Let's start by pulling:
 
 ~~~
-$ git pull origin master
+!git pull origin master
 ~~~
-{: .bash}
+{: .python}
 
 ~~~
 remote: Counting objects: 5, done.
 remote: Compressing objects: 100% (2/2), done.
 remote: Total 3 (delta 1), reused 3 (delta 1)
 Unpacking objects: 100% (3/3), done.
-From https://github.com/vlad/planets
+From https://github.com/vlad/repro_course
  * branch            master     -> FETCH_HEAD
 Auto-merging mars.txt
 CONFLICT (content): Merge conflict in mars.txt
@@ -493,9 +462,9 @@ Automatic merge failed; fix conflicts and then commit the result.
 and marks that conflict in the affected file:
 
 ~~~
-$ cat mars.txt
+!cat mars.txt
 ~~~
-{: .bash}
+{: .python}
 
 ~~~
 Cold and dry, but everything is my favorite color
@@ -523,9 +492,9 @@ or get rid of the change entirely.
 Let's replace both so that the file looks like this:
 
 ~~~
-$ cat mars.txt
+!cat mars.txt
 ~~~
-{: .bash}
+{: .python}
 
 ~~~
 Cold and dry, but everything is my favorite color
@@ -540,10 +509,10 @@ we add `mars.txt` to the changes being made by the merge
 and then commit:
 
 ~~~
-$ git add mars.txt
-$ git status
+!git add mars.txt
+!git status
 ~~~
-{: .bash}
+{: .python}
 
 ~~~
 On branch master
@@ -558,9 +527,9 @@ Changes to be committed:
 {: .output}
 
 ~~~
-$ git commit -m "Merging changes from GitHub"
+!git commit -m "Merging changes from GitHub"
 ~~~
-{: .bash}
+{: .python}
 
 ~~~
 [master 2abf2b1] Merging changes from GitHub
@@ -570,9 +539,9 @@ $ git commit -m "Merging changes from GitHub"
 Now we can push our changes to GitHub:
 
 ~~~
-$ git push origin master
+!git push origin master
 ~~~
-{: .bash}
+{: .python}
 
 ~~~
 Counting objects: 10, done.
@@ -580,7 +549,7 @@ Delta compression using up to 4 threads.
 Compressing objects: 100% (6/6), done.
 Writing objects: 100% (6/6), 697 bytes, done.
 Total 6 (delta 2), reused 0 (delta 0)
-To https://github.com/vlad/planets.git
+To https://github.com/vlad/repro_course.git
    dabb4c8..2abf2b1  master -> master
 ~~~
 {: .output}
@@ -590,16 +559,16 @@ so we don't have to fix things by hand again
 when the collaborator who made the first change pulls again:
 
 ~~~
-$ git pull origin master
+!git pull origin master
 ~~~
-{: .bash}
+{: .python}
 
 ~~~
 remote: Counting objects: 10, done.
 remote: Compressing objects: 100% (4/4), done.
 remote: Total 6 (delta 2), reused 6 (delta 2)
 Unpacking objects: 100% (6/6), done.
-From https://github.com/vlad/planets
+From https://github.com/vlad/repro_course
  * branch            master     -> FETCH_HEAD
 Updating dabb4c8..2abf2b1
 Fast-forward
@@ -611,9 +580,9 @@ Fast-forward
 We get the merged file:
 
 ~~~
-$ cat mars.txt
+!cat mars.txt
 ~~~
-{: .bash}
+{: .python}
 
 ~~~
 Cold and dry, but everything is my favorite color
@@ -637,7 +606,7 @@ or find a way to divide the work up differently.
 
 > ## GitHub GUI
 > 
-> Browse to your `planets` repository on GitHub.
+> Browse to your `repro_course` repository on GitHub.
 > Under the Code tab, find and click on the text that says "XX commits" (where "XX" is some number).
 > Hover over, and click on, the three buttons to the right of each commit.
 > What information can you gather/explore from these buttons?
@@ -668,7 +637,7 @@ or find a way to divide the work up differently.
 > ~~~
 > git remote add broken https://github.com/this/url/is/invalid
 > ~~~
-> {: .bash}
+> {: .python}
 > 
 > Do you get an error when adding the remote? Can you think of a
 > command that would make it obvious that your remote URL was not
