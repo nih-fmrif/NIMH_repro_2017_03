@@ -91,11 +91,6 @@ To obtain subsets of these values we will look at four approaches. Integer
 based indexing, label based indexing, attribute based indexing, and dictionary
 based indexing. 
 
-Using the iloc  for the implicit indices of the dataframe
-include referring to the columns (as attributes of the dataframe), loc for the
-explicit indices of the dataframe, and .
-
-
 The columns can be accessed and used conveniently through the attributes of the dataframe:
 
 ~~~
@@ -110,8 +105,8 @@ output
 {: .output}
 
 
-An equivalent syntax is to index the columns in the same way as a dictionary.
-This takes more typing and impedes autocompletion:
+An equivalent syntax is to access the columns in the same way as we would access the dictionary in Python.
+
 ~~~
 df_pheno['age']
 df_pheno['age'] > 50
@@ -123,9 +118,7 @@ output
 ~~~
 {: .output}
 
-This alternative syntax has the advantage of not causing subtle bugs occurring
-due to the fact that an attribute may have the same name as a method. This is
-should be used for assigning values to new columns.
+This alternative syntax should be used for assigning values to new columns:
 
 ~~~
 df_pheno['age_in_ten_years'] = df_pheno.age + 10
@@ -137,14 +130,14 @@ output
 ~~~
 {: .output}
 
-
-
 ## Using the loc indexing attribute
-Like data-descriptors, loc is not a method so does
-not use parentheses; however, it is different in that uses square brackets so
-that we can index into a dataframe as we did with lists and strings.
-Specifically the `loc` indexing attribute allows us to access the explicitly
-defined labels for all columns and rows of the dataframe.
+
+* Like the data-descriptors that we saw before when we worked with lists and Path
+objects from the pathlib package, loc is not a method so does not use
+parentheses.
+
+* loc uses square brackets so that we can index into a dataframe using the
+  explicit labels of the dataframe.
 
 
 * Selecting individual elements
