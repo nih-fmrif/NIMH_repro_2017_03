@@ -5,7 +5,7 @@ exercises: 15+
 start: true
 ---
 
----- Imports ----
+## Imports 
 ~~~
 # Some library functionality we shall use.
 import seaborn as sns
@@ -28,7 +28,7 @@ df = pd.read_csv('https://raw.githubusercontent.com/OpenNeuroLab/metasearch/mast
 ~~~
 {: .python}
 
----- Quantitative and categorical vars via dtypes ----
+## Quantitative and categorical vars via dtypes 
 
 ~~~
 # get types of data: data frame method: ``select_dtypes``
