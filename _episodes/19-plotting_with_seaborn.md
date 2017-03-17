@@ -5,7 +5,7 @@ exercises: 15+
 start: true
 ---
 
-
+---- Imports ----
 ~~~
 # Some library functionality we shall use.
 import seaborn as sns
@@ -24,11 +24,11 @@ sns.set()
 
 ~~~
 # load the data
-df = pd.read_csv('metasearch_phenotypes.csv')
+df = pd.read_csv('https://raw.githubusercontent.com/OpenNeuroLab/metasearch/master/docs/data/phenotype_mri.csv')
 ~~~
 {: .python}
 
----- dtypes ----
+---- Quantitative and categorical vars via dtypes ----
 
 ~~~
 # get types of data: data frame method: ``select_dtypes``
@@ -67,8 +67,8 @@ var_cat = list(df.select_dtypes(exclude=[np.number]))
 ~~~
 {: .python}
 
-For more about categorical variables, see:
-[This](http://pandas.pydata.org/pandas-docs/stable/categorical.html)
+For more about categorical variables, see [this pandas
+page](http://pandas.pydata.org/pandas-docs/stable/categorical.html).
 
 
 ---- dealing with missing values (NaNs) ----
@@ -162,14 +162,6 @@ plt.show()
 ~~~
 {: .python}
 
-~~~
-# note that *that* includes the first row of labels-- ugh.  Select it out
-my_pairplot = sns.pairplot( df.ix[:,1:], diag_kind='kde')
-plt.show()
-~~~
-{: .python}
-
-
 ---- Sidenote:  plotting_context() ----
 
 ~~~
@@ -196,7 +188,7 @@ sns.plotting_context()
 # To change some of these, one can do, for example:
 sns.set_context( rc={'lines.markeredgewidth': 0.0,
                      'xtick.labelsize': 8.0})
-my_pairplot = sns.pairplot( df.ix[:,1:], diag_kind='kde')
+my_pairplot = sns.pairplot( df, diag_kind='kde')
 plt.show()
 ~~~
 {: .python}
@@ -224,7 +216,7 @@ plt.savefig(fname, dpi=300)
 Note: see [here](http://seaborn.pydata.org/tutorial/aesthetics.html):
   for more on aesthetics description and settings, and
   [here](http://seaborn.pydata.org/tutorial/color_palettes.html#palette-tutorial)
-  for some examples of color palettes
+  for some examples of color palettes.
 
 ---- Sidenote: displaying correlation values ----
 
