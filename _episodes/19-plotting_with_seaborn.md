@@ -71,7 +71,7 @@ For more about categorical variables, see [this pandas
 page](http://pandas.pydata.org/pandas-docs/stable/categorical.html).
 
 
----- dealing with missing values (NaNs) ----
+## dealing with missing values (NaNs) 
 
 ~~~
 # some data will be missing, possibly.  Too see how many non-Nans are
@@ -106,7 +106,7 @@ def NoNoNaNette( df, cols=[] ):
 ~~~
 {: .python}
 
----- some plotting ----
+## some plotting 
 
 ~~~
 # -------------------  1a) Basic scatterplot -------------------------
@@ -162,7 +162,7 @@ plt.show()
 ~~~
 {: .python}
 
----- Sidenote:  plotting_context() ----
+## Sidenote:  plotting_context() 
 
 ~~~
 # What are default sundry values for various plot settings?  Check 'em
@@ -194,7 +194,7 @@ plt.show()
 {: .python}
 
 
----- Back to plotting ----
+## Back to plotting 
 
 ~~~
 # -------------- 2b) all quantitative pairs, no NaNs ----------------
@@ -218,7 +218,7 @@ Note: see [here](http://seaborn.pydata.org/tutorial/aesthetics.html):
   [here](http://seaborn.pydata.org/tutorial/color_palettes.html#palette-tutorial)
   for some examples of color palettes.
 
----- Sidenote: displaying correlation values ----
+## Sidenote: displaying correlation values 
 
 Unfortunately, there isn't a simple option to directly show the
 correlation values for the scatterplots, even though that might be
