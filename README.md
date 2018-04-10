@@ -2,7 +2,7 @@ NIMH course for reproducibility in neuroimaging.
 ==========================
 Links :
 
-Course materials site is rendered [here](https://nih-fmrif.github.io/NIMH_repro_2017).
+Course materials site is rendered [here](https://nih-fmrif.github.io/NIMH_repro_2017_03).
 
 NIMH's Data Science and Sharing Team will be conducting a workshop on open and
 reproducible neuroscience the week of March 13th. Over the course of four
